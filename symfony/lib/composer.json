@@ -32,10 +32,7 @@
     "google/apiclient": "^2.0",
     "bjeavons/zxcvbn-php": "^0.3"
   },
-  "require-dev": {
-    "codeception/codeception": "^2.2",
-    "phpunit/phpunit": "^5.7"
-  },
+
   "extra": {
     "installer-types": ["library"],
     "installer-paths": {
