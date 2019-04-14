@@ -299,3 +299,7 @@ function plugin_web_path($plugin, $path) {
     
     return $path;    
 }
+
+function __js($text, $args = array(), $catalogue = 'messages') {
+    return esc_js_no_entities(__($text, $args, $catalogue));
+}
