@@ -52,6 +52,7 @@ class OrangeHrmRegistration
      * @return bool
      */
     public function sendRegistrationData() {
+        return true;
         $mode = $this->getSysConf()->getMode();
         if ($mode == sysConf::PROD_MODE) {
             $ch = curl_init();
