@@ -5,7 +5,7 @@ phpversion:
 
 mysqlversion:
     min: '5.5'
-    max: '5.7.24'
+    max: '5.7.25'
     excludeRange: []
 
 mariadbversion:
