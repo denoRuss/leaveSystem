@@ -1,0 +1,131 @@
+SalaryType:
+  tableName: dk_salary_type
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      notnull: false
+      unique: true
+    jobtitle_id:
+      type: integer
+    monthly_basic:
+      type: float
+      notnull: true
+    other_allowance:
+      type: float
+      notnull: false
+    monthly_basic_tax:
+      type: float
+    monthly_nopay_leave:
+      type: float
+      notnull: false
+    monthly_epf_deduction:
+      type: float
+      notnull: false
+    monthly_etf_deduction:
+      type: float
+      notnull: false
+  relations:
+    JobTitle:
+      local: jobtitle_id
+      foreign: id
+
+
+EmployeeSalaryRecord:
+  tableName: dk_employee_salary
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    emp_number:
+      type: integer
+    salary_type_id:
+      type: integer
+    monthly_basic:
+      type: float
+      notnull: true
+    other_allowance:
+      type: float
+      notnull: false
+    monthly_basic_tax:
+      type: float
+      notnull: false
+    monthly_nopay_leave:
+      type: float
+      notnull: false
+    monthly_epf_deduction:
+      type: float
+      notnull: false
+    monthly_etf_deduction:
+      type: float
+      notnull: false
+  relations:
+    Employee:
+      local: emp_number
+      foreign: emp_number
+    SalaryType:
+      local: salary_type_id
+      foreign: id
+
+EmployeeSalaryHistory:
+  tableName: dk_employee_salary_history
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    emp_number:
+      type: integer
+    salary_type_id:
+      type: integer
+    monthly_basic:
+      type: float
+      notnull: true
+    other_allowance:
+      type: float
+      notnull: false
+    monthly_basic_tax:
+      type: float
+      notnull: false
+    monthly_nopay_leave:
+      type: float
+      notnull: false
+    monthly_epf_deduction:
+      type: float
+      notnull: false
+    monthly_etf_deduction:
+      type: float
+      notnull: false
+    total_earning:
+      type: float
+      notnull: false
+    total_deduction:
+      type: float
+      notnull: false
+    total_netsalary:
+      type: float
+      notnull: false
+    month:
+      type: integer
+    year:
+      type: integer
+  relations:
+    Employee:
+      local: emp_number
+      foreign: emp_number
+    SalaryType:
+      local: salary_type_id
+      foreign: id
+
+
+
+
+
+
+
+
+

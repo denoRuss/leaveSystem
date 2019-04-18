@@ -1,0 +1,54 @@
+SalaryType:
+  pluginName: orangehrmPayrollPlugin
+  hasSelectableRows: true
+  unselectableRowIds: []
+  idValueGetter: getId
+  title: 'Salary Types'
+  tableWidth: 100%
+  hasSummary: false
+  summary: []
+  buttons:
+    Add:
+      label: Add
+      type: button
+    Delete:
+      label: Delete
+      type: button
+      class: delete
+  buttonsPosition: before-data
+  formMethod: post
+  formAction: 'index.php/admin/deleteSalaryTypes'
+  assets:    
+    - viewSalaryTypeListSuccess.js
+
+EmployeeSalary:
+  pluginName: orangehrmPayrollPlugin
+  hasSelectableRows: false
+  unselectableRowIds: []
+  idValueGetter: getId
+  title: ''
+  tableWidth: 100%
+  hasSummary: false
+  summary: []
+  buttonsPosition: before-data
+  formMethod: post
+  formAction: 'pim/deleteEmployees'
+  assets: []
+  jsInitMethods: []
+
+EmployeeSalaryHistory:
+  pluginName: orangehrmPayrollPlugin
+  hasSelectableRows: false
+  unselectableRowIds: []
+  idValueGetter: getId
+  title: 'Employee Salary History'
+  tableWidth: 100%
+  hasSummary: false
+  summary: []
+  buttonsPosition: before-data
+  formMethod: post
+  formAction: 'pim/deleteEmployees'
+  assets: []
+  jsInitMethods: []
+
+

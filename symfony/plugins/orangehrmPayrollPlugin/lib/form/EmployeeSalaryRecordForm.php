@@ -6,8 +6,8 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     public function configure() {
         $this->setWidgets($this->getFormWidgets());
         $this->setValidators($this->getFormValidators());
-        $this->getWidgetSchema()->setLabels($this->getFormLabels());
         $this->_setSalaryTypeeWidget();
+        $this->getWidgetSchema()->setLabels($this->getFormLabels());
         $this->getWidgetSchema()->setNameFormat('employee_salary_record[%s]');
     }
 
@@ -34,7 +34,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         $labels = parent::getFormLabels();
         unset($labels['name']);
         $labels['employee_name'] = __('Employee Name').$requiredLabelSuffix;
-        $labels['employee_name'] = __('Employee Name').$requiredLabelSuffix;
+        $labels['salary_type_id'] = __('Salary Type').$requiredLabelSuffix;
 
         return $labels;
     }

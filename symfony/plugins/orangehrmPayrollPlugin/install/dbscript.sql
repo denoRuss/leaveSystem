@@ -50,3 +50,60 @@ INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
 
 INSERT INTO ohrm_user_role_data_group (user_role_id, data_group_id, can_read, can_create, can_update, can_delete, self) VALUES
   (@admin_role_id, @data_group_id, 1, 1, 1, 1, 1);
+
+
+
+
+-- Salary Related QUERY
+
+CREATE TABLE IF NOT EXISTS `dk_salary_type` (
+  `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(60) NOT NULL UNIQUE,
+  `jobtitle_id` INT NOT NULL ,
+  `monthly_basic` double default null,
+  `other_allowance` double default null,
+  `monthly_basic_tax` double default null,
+  `monthly_nopay_leave` double default null,
+  `monthly_epf_deduction` double default null,
+  `monthly_etf_deduction` double default null,
+  CONSTRAINT FOREIGN KEY (`jobtitle_id`) REFERENCES `ohrm_job_title` (`id`) ON DELETE RESTRICT
+
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE IF NOT EXISTS `dk_employee_salary` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `emp_number` INT(7) NOT NULL,
+    `salary_type_id` INT UNSIGNED NOT NULL,
+    `monthly_basic` double default null,
+  `other_allowance` double default null,
+  `monthly_basic_tax` double default null,
+  `monthly_nopay_leave` double default null,
+  `monthly_epf_deduction` double default null,
+  `monthly_etf_deduction` double default null,
+    CONSTRAINT FOREIGN KEY (`emp_number`) REFERENCES `hs_hr_employee` (`emp_number`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`salary_type_id`) REFERENCES `dk_salary_type` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `dk_employee_salary_history` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `emp_number` INT(7) NOT NULL,
+    `salary_type_id` INT UNSIGNED NOT NULL,
+    `monthly_basic` double default null,
+  `other_allowance` double default null,
+  `monthly_basic_tax` double default null,
+  `monthly_nopay_leave` double default null,
+  `monthly_epf_deduction` double default null,
+  `monthly_etf_deduction` double default null,
+  `total_earning` double default null,
+  `total_deduction` double default null,
+  `total_netsalary` double default null,
+  `month` INT default null,
+  `year` INT default null,
+    CONSTRAINT FOREIGN KEY (`emp_number`) REFERENCES `hs_hr_employee` (`emp_number`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`salary_type_id`) REFERENCES `dk_salary_type` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+
+
+-- Hide Unused menus
