@@ -3,6 +3,7 @@ $(document).ready(function () {
 
     $('#btnCancel').click(function() {
         location.href = url_employeeSalaryList;
+        validator.resetForm();
     });
 
     var validator = $('#frmEmployeeSalaryRecord').validate({

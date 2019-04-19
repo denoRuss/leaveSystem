@@ -87,6 +87,12 @@ class DkSalaryDao
             if(isset($searchParams['emp_number'])){
                 $query ->where('emp_number = ?', $searchParams['emp_number']);
             }
+            if(isset($searchParams['year'])){
+                $query ->andWhere('year = ?', $searchParams['year']);
+            }
+            if(isset($searchParams['month'])){
+                $query ->andWhere('month = ?', $searchParams['month']);
+            }
 
 
             return $query->execute();

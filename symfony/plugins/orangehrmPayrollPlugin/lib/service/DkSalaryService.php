@@ -160,4 +160,28 @@ class DkSalaryService
         }
     }
 
+    /**
+     * @param $empNumber
+     * @param $year
+     * @param $month
+     * @return bool
+     * @throws ServiceException
+     */
+    public function checkEmployeeSalaryPaymentExist($empNumber,$year, $month){
+        try {
+            $employeeSalaryPayment = $this->getSalaryDao()->searchEmployeeSalaryHistory(array(
+                'emp_number'=>$empNumber,
+                'year'=>$year,
+                'month'=>$month
+            ));
+            if (count($employeeSalaryPayment)==1) {
+                return false;
+            }
+            return true;
+
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
 }

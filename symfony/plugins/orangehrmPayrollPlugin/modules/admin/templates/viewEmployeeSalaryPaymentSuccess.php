@@ -58,7 +58,10 @@
                         <label for="employee_salary_payment_month"><?php echo $form['month']->renderLabel() ?></label>
                         <?php echo $form['month']->render(array("class" => "editable")); ?>
                     </li>
+                    <li class="long">
+                        <label id="payemnt_error"></label>
 
+                    </li>
 
                     <li class="required new">
                         <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
@@ -88,5 +91,7 @@
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
 
     var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
-    var url_CheckSalaryComponentNameNotExist = '<?php echo url_for('admin/checkSalaryComponentNameNotExistAjax'); ?>';
+    var url_CheckEmployeeSalaryPaymentExist = '<?php echo url_for('admin/checkEmployeeSalaryPaymentExistAjax'); ?>';
+    var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
+    var lang_alreadypaid = '<?php echo __js("Already paid for selected Month"); ?>';
 </script>

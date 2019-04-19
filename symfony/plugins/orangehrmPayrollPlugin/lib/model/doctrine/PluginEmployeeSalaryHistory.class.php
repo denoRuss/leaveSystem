@@ -11,7 +11,7 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
-{   protected $monthList = array(1=>'January',2=>'Feb',3=>'March',4=>'Apr',5=>'May',6=>'June');
+{   protected $monthList = array(1=>'January',2=>'February',3=>'March',4=>'April',5=>'May',6=>'June');
 
     public function calculateTotalDeduction(){
         $deductions =0;
