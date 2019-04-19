@@ -4,3 +4,4 @@ all:
   sort_asc_class: 'ASC'
   sort_desc_class: 'DESC'
   sort_default_class: 'null'
+  show_years_from: 2019
