@@ -1,51 +1,85 @@
 $(document).ready(function() {
     $('#btnCancel').click(function() {
         location.href = url_SalaryComponentList;
+        validator.resetForm();
     });
     
-    $('#frmSalaryComponent').validate({
+    var validator = $('#frmSalaryType').validate({
         rules: {
-            'salary_component[name]': {
+            'salary_type[name]': {
                 required: true,
-                maxlength: 60,
                 remote: {
-                    url: url_CheckSalaryComponentNameNotExist,
+                    url: url_CheckSalaryTypeNameNotExist,
                     type: 'post',
                     data: {
                         id: function() {
-                            return $('#salary_component_id').val();
+                            return $('#salary_type_id').val();
                         },
                         name: function() {
-                            return $('#salary_component_name').val();
+                            return $('#salary_type_name').val();
                         }
                     }
                 }
             },
-            'salary_component[type]': {
-                required: true
+            'salary_type[monthly_basic]': {
+                required: true,
+                twoDecimals:true
+
             },
-            'salary_component[cost_to_company]': {
-                required: true
+            'salary_type[other_allowance]': {
+                twoDecimals:true
+
             },
-            'salary_component[value_type][]': {
-                required: true
-            }
+            'salary_type[monthly_basic_tax]': {
+                twoDecimals:true
+
+            },
+            'salary_type[monthly_nopay_leave]': {
+                twoDecimals:true
+
+            },
+            'salary_type[monthly_epf_deduction]': {
+                twoDecimals:true
+
+            },
+            'salary_type[monthly_etf_deduction]': {
+                twoDecimals:true
+
+            },
+            'salary_type[jobtitle_id]': {
+                required: true,
+
+            },
+
         },
         messages: {
-            'salary_component[name]': {
+            'salary_type[name]': {
                 required: lang_Required,
-                maxlength: lang_LengthExceeded_60,
                 remote: lang_AlreadyExists
             },
-            'salary_component[type]': {
-                required: lang_Required
+            'salary_type[monthly_basic]': {
+                required: lang_Required,
+                twoDecimals: lang_salaryShouldBeNumeric,
             },
-            'salary_component[cost_to_company]': {
-                required: lang_Required
+            'salary_type[other_allowance]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
             },
-            'salary_component[value_type][]': {
-                required: lang_Required
-            }
+            'salary_type[monthly_basic_tax]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'salary_type[monthly_nopay_leave]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'salary_type[monthly_epf_deduction]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'salary_type[monthly_etf_deduction]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'salary_type[jobtitle_id]': {
+                required: lang_Required,
+            },
+
         },
         errorPlacement: function(error, element) {
             if (element.is('#salary_component_value_type_1')) {
@@ -54,6 +88,20 @@ $(document).ready(function() {
                 error.insertAfter(element);
             }
         }
+    });
+
+    $.validator.addMethod("twoDecimals", function(value, element, params) {
+
+        var isValid = false;
+        var maxSal = value;//$('#payGradeCurrency_maxSalary').val();
+        var match = maxSal.match(/^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$/);
+        if(match) {
+            isValid = true;
+        }
+        if (maxSal == ""){
+            isValid = true;
+        }
+        return isValid;
     });
     
     if (!editable) {

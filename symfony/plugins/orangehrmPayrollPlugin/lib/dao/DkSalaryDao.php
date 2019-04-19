@@ -136,4 +136,21 @@ class DkSalaryDao
             throw new DaoException($e->getMessage());
         }
     }
+
+    /**
+     * @param $name
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getSalaryTypeByName($name) {
+        try {
+            $query = Doctrine_Query::create()
+                ->from('SalaryType')
+                ->where('name = ?', $name);
+
+            return $query->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
 }

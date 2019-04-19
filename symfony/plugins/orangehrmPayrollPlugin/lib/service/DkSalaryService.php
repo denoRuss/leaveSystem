@@ -137,4 +137,27 @@ class DkSalaryService
         }
     }
 
+    /**
+     * @param $id
+     * @param $name
+     * @return bool
+     * @throws ServiceException
+     */
+    public function checkSalaryTypeNameNotExist($id, $name) {
+        try {
+            $salaryType = $this->getSalaryDao()->getSalaryTypeByName($name);
+            if ($salaryType === false) {
+                return true;
+            } else {
+                if ($salaryType instanceof SalaryType) {
+                    return ($id == $salaryType->getId());
+                } else {
+                    return true;
+                }
+            }
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
 }

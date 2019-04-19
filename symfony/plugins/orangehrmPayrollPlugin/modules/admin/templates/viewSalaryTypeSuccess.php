@@ -88,5 +88,6 @@
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
     
     var url_SalaryComponentList = '<?php echo url_for('admin/viewSalaryTypeList'); ?>';
-    var url_CheckSalaryComponentNameNotExist = '<?php echo url_for('admin/checkSalaryComponentNameNotExistAjax'); ?>';
+    var url_CheckSalaryTypeNameNotExist = '<?php echo url_for('admin/checkSalaryTypetNameNotExistAjax'); ?>';
+    var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
 </script>
