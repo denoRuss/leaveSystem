@@ -8,6 +8,9 @@ $(document).ready(function () {
 
     var validator = $('#frmEmployeeSalaryRecord').validate({
         rules: {
+            'employee_salary_record[salary_type_id]': {
+                required: true,
+            },
             'employee_salary_record[monthly_basic]': {
                 required: true,
                 twoDecimals:true
@@ -40,7 +43,9 @@ $(document).ready(function () {
 
         },
         messages: {
-
+            'employee_salary_record[salary_type_id]': {
+                required: lang_Required,
+            },
             'employee_salary_record[monthly_basic]': {
                 required: lang_Required,
                 twoDecimals: lang_salaryShouldBeNumeric,
@@ -87,6 +92,16 @@ $(document).ready(function () {
         }
         return isValid;
     });
+    
+    $("#employee_salary_record_salary_type_id").change(function () {
+        var salaryObject = salaryTypeList[$(this).val()];
+        console.log(salaryObject);
 
-    console.log('loaded');
+        $("#employee_salary_record_monthly_basic").val(salaryObject['monthly_basic']);
+        $("#employee_salary_record_other_allowance").val(salaryObject['other_allowance']);
+        $("#employee_salary_record_monthly_basic_tax").val(salaryObject['monthly_basic_tax']);
+        $("#employee_salary_record_monthly_nopay_leave").val(salaryObject['monthly_nopay_leave']);
+        $("#employee_salary_record_monthly_epf_deduction").val(salaryObject['monthly_epf_deduction']);
+        $("#employee_salary_record_monthly_etf_deduction").val(salaryObject['monthly_etf_deduction']);
+    });
 });

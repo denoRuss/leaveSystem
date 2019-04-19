@@ -99,6 +99,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
     public function setEmployeeSalaryPaymentObject($object,$employee){
 
         if($object instanceof EmployeeSalaryRecord){
+            $this->setDefault('salary_type_id', $object->getSalaryTypeId());
             $this->setDefault('monthly_basic', $object->getMonthlyBasic());
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());

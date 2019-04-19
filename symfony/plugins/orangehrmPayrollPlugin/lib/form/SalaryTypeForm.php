@@ -186,4 +186,25 @@ class SalaryTypeForm extends sfForm {
         return $labels;
     }
 
+    public function getSalaryTypeListAsJson() {
+
+        $list = array();
+        $salaryTypeList = $this->getSalaryService()->getSalaryComponentList();
+
+        foreach ($salaryTypeList as $salaryType) {
+
+                $list[$salaryType->getId()] = array(
+                    'name'=> $salaryType->getName(),
+                    'monthly_basic' => $salaryType->getMonthlyBasic(),
+                    'other_allowance'=>$salaryType->getOtherAllowance(),
+                    'monthly_basic_tax'=>$salaryType->getMonthlyBasicTax(),
+                    'monthly_nopay_leave'=>$salaryType->getMonthlyNopayLeave(),
+                    'monthly_epf_deduction'=>$salaryType->getMonthlyEpfDeduction(),
+                    'monthly_etf_deduction'=>$salaryType->getMonthlyEtfDeduction(),
+
+                );
+        }
+        return json_encode($list);
+    }
+
 }

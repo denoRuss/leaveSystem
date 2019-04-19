@@ -46,6 +46,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     {
         if($object instanceof EmployeeSalaryRecord){
             $this->setDefault('id', $object->getId());
+            $this->setDefault('salary_type_id', $object->getSalaryTypeId());
             $this->setDefault('monthly_basic', $object->getMonthlyBasic());
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
@@ -60,7 +61,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     protected function _setSalaryTypeeWidget() {
 
         $salaryTypeList = $this->getSalaryService()->getSalaryComponentList();
-        $choices = array();
+        $choices = array("" => "-- " . __('Select') . " --");
 
         foreach ($salaryTypeList as $job) {
             $choices[$job->getId()] = $job->getName();
@@ -104,5 +105,10 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     public function getJavaScripts() {
         $javascripts = array();
         return $javascripts;
+    }
+
+    public function getStylesheets()
+    {
+        return array();
     }
 }

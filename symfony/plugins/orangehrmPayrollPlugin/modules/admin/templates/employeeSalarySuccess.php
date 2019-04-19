@@ -1,5 +1,5 @@
 <?php use_javascript(plugin_web_path('orangehrmPayrollPlugin', 'js/employeeSalary.js')); ?>
-<?php use_javascript(plugin_web_path('orangehrmPayrollPlugin', 'css/employeeSalarySuccess.css')); ?>
+<?php use_stylesheet(plugin_web_path('orangehrmPayrollPlugin', 'css/employeeSalarySuccess.css')); ?>
 
 <div id="saveHobTitle" class="box">
 
@@ -77,4 +77,5 @@
 
     var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
     var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
+    var salaryTypeList = <?php echo str_replace('&#039;', "'", $form->getSalaryTypeListAsJson()) ?>;
 </script>
