@@ -76,5 +76,5 @@
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
 
     var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
-    var url_CheckSalaryComponentNameNotExist = '<?php echo url_for('admin/checkSalaryComponentNameNotExistAjax'); ?>';
+    var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
 </script>
