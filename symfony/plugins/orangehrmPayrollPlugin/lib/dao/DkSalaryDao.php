@@ -24,6 +24,24 @@ class DkSalaryDao
     }
 
     /**
+     * @param string $sortField
+     * @param string $sortOrder
+     * @return Doctrine_Collection
+     * @throws DaoException
+     */
+    public function getTaxBracketList($sortField='id',$sortOrder='ASC'){
+
+        try {
+            $query = Doctrine_Query::create()
+                ->from('TaxBracket')
+                ->orderBy($sortField.' '.$sortOrder);
+            return $query->execute();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $id
      * @return array|Doctrine_Record
      * @throws DaoException
@@ -32,6 +50,23 @@ class DkSalaryDao
         try {
             $query = Doctrine_Query::create()
                 ->from('SalaryType')
+                ->where('id = ?', $id);
+
+            return $query->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getTaxBracket($id) {
+        try {
+            $query = Doctrine_Query::create()
+                ->from('TaxBracket')
                 ->where('id = ?', $id);
 
             return $query->fetchOne();
@@ -116,6 +151,20 @@ class DkSalaryDao
     }
 
     /**
+     * @param TaxBracket $taxBracket
+     * @return TaxBracket
+     * @throws DaoException
+     */
+    public function saveTaxBracket(TaxBracket $taxBracket) {
+        try {
+            $taxBracket->save();
+            return $taxBracket;
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
      * @param EmployeeSalaryRecord $employeeSalaryRecord
      * @return EmployeeSalaryRecord
      * @throws DaoException
@@ -155,6 +204,38 @@ class DkSalaryDao
                 ->where('name = ?', $name);
 
             return $query->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $searchParams
+     * @return bool
+     * @throws DaoException
+     */
+    public function checkTaxBracketBoundsNotExist($searchParams){
+        try {
+            $query = Doctrine_Query::create()
+                ->from('TaxBracket');
+
+
+            if(!empty($searchParams['lower_bound'])){
+                $query->andWhere('upper_bound >= ?',$searchParams['lower_bound']);
+            }
+            if(!empty($searchParams['upper_bound'])){
+                $query->andWhere('lower_bound <= ?',$searchParams['upper_bound']);
+            }
+
+
+            $result= $query->execute();
+
+            if(count($result)==0){
+                return true;
+            }
+            else{
+                return false;
+            }
         } catch (Exception $e) {
             throw new DaoException($e->getMessage());
         }

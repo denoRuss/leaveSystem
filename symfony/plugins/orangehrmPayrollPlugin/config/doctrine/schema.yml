@@ -122,6 +122,23 @@ EmployeeSalaryHistory:
       foreign: id
 
 
+TaxBracket:
+  tableName: dk_tax_bracket
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    lower_bound:
+      type: float
+      notnull: true
+    upper_bound:
+      type: float
+      notnull: true
+    percentage:
+      type: float
+      notnull: true
+
 
 
 

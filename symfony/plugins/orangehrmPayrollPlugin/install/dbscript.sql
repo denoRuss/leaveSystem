@@ -105,6 +105,15 @@ CREATE TABLE IF NOT EXISTS `dk_employee_salary_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 
+CREATE TABLE IF NOT EXISTS `dk_tax_bracket` (
+  `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  `lower_bound` double default null,
+  `upper_bound` double default null,
+  `percentage` double default null
+
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+
 -- Adding Salary type screen
 set @module_id := (SELECT id FROM ohrm_module WHERE name = 'admin');
 set @admin_role_id := (SELECT id FROM ohrm_user_role WHERE name = 'Admin');
@@ -137,3 +146,29 @@ UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 7;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 11;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 13;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 14;
+
+
+-- Adding Tax bracket screen
+set @module_id := (SELECT id FROM ohrm_module WHERE name = 'admin');
+set @admin_role_id := (SELECT id FROM ohrm_user_role WHERE name = 'Admin');
+
+
+
+INSERT INTO ohrm_screen (name, module_id, action_url) VALUES
+('Tax Brackets', @module_id , 'viewTaxBracketList');
+
+set @view_tax_bracket_list_screen_id := (SELECT id FROM ohrm_screen WHERE action_url = 'viewTaxBracketList');
+set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
+
+INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
+('Tax Brackets', @view_tax_bracket_list_screen_id , @parent_menu_id, 2, '100', null, 1);
+
+
+INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
+(@admin_role_id, @view_tax_bracket_list_screen_id, 1);
+
+
+
+SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
+INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
+  (@data_group_id, @view_tax_bracket_list_screen_id, 1);

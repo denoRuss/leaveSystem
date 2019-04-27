@@ -38,6 +38,20 @@ class DkSalaryService
     }
 
     /**
+     * @param string $sortField
+     * @param string $sortOrder
+     * @return Doctrine_Collection
+     * @throws ServiceException
+     */
+    public function getTaxBracketList($sortField='id',$sortOrder='ASC') {
+        try {
+            return $this->getSalaryDao()->getTaxBracketList($sortField,$sortOrder);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $id
      * @return array|Doctrine_Record|SalaryType
      * @throws Doctrine_Connection_Exception
@@ -51,6 +65,25 @@ class DkSalaryService
 
         try {
             return $this->getSalaryDao()->getSalaryType($id);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return array|Doctrine_Record|TaxBracket
+     * @throws Doctrine_Connection_Exception
+     * @throws Doctrine_Record_Exception
+     * @throws ServiceException
+     */
+    public function getTaxBracket($id) {
+        if (empty($id)) {
+            return new TaxBracket();
+        }
+
+        try {
+            return $this->getSalaryDao()->getTaxBracket($id);
         } catch (DaoException $e) {
             throw new ServiceException($e->getMessage());
         }
@@ -106,6 +139,19 @@ class DkSalaryService
     public function saveSalaryType(SalaryType $salaryType) {
         try {
             return $this->getSalaryDao()->saveSalaryType($salaryType);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param TaxBracket $taxBracket
+     * @return TaxBracket
+     * @throws ServiceException
+     */
+    public function saveTaxBracket(TaxBracket $taxBracket) {
+        try {
+            return $this->getSalaryDao()->saveTaxBracket($taxBracket);
         } catch (DaoException $e) {
             throw new ServiceException($e->getMessage());
         }
@@ -182,6 +228,15 @@ class DkSalaryService
         } catch (DaoException $e) {
             throw new ServiceException($e->getMessage());
         }
+    }
+
+    public function checkTaxBracketBoundsNotExist($lowerBound,$upperBound){
+
+        if(empty($lowerBound)&& empty($upperBound)){
+            return true;
+        }
+        return $this->getSalaryDao()->checkTaxBracketBoundsNotExist(array('lower_bound'=>$lowerBound,'upper_bound'=>$upperBound));
+
     }
 
 }

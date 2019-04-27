@@ -51,4 +51,27 @@ EmployeeSalaryHistory:
   assets: []
   jsInitMethods: []
 
+TaxBracket:
+  pluginName: orangehrmPayrollPlugin
+  hasSelectableRows: true
+  unselectableRowIds: []
+  idValueGetter: getId
+  title: 'Tax Brackets'
+  tableWidth: 100%
+  hasSummary: false
+  summary: []
+  buttons:
+    Add:
+      label: Add
+      type: button
+    Delete:
+      label: Delete
+      type: button
+      class: delete
+  buttonsPosition: before-data
+  formMethod: post
+  formAction: 'index.php/admin/deleteTaxBracket'
+  assets:
+    - viewTaxBracketListSuccess.js
+
 
