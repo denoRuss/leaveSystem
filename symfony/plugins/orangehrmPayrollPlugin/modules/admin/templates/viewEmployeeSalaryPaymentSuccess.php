@@ -22,10 +22,7 @@
                         <label for="employee_salary_payment_employee_name"><?php echo $form['employee_name']->renderLabel() ?></label>
                         <?php echo $form['employee_name']->render(array("class" => "")); ?>
                     </li>
-                    <li class="long">
-                        <label for="employee_salary_payment_salary_type_id"><?php echo $form['salary_type_id']->renderLabel() ?></label>
-                        <?php echo $form['salary_type_id']->render(array("class" => "")); ?>
-                    </li>
+
                     <li class="long">
                         <label for="employee_salary_payment_monthly_basic"><?php echo $form['monthly_basic']->renderLabel() ?></label>
                         <?php echo $form['monthly_basic']->render(array("class" => "editable")); ?>

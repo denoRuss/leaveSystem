@@ -3,10 +3,10 @@
 
 class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
 {
+    protected $employeeService;
     public function configure() {
         $this->setWidgets($this->getFormWidgets());
         $this->setValidators($this->getFormValidators());
-        $this->_setSalaryTypeeWidget();
         $this->_setYearAndMonthWidget();
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
         $this->getWidgetSchema()->setNameFormat('employee_salary_payment[%s]');
@@ -71,19 +71,19 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
         if ($this->isBound()) {
             $object = new EmployeeSalaryHistory();
 
-            $id = $this->getValue('id');
-            if (!empty($id)) {
-                $object = $this->getSalaryService()->getEmployeeSalaryHistory($id);
-            }
+            $employee = $this->getEmployeeService()->getEmployee($this->getValue('employee_name')['empId']);
+            $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
 
+            /**
+             * @var EmployeeSalaryRecord $employeeSalaryRecord
+             */
             $object->setEmpNumber($this->getValue('employee_name')['empId']);
-            $object->setSalaryTypeId($this->getValue('salary_type_id'));
-            $object->setMonthlyBasic($this->getValue('monthly_basic'));
-            $object->setOtherAllowance($this->getValue('other_allowance')?$this->getValue('other_allowance'):null);
-            $object->setMonthlyBasicTax($this->getValue('monthly_basic_tax')?$this->getValue('monthly_basic_tax'):null);
-            $object->setMonthlyNopayLeave($this->getValue('monthly_nopay_leave')?$this->getValue('monthly_nopay_leave'):null);
-            $object->setMonthlyEpfDeduction($this->getValue('monthly_epf_deduction')?$this->getValue('monthly_epf_deduction'):null);
-            $object->setMonthlyEtfDeduction($this->getValue('monthly_etf_deduction')?$this->getValue('monthly_etf_deduction'):null);
+            $object->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
+            $object->setOtherAllowance($employeeSalaryRecord->getOtherAllowance()?$employeeSalaryRecord->getOtherAllowance():null);
+            $object->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax()?$employeeSalaryRecord->getMonthlyBasicTax():null);
+            $object->setMonthlyNopayLeave($employeeSalaryRecord->getMonthlyNopayLeave()?$employeeSalaryRecord->getMonthlyNopayLeave():null);
+            $object->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction()?$employeeSalaryRecord->getMonthlyEpfDeduction():null);
+            $object->setMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyEtfDeduction()?$employeeSalaryRecord->getMonthlyEtfDeduction():null);
             $object->setTotalEarning($object->calculateTotalEarnings());
             $object->setTotalDeduction($object->calculateTotalDeduction());
             $object->setTotalNetsalary($object->calculateTotalNetsalary());
@@ -99,7 +99,6 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
     public function setEmployeeSalaryPaymentObject($object,$employee){
 
         if($object instanceof EmployeeSalaryRecord){
-            $this->setDefault('salary_type_id', $object->getSalaryTypeId());
             $this->setDefault('monthly_basic', $object->getMonthlyBasic());
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
@@ -109,5 +108,13 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
+    }
+
+    public function getEmployeeService() {
+        if(is_null($this->employeeService)) {
+            $this->employeeService = new EmployeeService();
+            $this->employeeService->setEmployeeDao(new EmployeeDao());
+        }
+        return $this->employeeService;
     }
 }

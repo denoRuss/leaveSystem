@@ -1,12 +1,23 @@
 $(document).ready(function () {
 
     $('#employee_salary_payment_employee_name_empName').attr('disabled','disabled');
+    $('#employee_salary_payment_monthly_basic').attr('disabled','disabled');
+    $('#employee_salary_payment_other_allowance').attr('disabled','disabled');
+    $('#employee_salary_payment_monthly_basic_tax').attr('disabled','disabled');
+    $('#employee_salary_payment_monthly_nopay_leave').attr('disabled','disabled');
+    $('#employee_salary_payment_monthly_epf_deduction').attr('disabled','disabled');
+    $('#employee_salary_payment_monthly_etf_deduction').attr('disabled','disabled');
 
     $('#btnCancel').click(function() {
         location.href = url_employeeSalaryList;
         validator.resetForm();
     });
 
+    $('#btnSave').click(function (e) {
+        e.preventDefault();
+        $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+        $("#frmEmployeeSalaryPayment").submit()
+    });
 
 
     var validator = $('#frmEmployeeSalaryPayment').validate({
@@ -95,7 +106,6 @@ $(document).ready(function () {
             },
             'employee_salary_payment[year]': {
                 remote: lang_alreadypaid
-                // remote: lang_alreadypaid+' '+$('#employee_salary_payment_year').val()+' '+ $("#employee_salary_payment_month option:selected").text()
             },
             'employee_salary_payment[month]': {
                 remote:  lang_alreadypaid
