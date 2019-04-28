@@ -6,7 +6,6 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     public function configure() {
         $this->setWidgets($this->getFormWidgets());
         $this->setValidators($this->getFormValidators());
-        $this->_setSalaryTypeeWidget();
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
         $this->getWidgetSchema()->setNameFormat('employee_salary_record[%s]');
     }
@@ -34,7 +33,6 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         $labels = parent::getFormLabels();
         unset($labels['name']);
         $labels['employee_name'] = __('Employee Name').$requiredLabelSuffix;
-        $labels['salary_type_id'] = __('Salary Type').$requiredLabelSuffix;
 
         return $labels;
     }
@@ -46,7 +44,6 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     {
         if($object instanceof EmployeeSalaryRecord){
             $this->setDefault('id', $object->getId());
-            $this->setDefault('salary_type_id', $object->getSalaryTypeId());
             $this->setDefault('monthly_basic', $object->getMonthlyBasic());
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
@@ -88,10 +85,9 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
             }
 
             $object->setEmpNumber($this->getValue('employee_name')['empId']);
-            $object->setSalaryTypeId($this->getValue('salary_type_id'));
             $object->setMonthlyBasic($this->getValue('monthly_basic'));
             $object->setOtherAllowance($this->getValue('other_allowance')?$this->getValue('other_allowance'):null);
-            $object->setMonthlyBasicTax($this->getValue('monthly_basic_tax')?$this->getValue('monthly_basic_tax'):null);
+            $object->setMonthlyBasicTax($object->calculateMonthlyBasicTax($this->getValue('monthly_basic')));
             $object->setMonthlyNopayLeave($this->getValue('monthly_nopay_leave')?$this->getValue('monthly_nopay_leave'):null);
             $object->setMonthlyEpfDeduction($this->getValue('monthly_epf_deduction')?$this->getValue('monthly_epf_deduction'):null);
             $object->setMonthlyEtfDeduction($this->getValue('monthly_etf_deduction')?$this->getValue('monthly_etf_deduction'):null);
@@ -110,5 +106,23 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     public function getStylesheets()
     {
         return array();
+    }
+
+    public function getTaxBracketListAsJson() {
+
+        $list = array();
+        $taxBracketList = $this->getSalaryService()->getTaxBracketList();
+
+        foreach ($taxBracketList as $taxBracket) {
+
+            $list[] = array(
+                'lower_bound'=> $taxBracket->getLowerBound(),
+                'upper_bound' => $taxBracket->getUpperBound(),
+                'percentage'=>$taxBracket->getPercentage(),
+
+
+            );
+        }
+        return json_encode($list,JSON_NUMERIC_CHECK);
     }
 }

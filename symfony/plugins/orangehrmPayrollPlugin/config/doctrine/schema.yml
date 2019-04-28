@@ -43,8 +43,6 @@ EmployeeSalaryRecord:
       autoincrement: true
     emp_number:
       type: integer
-    salary_type_id:
-      type: integer
     monthly_basic:
       type: float
       notnull: true
@@ -67,9 +65,6 @@ EmployeeSalaryRecord:
     Employee:
       local: emp_number
       foreign: emp_number
-    SalaryType:
-      local: salary_type_id
-      foreign: id
 
 EmployeeSalaryHistory:
   tableName: dk_employee_salary_history
@@ -79,8 +74,6 @@ EmployeeSalaryHistory:
       primary: true
       autoincrement: true
     emp_number:
-      type: integer
-    salary_type_id:
       type: integer
     monthly_basic:
       type: float
@@ -117,9 +110,6 @@ EmployeeSalaryHistory:
     Employee:
       local: emp_number
       foreign: emp_number
-    SalaryType:
-      local: salary_type_id
-      foreign: id
 
 
 TaxBracket:

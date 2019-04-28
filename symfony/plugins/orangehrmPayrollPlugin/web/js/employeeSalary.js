@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('#employee_salary_record_employee_name_empName').attr('disabled','disabled');
+    $('#employee_salary_record_monthly_basic_tax').attr('disabled','disabled');
 
     $('#btnCancel').click(function() {
         location.href = url_employeeSalaryList;
@@ -8,13 +9,10 @@ $(document).ready(function () {
 
     var validator = $('#frmEmployeeSalaryRecord').validate({
         rules: {
-            'employee_salary_record[salary_type_id]': {
-                required: true,
-            },
             'employee_salary_record[monthly_basic]': {
                 required: true,
-                twoDecimals:true
-
+                twoDecimals:true,
+                validTaxBracket:true
             },
             'employee_salary_record[other_allowance]': {
                 twoDecimals:true
@@ -43,12 +41,10 @@ $(document).ready(function () {
 
         },
         messages: {
-            'employee_salary_record[salary_type_id]': {
-                required: lang_Required,
-            },
             'employee_salary_record[monthly_basic]': {
                 required: lang_Required,
                 twoDecimals: lang_salaryShouldBeNumeric,
+                validTaxBracket:lang_invalidTaxbracket
             },
             'employee_salary_record[other_allowance]': {
                 twoDecimals: lang_salaryShouldBeNumeric,
@@ -92,6 +88,22 @@ $(document).ready(function () {
         }
         return isValid;
     });
+
+    $.validator.addMethod("validTaxBracket", function(value, element, params) {
+
+        value = parseFloat(value);
+        var isValid = false;
+        for(i=0;i<taxBracketList.length;i++){
+            var taxBracket = taxBracketList[i];
+            if(taxBracket.lower_bound<=value && value<=taxBracket.upper_bound){
+                var tax= value*taxBracket.percentage/100;
+                $("#employee_salary_record_monthly_basic_tax").val(tax);
+                return true;
+            }
+        }
+        $("#employee_salary_record_monthly_basic_tax").val('');
+        return isValid;
+    });
     
     $("#employee_salary_record_salary_type_id").change(function () {
         var salaryObject = salaryTypeList[$(this).val()];
@@ -105,3 +117,17 @@ $(document).ready(function () {
         $("#employee_salary_record_monthly_etf_deduction").val(salaryObject['monthly_etf_deduction']);
     });
 });
+
+
+function calculatePayeeTax(taxBracketList,value) {
+
+    for(i=0;i<taxBracketList.length;i++){
+        var taxBracket = taxBracketList[i];
+        if(taxBracket.lower_bound<=value && value<=taxBracket.upper_bound){
+           var tax= value*taxBracket.percentage/100;
+            $("#employee_salary_record_monthly_basic_tax").val(tax);
+            $("#taxbracket_error").html('No Tax Bracket is defined for this range')
+            return true;
+        }
+    }
+}

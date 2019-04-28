@@ -230,6 +230,12 @@ class DkSalaryService
         }
     }
 
+    /**
+     * @param $lowerBound
+     * @param $upperBound
+     * @return bool
+     * @throws DaoException
+     */
     public function checkTaxBracketBoundsNotExist($lowerBound,$upperBound){
 
         if(empty($lowerBound)&& empty($upperBound)){
@@ -237,6 +243,15 @@ class DkSalaryService
         }
         return $this->getSalaryDao()->checkTaxBracketBoundsNotExist(array('lower_bound'=>$lowerBound,'upper_bound'=>$upperBound));
 
+    }
+
+    /**
+     * @param $salary
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getMatchingTaxBracket($salary){
+        return $this->getSalaryDao()->getMatchingTaxBracket($salary);
     }
 
 }

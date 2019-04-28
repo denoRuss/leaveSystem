@@ -99,18 +99,8 @@ class EmployeeSalaryListConfigurationFactory extends ohrmListConfigurationFactor
             ),
         ));
 
-        $header7->populateFromArray(array(
-            'name' => 'Salary Type',
-            'width' => '25%',
-            'isSortable' => false,
-            'filters' => array('EmployeeSalaryTypeNameFilter' => array()),
-            'sortField' => 'supervisor',
-            'elementType' => 'label',
-            'textAlignmentStyle' => 'left',
-            'elementProperty' => array('getter' => array('getEmpNumber'))
-        ));
 
-        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6, $header7);
+        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6);
     }
     
     public function getClassName() {

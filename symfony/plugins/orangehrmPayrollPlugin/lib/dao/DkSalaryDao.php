@@ -240,4 +240,24 @@ class DkSalaryDao
             throw new DaoException($e->getMessage());
         }
     }
+
+    /**
+     * @param $salary
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getMatchingTaxBracket($salary){
+        try {
+            $query = Doctrine_Query::create()
+                ->from('TaxBracket');
+
+                $query->andWhere('upper_bound >= ?',$salary);
+                $query->andWhere('lower_bound <= ?',$salary);
+
+                return $query->fetchOne();
+
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
 }

@@ -22,10 +22,6 @@
                         <?php echo $form['employee_name']->render(array("class" => "")); ?>
                     </li>
                     <li class="long">
-                        <label for="employee_salary_record_salary_type_id"><?php echo $form['salary_type_id']->renderLabel() ?></label>
-                        <?php echo $form['salary_type_id']->render(array("class" => "")); ?>
-                    </li>
-                    <li class="long">
                         <label for="employee_salary_record_monthly_basic"><?php echo $form['monthly_basic']->renderLabel() ?></label>
                         <?php echo $form['monthly_basic']->render(array("class" => "editable")); ?>
                     </li>
@@ -36,6 +32,10 @@
                     <li class="long">
                         <label for="employee_salary_record_monthly_basic_tax"><?php echo $form['monthly_basic_tax']->renderLabel() ?></label>
                         <?php echo $form['monthly_basic_tax']->render(array("class" => "editable")); ?>
+                    </li>
+                    <li class="long">
+                        <label id="taxbracket_error"></label>
+
                     </li>
                     <li class="long">
                         <label for="employee_salary_record_monthly_nopay_leave"><?php echo $form['monthly_nopay_leave']->renderLabel() ?></label>
@@ -74,8 +74,11 @@
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
+    var lang_invalidTaxbracket = '<?php echo __js('No Tax Bracket is defined for this range'); ?>';
 
     var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
     var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
     var salaryTypeList = <?php echo str_replace('&#039;', "'", $form->getSalaryTypeListAsJson()) ?>;
+    var taxBracketList = <?php echo str_replace('&#039;', "'", $form->getTaxBracketListAsJson()) ?>;
+
 </script>
