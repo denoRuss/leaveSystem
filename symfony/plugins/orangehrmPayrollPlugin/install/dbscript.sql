@@ -123,7 +123,7 @@ set @view_salary_type_list_screen_id := (SELECT id FROM ohrm_screen WHERE action
 set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
 
 INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
-('Salary Types', @view_salary_type_list_screen_id , @parent_menu_id, 2, '100', null, 1);
+('Salary Types', @view_salary_type_list_screen_id , @parent_menu_id, 2, '100', null, 0);
 
 
 INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
@@ -168,3 +168,36 @@ INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
 SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
 INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
   (@data_group_id, @view_tax_bracket_list_screen_id, 1);
+
+
+
+-- Adding Configuration screen
+set @module_id := (SELECT id FROM ohrm_module WHERE name = 'admin');
+set @admin_role_id := (SELECT id FROM ohrm_user_role WHERE name = 'Admin');
+
+
+
+INSERT INTO ohrm_screen (name, module_id, action_url) VALUES
+('Configuration', @module_id , 'viewPayrollConfiguration');
+
+set @view_payroll_configuration_screen_id := (SELECT id FROM ohrm_screen WHERE action_url = 'viewPayrollConfiguration');
+set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
+
+INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
+('Configuration', @view_payroll_configuration_screen_id , @parent_menu_id, 2, '100', null, 1);
+
+
+INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
+(@admin_role_id, @view_payroll_configuration_screen_id, 1);
+
+
+
+SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
+INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
+  (@data_group_id, @view_payroll_configuration_screen_id, 1);
+
+
+--   Adding default payroll configuration values
+
+INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.epf_percentage', '0');
+INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.etf_percentage', '0');

@@ -1,0 +1,45 @@
+form#frmPayrollConfiguration {
+    margin: 10px 0px 0px 0px;
+}
+
+div.outerbox {
+    width: 500px;
+}
+
+br {
+    clear: both;
+}
+
+input.formRadio {
+    float: left;
+    display: block;
+}
+
+input[type="radio"] {
+    width: auto !important;
+}
+
+label.formRadio {
+    float: left;
+    display: block;
+    width: auto;
+    min-width: 80px;
+    margin: 10px 22px 0px 0px;
+    padding: 0px 0px 0px 4px;
+}
+
+input.formCheckbox {
+    margin: 10px 10px 0px 0px;
+}
+
+label.formCheckbox {
+    width: auto;
+    min-width: 80px;
+    margin: 10px 22px 0px 0px;
+    padding: 0px 0px 0px 4px;
+}
+
+ul.radio_list li {
+    float: left;
+    display: block;
+}
