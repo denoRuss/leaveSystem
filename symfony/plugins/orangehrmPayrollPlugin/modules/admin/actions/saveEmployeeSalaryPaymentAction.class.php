@@ -29,6 +29,6 @@ class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
             }
         }
         $this->getUser()->setFlash($messageType, __($message));
-        $this->redirect($request->getReferer());
+        $this->redirect('admin/viewEmployeeSalaryPayment/empNumber/'+$postData['employee_name']['empId']);
     }
 }
