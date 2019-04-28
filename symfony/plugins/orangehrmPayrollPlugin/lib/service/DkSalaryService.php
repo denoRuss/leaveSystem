@@ -236,12 +236,12 @@ class DkSalaryService
      * @return bool
      * @throws DaoException
      */
-    public function checkTaxBracketBoundsNotExist($lowerBound,$upperBound){
+    public function checkTaxBracketBoundsNotExist($lowerBound,$upperBound,$id){
 
-        if(empty($lowerBound)&& empty($upperBound)){
+        if(empty($lowerBound)|| empty($upperBound)){
             return true;
         }
-        return $this->getSalaryDao()->checkTaxBracketBoundsNotExist(array('lower_bound'=>$lowerBound,'upper_bound'=>$upperBound));
+        return $this->getSalaryDao()->checkTaxBracketBoundsNotExist(array('lower_bound'=>$lowerBound,'upper_bound'=>$upperBound,'id'=>$id));
 
     }
 

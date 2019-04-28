@@ -226,7 +226,9 @@ class DkSalaryDao
             if(!empty($searchParams['upper_bound'])){
                 $query->andWhere('lower_bound <= ?',$searchParams['upper_bound']);
             }
-
+//            if(!empty($searchParams['id'])){
+//                $query->andWhere('id != ?',$searchParams['id']);
+//            }
 
             $result= $query->execute();
 

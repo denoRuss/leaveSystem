@@ -66,6 +66,7 @@
     
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var lang_validSalaryRange = '<?php echo __js("Should be higher than Lower Boundry"); ?>';
+    var lang_overlappingTaxBracket = '<?php echo __js("Overlapping with existing tax bracket"); ?>';
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
     

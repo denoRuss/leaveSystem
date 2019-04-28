@@ -18,7 +18,11 @@ $(document).ready(function() {
                         },
                         upper_bound: function() {
                             return $('#tax_bracket_upper_bound').val();
+                        },
+                        id: function() {
+                            return $('#tax_bracket_id').val();
                         }
+
                     }
                 }
 
@@ -36,6 +40,9 @@ $(document).ready(function() {
                         },
                         upper_bound: function() {
                             return $('#tax_bracket_upper_bound').val();
+                        },
+                        id: function() {
+                            return $('#tax_bracket_id').val();
                         }
                     }
                 }
@@ -54,13 +61,13 @@ $(document).ready(function() {
             'tax_bracket[lower_bound]': {
                 required: lang_Required,
                 twoDecimals: lang_salaryShouldBeNumeric,
-                remote: lang_AlreadyExists
+                remote: lang_overlappingTaxBracket
             },
             'tax_bracket[upper_bound]': {
                 required: lang_Required,
                 twoDecimals: lang_salaryShouldBeNumeric,
                 validSalaryRange: lang_validSalaryRange,
-                remote: lang_AlreadyExists
+                remote: lang_overlappingTaxBracket
 
             },
             'tax_bracket[percentage]': {
