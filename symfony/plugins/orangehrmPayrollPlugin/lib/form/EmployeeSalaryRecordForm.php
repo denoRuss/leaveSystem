@@ -89,8 +89,8 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
             $object->setOtherAllowance($this->getValue('other_allowance')?$this->getValue('other_allowance'):null);
             $object->setMonthlyBasicTax($object->calculateMonthlyBasicTax($this->getValue('monthly_basic')));
             $object->setMonthlyNopayLeave($this->getValue('monthly_nopay_leave')?$this->getValue('monthly_nopay_leave'):null);
-            $object->setMonthlyEpfDeduction($this->getValue('monthly_epf_deduction')?$this->getValue('monthly_epf_deduction'):null);
-            $object->setMonthlyEtfDeduction($this->getValue('monthly_etf_deduction')?$this->getValue('monthly_etf_deduction'):null);
+            $object->setMonthlyEpfDeduction($object->calculateMonthlyEpfDeduction($this->getValue('monthly_basic')));
+            $object->setMonthlyEtfDeduction($object->calculateMonthlyEtfDeduction($this->getValue('monthly_basic')));
 
             return $object;
         } else {

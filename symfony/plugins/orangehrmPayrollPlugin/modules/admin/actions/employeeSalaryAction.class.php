@@ -1,7 +1,7 @@
 <?php
 
 
-class employeeSalaryAction extends viewSalaryTypeListAction
+class employeeSalaryAction extends basePayrollAction
 {
     public function execute($request)
     {
@@ -21,6 +21,8 @@ class employeeSalaryAction extends viewSalaryTypeListAction
         $this->editable = true;
         $this->form = $form;
         $this->title = $employeeSalaryRecord instanceof EmployeeSalaryRecord? 'Edit Employee Salary Type' : 'Add Employee Salary Type';
+        $this->epfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
+        $this->etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
     }
 
     public function getEmployeeService() {

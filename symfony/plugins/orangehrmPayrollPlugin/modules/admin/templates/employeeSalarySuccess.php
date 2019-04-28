@@ -81,4 +81,7 @@
     var salaryTypeList = <?php echo str_replace('&#039;', "'", $form->getSalaryTypeListAsJson()) ?>;
     var taxBracketList = <?php echo str_replace('&#039;', "'", $form->getTaxBracketListAsJson()) ?>;
 
+    var EPF_Percentage = <?php echo $epfPercentage;?>;
+    var ETF_Percentage = <?php echo $etfPercentage;?>;
+
 </script>

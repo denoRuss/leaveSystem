@@ -143,6 +143,10 @@ UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 11;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 13;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 14;
 
+UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'leave';
+UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'directory';
+
+
 
 -- Adding Tax bracket screen
 set @module_id := (SELECT id FROM ohrm_module WHERE name = 'admin');
@@ -184,7 +188,7 @@ set @view_payroll_configuration_screen_id := (SELECT id FROM ohrm_screen WHERE a
 set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
 
 INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
-('Configuration', @view_payroll_configuration_screen_id , @parent_menu_id, 2, '100', null, 1);
+('Settings', @view_payroll_configuration_screen_id , @parent_menu_id, 2, '100', null, 1);
 
 
 INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES

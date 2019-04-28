@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $('#employee_salary_record_employee_name_empName').attr('disabled','disabled');
     $('#employee_salary_record_monthly_basic_tax').attr('disabled','disabled');
+    $('#employee_salary_record_monthly_epf_deduction').attr('disabled','disabled');
+    $('#employee_salary_record_monthly_etf_deduction').attr('disabled','disabled');
 
     $('#btnCancel').click(function() {
         location.href = url_employeeSalaryList;
@@ -98,10 +100,18 @@ $(document).ready(function () {
             if(taxBracket.lower_bound<=value && value<=taxBracket.upper_bound){
                 var tax= value*taxBracket.percentage/100;
                 $("#employee_salary_record_monthly_basic_tax").val(tax);
+
+                var epf = value*EPF_Percentage/100;
+                $("#employee_salary_record_monthly_epf_deduction").val(epf);
+
+                var etf = value*ETF_Percentage/100;
+                $("#employee_salary_record_monthly_etf_deduction").val(etf);
                 return true;
             }
         }
         $("#employee_salary_record_monthly_basic_tax").val('');
+        $("#employee_salary_record_monthly_epf_deduction").val('');
+        $("#employee_salary_record_monthly_etf_deduction").val('');
         return isValid;
     });
     

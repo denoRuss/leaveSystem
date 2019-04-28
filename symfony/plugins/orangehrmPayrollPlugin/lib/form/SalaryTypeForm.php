@@ -176,10 +176,10 @@ class SalaryTypeForm extends sfForm {
             'name' => __('Salary Type Name') . $requiredLabelSuffix,
             'monthly_basic' => __('Monthly Basic Salary') . $requiredLabelSuffix,
             'other_allowance' => __('Other Allowance'),
-            'monthly_basic_tax' => __('Monthly Tax for Basic Salary'),
+            'monthly_basic_tax' => __('Tax deduction'),
             'monthly_nopay_leave' => __('No Pay Leave Deduction'),
-            'monthly_epf_deduction' => __('EPF for Basic Salary'),
-            'monthly_etf_deduction' => __('ETF for Basic Salary'),
+            'monthly_epf_deduction' => __('EPF contribution'),
+            'monthly_etf_deduction' => __('ETF contribution'),
             'jobtitle_id' => __('Job Title'),
         );
 

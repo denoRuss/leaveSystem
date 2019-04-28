@@ -13,6 +13,8 @@
 abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
 {
     protected $salaryComponentService;
+    protected $salaryConfigService;
+
     public function calculateMonthlyBasicTax($salary){
 
         $taxBracket = $this->getSalaryService()->getMatchingTaxBracket($salary);
@@ -24,10 +26,29 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
         return null;
     }
 
+    public function calculateMonthlyEpfDeduction($salary){
+        $epfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
+        $tax = $salary*$epfPercentage/100;
+        return $tax;
+    }
+
+    public function calculateMonthlyEtfDeduction($salary){
+        $etfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
+        $tax = $salary*$etfPercentage/100;
+        return $tax;
+    }
+
     public function getSalaryService() {
         if (!($this->salaryComponentService instanceof DkSalaryService)) {
             $this->salaryComponentService = new DkSalaryService();
         }
         return $this->salaryComponentService;
+    }
+
+    public function getSalaryConfigService() {
+        if (!($this->salaryConfigService instanceof DkConfigService)) {
+            $this->salaryConfigService = new DkConfigService();
+        }
+        return $this->salaryConfigService;
     }
 }
