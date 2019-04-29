@@ -53,6 +53,8 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
+
+        $this->setDefault('monthly_nopay_leave',$this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));
     }
 
     protected function _setSalaryTypeeWidget() {

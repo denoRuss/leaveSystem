@@ -4,6 +4,8 @@
 class DkSalaryService
 {
     protected $salaryDao;
+    protected $leaveRequestService;
+    protected $salaryConfigService;
 
 
     /**
@@ -252,6 +254,76 @@ class DkSalaryService
      */
     public function getMatchingTaxBracket($salary){
         return $this->getSalaryDao()->getMatchingTaxBracket($salary);
+    }
+
+    public function calulateNopayLeaveDeduction($empNumber,$from = null,$to = null){
+
+        if($this->getSalaryConfigService()->getNopayLeaveTypeId()==-1 || $this->getSalaryConfigService()->getNopayLeaveDeduction()==0){
+            return 0;
+        }
+        if(is_null($from) && is_null($to)){
+            $fromDate = date('Y-m-').'01';
+            $toDate = date('Y-m-').'30';
+        }
+
+        $leaveTypeId = $this->getSalaryConfigService()->getNopayLeaveTypeId();
+        $searchParams = new ParameterObject(array(
+            'dateRange' => new DateRange($fromDate, $toDate),
+            'statuses' => array(Leave::LEAVE_STATUS_LEAVE_TAKEN),
+            'leaveTypeId' => $leaveTypeId,
+            'employeeFilter' => array($empNumber),
+        ));
+        $leaveRequests = $this->getLeaveRequestService()->searchLeaveRequests($searchParams,1,false,true,true,false,false);
+
+        try{
+
+            $query = Doctrine_Query::create()
+                ->select('SUM(l.length_days) as num_of_leave')
+                ->from('Leave l');
+
+                if (!empty($fromDate)) {
+                    $query->andWhere("l.date >= ?",$fromDate);
+                }
+
+                if (!empty($toDate)) {
+                    $query->andWhere("l.date <= ?",$toDate);
+                }
+
+                if (!empty($leaveTypeId)) {
+                    $query->andWhere('l.leave_type_id = ?', $leaveTypeId);
+                }
+                $query->andWhere('l.emp_number = ?',$empNumber);
+
+                if (!empty($statuses)) {
+                    $query->andWhereIn("l.status", $statuses);
+                }
+
+            $result=  $query->execute();
+        }
+        catch (Exception $e){
+            $result =false;
+        }
+
+        if($result instanceof Doctrine_Collection){
+            $numOfTakenNopayLeave =$result->getFirst()['num_of_leave'];
+        }
+        $deductionForNopayLeave = $this->getSalaryConfigService()->getNopayLeaveDeduction();
+        return $numOfTakenNopayLeave *$deductionForNopayLeave;
+    }
+
+
+    public function getLeaveRequestService(){
+        if (!($this->leaveRequestService instanceof LeaveRequestService)) {
+            $this->leaveRequestService = new LeaveRequestService();
+        }
+        return $this->leaveRequestService;
+    }
+
+    public function getSalaryConfigService(){
+        if (!($this->salaryConfigService instanceof DkConfigService)) {
+            $this->salaryConfigService = new DkConfigService();
+        }
+        return $this->salaryConfigService;
     }
 
 }
