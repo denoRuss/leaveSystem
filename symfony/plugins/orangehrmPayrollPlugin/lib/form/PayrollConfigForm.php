@@ -6,8 +6,11 @@ class PayrollConfigForm extends sfForm {
     protected $salaryComponentService;
     protected $jobTitleService;
     protected $salaryConfigService;
+    protected $leaveTypeService;
 
-
+    /**
+     * @return DkSalaryService
+     */
     public function getSalaryService() {
         if (!($this->salaryComponentService instanceof DkSalaryService)) {
             $this->salaryComponentService = new DkSalaryService();
@@ -33,16 +36,14 @@ class PayrollConfigForm extends sfForm {
     }
 
     /**
-     * @return JobTitleService
+     * @return LeaveTypeService
      */
-    public function getJobTitleService() {
-        if (is_null($this->jobTitleService)) {
-            $this->jobTitleService = new JobTitleService();
-            $this->jobTitleService->setJobTitleDao(new JobTitleDao());
+    protected function getLeaveTypeService() {
+        if (!($this->leaveTypeService instanceof LeaveTypeService)) {
+            $this->leaveTypeService = new LeaveTypeService();
         }
-        return $this->jobTitleService;
+        return $this->leaveTypeService;
     }
-
 
     /**
      * Overriding the configure method 
@@ -50,21 +51,21 @@ class PayrollConfigForm extends sfForm {
     public function configure() {
         $this->setWidgets($this->getFormWidgets());
         $this->setValidators($this->getFormValidators());
+        $this->_setLeaveTypeWidget();
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
         $this->getWidgetSchema()->setNameFormat('payroll_configuration[%s]');
     }
 
-    private function _setJobTitleWidget() {
+    private function _setLeaveTypeWidget() {
 
-        $jobTitleList = $this->getJobTitleService()->getJobTitleList();
-        $choices = array();
-
-        foreach ($jobTitleList as $job) {
-            $choices[$job->getId()] = $job->getJobTitleName();
+        $leaveTypeList = $this->getLeaveTypeService()->getLeaveTypeList();
+        $leaveTypeChoices = array('' => '--' . __('Select') . '--');
+        foreach ($leaveTypeList as $leaveType) {
+            $leaveTypeChoices[$leaveType->getId()] = $leaveType->getName();
         }
 
-        $this->setWidget('jobtitle_id', new sfWidgetFormChoice(array('choices' => $choices)));
-        $this->setValidator('jobtitle_id', new sfValidatorChoice(array('choices' => array_keys($choices))));
+        $this->setWidget('leave_type_id', new sfWidgetFormChoice(array('choices' => $leaveTypeChoices)));
+        $this->setValidator('leave_type_id', new sfValidatorChoice(array('choices' => array_keys($leaveTypeChoices))));
     }
 
     /**
@@ -75,12 +76,9 @@ class PayrollConfigForm extends sfForm {
         
         $this->setDefault('epf_percentage', $this->getSalaryConfigService()->getEpfPercentage());
         $this->setDefault('etf_percentage', $this->getSalaryConfigService()->getEtfPercentage());
-//        $this->setDefault('other_allowance', $object->getOtherAllowance());
-//        $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
-//        $this->setDefault('monthly_nopay_leave', $object->getMonthlyNopayLeave());
-//        $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
-//        $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
-//        $this->setDefault('jobtitle_id', $object->getJobtitleId());
+        $this->setDefault('leave_type_id', $this->getSalaryConfigService()->getNopayLeaveTypeId());
+        $this->setDefault('nopay_leave_deduction', $this->getSalaryConfigService()->getNopayLeaveDeduction());
+
     }
 
     /**
@@ -92,6 +90,8 @@ class PayrollConfigForm extends sfForm {
                 //save efp percentage
                 $this->getSalaryConfigService()->setEpfPercentage($this->getValue('epf_percentage')?$this->getValue('epf_percentage'):0);
                 $this->getSalaryConfigService()->setEtfPercentage($this->getValue('etf_percentage')?$this->getValue('etf_percentage'):0);
+                $this->getSalaryConfigService()->setNopayLeaveTypeId($this->getValue('leave_type_id')?$this->getValue('leave_type_id'):-1);
+                $this->getSalaryConfigService()->setNopayLeaveDeduction($this->getValue('nopay_leave_deduction')?$this->getValue('nopay_leave_deduction'):0);
             }
             catch (Exception $e){
                 throw new ServiceException($e->getMessage());
@@ -112,6 +112,7 @@ class PayrollConfigForm extends sfForm {
 
         $widgets['epf_percentage'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
         $widgets['etf_percentage'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
+        $widgets['nopay_leave_deduction'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
 
 
         return $widgets;
@@ -126,6 +127,7 @@ class PayrollConfigForm extends sfForm {
 
         $validators['epf_percentage'] = new sfValidatorString(array('required' => true));
         $validators['etf_percentage'] = new sfValidatorString(array('required' => true));
+        $validators['nopay_leave_deduction'] = new sfValidatorString(array('required' => false));
 
 
         return $validators;
@@ -141,30 +143,13 @@ class PayrollConfigForm extends sfForm {
         $labels = array(
             'epf_percentage' => __('EPF Percentage') . $requiredLabelSuffix,
             'etf_percentage' => __('ETF Percentage') . $requiredLabelSuffix,
+            'leave_type_id' => __('Leave Type') . $requiredLabelSuffix,
+            'nopay_leave_deduction' => __('Deduction per Leave'),
         );
 
         return $labels;
     }
 
-    public function getSalaryTypeListAsJson() {
 
-        $list = array();
-        $salaryTypeList = $this->getSalaryService()->getSalaryComponentList();
-
-        foreach ($salaryTypeList as $salaryType) {
-
-                $list[$salaryType->getId()] = array(
-                    'name'=> $salaryType->getName(),
-                    'monthly_basic' => $salaryType->getMonthlyBasic(),
-                    'other_allowance'=>$salaryType->getOtherAllowance(),
-                    'monthly_basic_tax'=>$salaryType->getMonthlyBasicTax(),
-                    'monthly_nopay_leave'=>$salaryType->getMonthlyNopayLeave(),
-                    'monthly_epf_deduction'=>$salaryType->getMonthlyEpfDeduction(),
-                    'monthly_etf_deduction'=>$salaryType->getMonthlyEtfDeduction(),
-
-                );
-        }
-        return json_encode($list);
-    }
 
 }

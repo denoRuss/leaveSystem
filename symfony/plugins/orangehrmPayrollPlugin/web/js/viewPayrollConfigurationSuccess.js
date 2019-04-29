@@ -1,9 +1,5 @@
 $(document).ready(function() {
-    $('#btnCancel').click(function() {
-        location.href = url_TaxBracketList;
-        //validator.resetForm();
-    });
-    
+
     var validator = $('#frmPayrollConfiguration').validate({
         rules: {
 
@@ -14,6 +10,14 @@ $(document).ready(function() {
             },
             'payroll_configuration[etf_percentage]': {
                 required: true,
+                twoDecimals:true
+
+            },
+            'payroll_configuration[leave_type_id]': {
+                required: true,
+
+            },
+            'payroll_configuration[nopay_leave_deduction]': {
                 twoDecimals:true
 
             },
@@ -28,6 +32,12 @@ $(document).ready(function() {
             },
             'payroll_configuration[etf_percentage]': {
                 required: lang_Required,
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'payroll_configuration[leave_type_id]': {
+                required: lang_Required,
+            },
+            'payroll_configuration[nopay_leave_deduction]': {
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
 
@@ -77,6 +87,8 @@ $(document).ready(function() {
     if (!editable) {
         $('#payroll_configuration_epf_percentage').attr('disabled', true);
         $('#payroll_configuration_etf_percentage').attr('disabled', true);
+        $('#payroll_configuration_leave_type_id').attr('disabled', true);
+        $('#payroll_configuration_nopay_leave_deduction').attr('disabled', true);
     }
 
     $("#btnSave").click(function(e) {
@@ -88,14 +100,21 @@ $(document).ready(function() {
                 $(this).removeAttr("disabled");
             });
             $("#btnSave").attr('value', save);
+            $("#btnCancel").removeClass('hide');
             return;
         }
 
         if($("#btnSave").attr('value') == save) {
             if ($("#frmPayrollConfiguration").valid()) {
                 $("#btnSave").val(lang_processing);
+                $("#btnCancel").addClass('hide');
             }
             $("#frmPayrollConfiguration").submit();
         }
+    });
+
+    $('#btnCancel').click(function() {
+        location.href = url_PayrollSettings;
+        //validator.resetForm();
     });
 });

@@ -38,10 +38,14 @@
                         <label for="payroll_configuration_etf_percentage"><?php echo $form['etf_percentage']->renderLabel() ?></label>
                         <?php echo $form['etf_percentage']->render(array("class" => "editable")); ?>
                     </li>
-<!--                    <li class="long">-->
-<!--                        <label for="tax_bracket_percentage">--><?php //echo $form['percentage']->renderLabel() ?><!--</label>-->
-<!--                        --><?php //echo $form['percentage']->render(array("class" => "editable")); ?>
-<!--                    </li>-->
+                    <li class="long">
+                        <label for="tax_bracket_leave_type_id"><?php echo $form['leave_type_id']->renderLabel() ?></label>
+                        <?php echo $form['leave_type_id']->render(array("class" => "editable")); ?>
+                    </li>
+                    <li class="long">
+                        <label for="tax_bracket_nopay_leave_deduction"><?php echo $form['nopay_leave_deduction']->renderLabel() ?></label>
+                        <?php echo $form['nopay_leave_deduction']->render(array("class" => "editable")); ?>
+                    </li>
 
                     <li class="required new">
                         <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
@@ -52,7 +56,7 @@
             <div class="formbuttons">
                 <?php if ($showEditbutton): ?>
                     <input type="submit" class="plainbtn" id="btnSave" value="<?php echo 'Edit'; ?>" />
-                    <input type="button" class="reset" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
+                    <input type="button" class="reset hide" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
                 <?php else: ?>
                     <input type="button" class="reset" id="btnCancel" value="<?php echo 'Back'; ?>" />
                 <?php endif; ?>
@@ -72,7 +76,7 @@
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
 
-    var url_TaxBracketList = '<?php echo url_for('admin/viewTaxBracketList'); ?>';
+    var url_PayrollSettings = '<?php echo url_for('admin/viewPayrollConfiguration'); ?>';
     var url_CheckSalaryTypeNameNotExist = '<?php echo url_for('admin/checkSalaryTypetNameNotExistAjax'); ?>';
     var url_TaxBracketBoundsNotExist = '<?php echo url_for('admin/checkTaxBracketBoundsNotExistAjax'); ?>';
     var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
