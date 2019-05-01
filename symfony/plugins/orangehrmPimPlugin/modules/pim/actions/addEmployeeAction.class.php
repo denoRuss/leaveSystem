@@ -135,7 +135,7 @@ class addEmployeeAction extends basePimAction {
                                 array('employee' => $this->form->getEmployee(), 'emp_number'=> $empNumber)));
 
                             $this->getEmployeeEventService()->saveEvent($empNumber,PluginEmployeeEvent::EVENT_TYPE_EMPLOYEE,PluginEmployeeEvent::EVENT_SAVE,'Saving Employee',$this->getEmployeeEventService()->getUserRole());
-                            $this->redirect('pim/viewPersonalDetails?empNumber='. $empNumber);
+                            $this->redirect('pim/viewSalaryList?empNumber='. $empNumber);
                         }
 
                     } catch(Exception $e) {
