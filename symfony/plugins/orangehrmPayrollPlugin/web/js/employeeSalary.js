@@ -121,6 +121,7 @@ $(document).ready(function () {
         if($("#btnSave").attr('value') == edit) {
 
             $("#employee_salary_record_monthly_basic").removeAttr("disabled");
+            $('#employee_salary_record_other_allowance').removeAttr("disabled");
             $("#btnSave").attr('value', save);
             $("#btnCancel").removeClass('hide');
             return;
