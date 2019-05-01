@@ -135,4 +135,25 @@ $(document).ready(function () {
         return isValid;
     });
 
+
+    $("#employee_salary_payment_month, #employee_salary_payment_year").change(function () {
+        $.ajax({
+            url:url_getNopayLeaveBalanceAjax,
+            method:'POST',
+            dataType:'JSON',
+            data:{
+                empNumber: empNumber,
+                year:$("#employee_salary_payment_year").val(),
+                month:$("#employee_salary_payment_month").val()
+            },
+            success: function (data) {
+                console.log(data);
+                $('#employee_salary_payment_monthly_nopay_leave').val(data.nopayLeaveDeduction);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    })
+
 });

@@ -73,6 +73,9 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
 
             $employee = $this->getEmployeeService()->getEmployee($this->getValue('employee_name')['empId']);
             $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
+            $from = date('Y-m-d',strtotime($this->getValue('year').'-'.$this->getValue('month').'-01'));
+            $to = date('Y-m-t',strtotime($from));
+
 
             /**
              * @var EmployeeSalaryRecord $employeeSalaryRecord
@@ -81,7 +84,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $object->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
             $object->setOtherAllowance($employeeSalaryRecord->getOtherAllowance()?$employeeSalaryRecord->getOtherAllowance():null);
             $object->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax()?$employeeSalaryRecord->getMonthlyBasicTax():null);
-            $object->setMonthlyNopayLeave($employeeSalaryRecord->getMonthlyNopayLeave()?$employeeSalaryRecord->getMonthlyNopayLeave():null);
+            $object->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
             $object->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction()?$employeeSalaryRecord->getMonthlyEpfDeduction():null);
             $object->setMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyEtfDeduction()?$employeeSalaryRecord->getMonthlyEtfDeduction():null);
             $object->setTotalEarning($object->calculateTotalEarnings());
@@ -102,12 +105,14 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $this->setDefault('monthly_basic', $object->getMonthlyBasic());
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
-            $this->setDefault('monthly_nopay_leave', $object->getMonthlyNopayLeave());
             $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
             $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
+        $this->setDefault('year',date('Y'));
+        $this->setDefault('month',date('n'));
+        $this->setDefault('monthly_nopay_leave', $this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));
     }
 
     public function getEmployeeService() {

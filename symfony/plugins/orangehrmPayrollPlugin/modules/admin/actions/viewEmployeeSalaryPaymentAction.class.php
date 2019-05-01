@@ -21,6 +21,7 @@ class viewEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
         $this->editable = true;
         $this->form = $form;
         $this->title = 'Employee Salary Payment';
+        $this->empNumber = $empNumber;
 
         $listData = $this->getSalaryService()->searchEmployeeSalaryHistory(array('emp_number'=>$empNumber));
         $this->setListComponent($listData);

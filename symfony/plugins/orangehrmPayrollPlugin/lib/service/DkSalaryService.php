@@ -262,18 +262,12 @@ class DkSalaryService
             return 0;
         }
         if(is_null($from) && is_null($to)){
-            $fromDate = date('Y-m-').'01';
-            $toDate = date('Y-m-').'30';
+            $from = date('Y-m-').'01';
+            $to = date('Y-m-t');
         }
 
         $leaveTypeId = $this->getSalaryConfigService()->getNopayLeaveTypeId();
-        $searchParams = new ParameterObject(array(
-            'dateRange' => new DateRange($fromDate, $toDate),
-            'statuses' => array(Leave::LEAVE_STATUS_LEAVE_TAKEN),
-            'leaveTypeId' => $leaveTypeId,
-            'employeeFilter' => array($empNumber),
-        ));
-        $leaveRequests = $this->getLeaveRequestService()->searchLeaveRequests($searchParams,1,false,true,true,false,false);
+        $statuses = array(Leave::LEAVE_STATUS_LEAVE_TAKEN);
 
         try{
 
@@ -281,12 +275,12 @@ class DkSalaryService
                 ->select('SUM(l.length_days) as num_of_leave')
                 ->from('Leave l');
 
-                if (!empty($fromDate)) {
-                    $query->andWhere("l.date >= ?",$fromDate);
+                if (!empty($from)) {
+                    $query->andWhere("l.date >= ?",$from);
                 }
 
-                if (!empty($toDate)) {
-                    $query->andWhere("l.date <= ?",$toDate);
+                if (!empty($to)) {
+                    $query->andWhere("l.date <= ?",$to);
                 }
 
                 if (!empty($leaveTypeId)) {

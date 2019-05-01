@@ -82,6 +82,7 @@
 
 <script type="text/javascript">
     var editable = <?php echo ($editable) ? 'true' : 'false'; ?>;
+    var empNumber = <?php echo $empNumber ?>;
 
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';
@@ -89,6 +90,7 @@
 
     var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
     var url_CheckEmployeeSalaryPaymentExist = '<?php echo url_for('admin/checkEmployeeSalaryPaymentExistAjax'); ?>';
+    var url_getNopayLeaveBalanceAjax = '<?php echo url_for('admin/getNopayLeaveBalanceAjax'); ?>';
     var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';
     var lang_alreadypaid = '<?php echo __js("Already paid for selected Month"); ?>';
 </script>
