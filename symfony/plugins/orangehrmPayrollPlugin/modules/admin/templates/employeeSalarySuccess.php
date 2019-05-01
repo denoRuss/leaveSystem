@@ -59,8 +59,8 @@
             </fieldset>
             <div class="formbuttons">
                 <?php if ($editable): ?>
-                    <input type="submit" class="plainbtn" id="btnSave" value="<?php echo 'Save'; ?>" />
-                    <input type="button" class="reset" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
+                    <input type="submit" class="plainbtn" id="btnSave" value="<?php echo 'Edit'; ?>" />
+                    <input type="button" class="reset hide" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
                 <?php else: ?>
                     <input type="button" class="reset" id="btnCancel" value="<?php echo 'Back'; ?>" />
                 <?php endif; ?>
@@ -70,6 +70,10 @@
 </div>
 <script type="text/javascript">
     var editable = <?php echo ($editable) ? 'true' : 'false'; ?>;
+
+    var edit = '<?php echo __js('Edit'); ?>';
+    var save = '<?php echo __js('Save'); ?>';
+    var lang_processing = '<?php echo __js('Processing'); ?>';
 
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';

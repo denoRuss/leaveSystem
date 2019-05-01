@@ -3,11 +3,11 @@ $(document).ready(function () {
     $('#employee_salary_record_monthly_basic_tax').attr('disabled','disabled');
     $('#employee_salary_record_monthly_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_record_monthly_etf_deduction').attr('disabled','disabled');
+    $('#employee_salary_record_monthly_basic').attr('disabled','disabled');
+    $('#employee_salary_record_monthly_nopay_leave').attr('disabled','disabled');
+    $('#employee_salary_record_other_allowance').attr('disabled','disabled');
 
-    $('#btnCancel').click(function() {
-        location.href = url_employeeSalaryList;
-        validator.resetForm();
-    });
+
 
     var validator = $('#frmEmployeeSalaryRecord').validate({
         rules: {
@@ -114,17 +114,30 @@ $(document).ready(function () {
         $("#employee_salary_record_monthly_etf_deduction").val('');
         return isValid;
     });
-    
-    $("#employee_salary_record_salary_type_id").change(function () {
-        var salaryObject = salaryTypeList[$(this).val()];
-        console.log(salaryObject);
 
-        $("#employee_salary_record_monthly_basic").val(salaryObject['monthly_basic']);
-        $("#employee_salary_record_other_allowance").val(salaryObject['other_allowance']);
-        $("#employee_salary_record_monthly_basic_tax").val(salaryObject['monthly_basic_tax']);
-        $("#employee_salary_record_monthly_nopay_leave").val(salaryObject['monthly_nopay_leave']);
-        $("#employee_salary_record_monthly_epf_deduction").val(salaryObject['monthly_epf_deduction']);
-        $("#employee_salary_record_monthly_etf_deduction").val(salaryObject['monthly_etf_deduction']);
+    $("#btnSave").click(function(e) {
+        //if user clicks on Edit make all fields editable
+        e.preventDefault();
+        if($("#btnSave").attr('value') == edit) {
+
+            $("#employee_salary_record_monthly_basic").removeAttr("disabled");
+            $("#btnSave").attr('value', save);
+            $("#btnCancel").removeClass('hide');
+            return;
+        }
+
+        if($("#btnSave").attr('value') == save) {
+            if ($("#frmEmployeeSalaryRecord").valid()) {
+                $("#btnSave").val(lang_processing);
+                $("#btnCancel").addClass('hide');
+            }
+            $("#frmEmployeeSalaryRecord").submit();
+        }
+    });
+
+    $('#btnCancel').click(function() {
+        location.href = url_employeeSalaryList;
+        validator.resetForm();
     });
 });
 

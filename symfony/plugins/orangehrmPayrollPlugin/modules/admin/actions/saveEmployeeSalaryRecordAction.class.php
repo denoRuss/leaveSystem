@@ -29,6 +29,12 @@ class saveEmployeeSalaryRecordAction extends viewSalaryTypeListAction
             }
         }
         $this->getUser()->setFlash($messageType, __($message));
-        $this->redirect('admin/employeeSalaryList');
+        if(preg_match('/admin/',$request->getReferer())){
+            $this->redirect('admin/employeeSalaryList');
+        }
+        else{
+            $this->redirect($request->getReferer());
+        }
+
     }
 }
