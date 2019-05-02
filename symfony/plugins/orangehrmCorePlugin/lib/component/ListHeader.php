@@ -16,7 +16,8 @@ class ListHeader extends ComponentProperty {
         'comment',
         'treeLink',
         'linkDate',
-        'checkbox'
+        'checkbox',
+        'linkPayment'
     );
     private $textAlignmentStyles = array(
         'left',
