@@ -40,4 +40,4 @@ UPDATE `hs_hr_config` SET `value` = 'off' WHERE `hs_hr_config`.`key` = 'authenti
 UPDATE `hs_hr_config` SET `value` = 'veryWeak' WHERE `hs_hr_config`.`key` = 'authentication.default_required_password_strength';
 
 -- Salary history screen is removed
-UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 20;
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 103;
