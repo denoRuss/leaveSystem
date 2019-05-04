@@ -77,7 +77,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
         ));
 
         $header5->populateFromArray(array(
-            'name' => 'Total Earaning',
+            'name' => 'Gross Salary',
             'width' => '15%',
             'isSortable' => false,
             'sortField' => 'employeeStatus',
