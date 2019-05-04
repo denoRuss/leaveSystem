@@ -2,7 +2,7 @@
 
 class LinkPaymentCell extends LinkCell {
 
-
+    private $dataSourceType = self::DATASOURCE_TYPE_OBJECT;
 
     public function __toString() {
 
@@ -49,7 +49,7 @@ class LinkPaymentCell extends LinkCell {
     public function isLinkable($dataObject = null){
 
 
-        return $dataObject->getRawValue()->getEmployeeSalaryHistory()->getFirst()->getMonthlyBasic()==null;
+        return is_null($dataObject->getRawValue()->getEmployeeSalaryHistory()->getFirst()->getId());
     }
 
     protected function getValue($getterName = 'getter') {

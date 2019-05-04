@@ -306,6 +306,62 @@ class DkSalaryService
     }
 
 
+    public function processBulkPayment($filters,$employeeList){
+        $result = array();
+        $result[0] = array('Payment Completed successfully');
+        $result[1] = 'success.nofade';
+
+        //set one time for performance improvement
+        $from = date('Y-m-d',strtotime($filters['year'].'-'.$filters['month'].'-01'));
+        $to = date('Y-m-t',strtotime($from));
+
+        $searchParam = array('year'=>$filters['year'],'month'=>$filters['month']);
+        $salaryHistoryList = new Doctrine_Collection(Doctrine::getTable('EmployeeSalaryHistory'));
+
+        foreach ($employeeList as $employee){
+            $searchParam['emp_number']=$employee->getEmpNumber();
+            $employeePayment = $this->searchEmployeeSalaryHistory($searchParam);
+            if(count($employeePayment)==0){
+
+                $employeeCurrentSalaryRecord = $this->getSalaryDao()->getEmployeeSalaryRecordByEmpNumber($employee->getEmpNumber());
+                if($employeeCurrentSalaryRecord instanceof EmployeeSalaryRecord){
+
+                    $salaryHistoryItem = new EmployeeSalaryHistory();
+                    $salaryHistoryItem->setEmpNumber($employee->getEmpNumber());
+                    $salaryHistoryItem->setMonthlyBasic($employeeCurrentSalaryRecord->getMonthlyBasic());
+                    $salaryHistoryItem->setOtherAllowance($employeeCurrentSalaryRecord->getOtherAllowance());
+                    $salaryHistoryItem->setMonthlyBasicTax($employeeCurrentSalaryRecord->getMonthlyBasicTax());
+                    $salaryHistoryItem->setMonthlyNopayLeave($this->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
+                    $salaryHistoryItem->setMonthlyEpfDeduction($employeeCurrentSalaryRecord->getMonthlyEpfDeduction());
+                    $salaryHistoryItem->setMonthlyEtfDeduction($employeeCurrentSalaryRecord->getMonthlyEtfDeduction());
+                    $salaryHistoryItem->setTotalEarning($salaryHistoryItem->calculateTotalEarnings());
+                    $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->calculateTotalDeduction());
+                    $salaryHistoryItem->setTotalNetsalary($salaryHistoryItem->calculateTotalNetsalary());
+                    $salaryHistoryItem->setMonth($filters['month']);
+                    $salaryHistoryItem->setYear($filters['year']);
+
+                    $salaryHistoryList->add($salaryHistoryItem);
+                }
+                else{
+                    $result[0][] = 'Basic Salary is not defined for '.$employee->getFullName();
+                }
+            }
+            else{
+                $result[0][] = 'Payment is already completed for '.$employee->getFullName().' for '.date('Y M',strtotime($from));
+            }
+        }
+
+        try{
+            $salaryHistoryList->save();
+        }
+        catch (Exception $exception){
+            $result[0] = array('Failed to Process');
+            $result[1] = 'warning';
+            Logger::getLogger('orangehrm')->error($exception->getMessage());
+        }
+        return $result;
+    }
+
     public function getLeaveRequestService(){
         if (!($this->leaveRequestService instanceof LeaveRequestService)) {
             $this->leaveRequestService = new LeaveRequestService();

@@ -93,6 +93,23 @@ class DkSalaryDao
     }
 
     /**
+     * @param $empNumber
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getEmployeeSalaryRecordByEmpNumber($empNumber) {
+        try {
+            $query = Doctrine_Query::create()
+                ->from('EmployeeSalaryRecord')
+                ->where('emp_number = ?', $empNumber);
+
+            return $query->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $id
      * @return array|Doctrine_Record
      * @throws DaoException

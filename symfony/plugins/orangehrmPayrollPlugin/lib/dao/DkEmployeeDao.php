@@ -3,7 +3,7 @@
 
 class DkEmployeeDao extends EmployeeDao
 {
-
+    protected $salaryService;
     protected static $searchMapping = array(
         'id' => 'e.employee_id',
         'employee_name' => 'concat_ws(\' \', e.emp_firstname,e.emp_middle_name,e.emp_lastname)',
@@ -39,7 +39,7 @@ class DkEmployeeDao extends EmployeeDao
             'e.emp_middle_name AS middleName,e.emp_birthday AS employeeBirthday, e.termination_id AS terminationId, ' .
             'cs.name AS subDivision, cs.id AS subDivisionId,' .
             'j.job_title AS jobTitle, j.id AS jobTitleId, j.is_deleted AS isDeleted, ' .
-            'd.total_earning as totalEarning, d.total_deduction as totalDeduction, d.total_netsalary as netSalary,d.monthly_basic as monthlyBasic,'.
+            'd.total_earning as totalEarning, d.total_deduction as totalDeduction, d.total_netsalary as netSalary,d.monthly_basic as monthlyBasic,d.id as salaryHistoryId,'.
             'es.name AS employeeStatus, es.id AS employeeStatusId, '.
             'GROUP_CONCAT(s.emp_firstname, \'## \', s.emp_middle_name, \'## \', s.emp_lastname, \'## \',s.emp_number) AS supervisors,'.
             'GROUP_CONCAT(DISTINCT loc.id, \'##\',loc.name) AS locationIds';
@@ -255,6 +255,10 @@ class DkEmployeeDao extends EmployeeDao
             $employees = new Doctrine_Collection(Doctrine::getTable('Employee'));
 
             if ($result) {
+                //set one time for performance improvement
+                $from = date('Y-m-d',strtotime($filters['year'].'-'.$filters['month'].'-01'));
+                $to = date('Y-m-t',strtotime($from));
+
                 while ($row = $statement->fetch() ) {
                     $employee = new Employee();
 
@@ -286,10 +290,32 @@ class DkEmployeeDao extends EmployeeDao
                     $salaryHistoryList = new Doctrine_Collection(Doctrine::getTable('EmployeeSalaryHistory'));
 
                     $salaryHistoryItem = new EmployeeSalaryHistory();
-                    $salaryHistoryItem->setTotalEarning(number_format($row['totalEarning'],2));
-                    $salaryHistoryItem->setTotalDeduction(number_format($row['totalDeduction'],2));
-                    $salaryHistoryItem->setTotalNetsalary(number_format($row['netSalary'],2));
-                    $salaryHistoryItem->setMonthlyBasic($row['monthlyBasic']);
+                    if(is_null($row['salaryHistoryId'])){
+                        //payment has not done yet, projected values are shown
+                        $employeeSalaryRecord = $this->getSalaryService()->getSalaryDao()->getEmployeeSalaryRecordByEmpNumber($row['empNumber']);
+                        if($employeeSalaryRecord instanceof EmployeeSalaryRecord){
+
+
+
+                            $salaryHistoryItem->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
+                            $salaryHistoryItem->setOtherAllowance($employeeSalaryRecord->getOtherAllowance());
+                            $salaryHistoryItem->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax());
+                            $salaryHistoryItem->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($row['empNumber'],$from,$to));
+                            $salaryHistoryItem->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction());
+                            $salaryHistoryItem->setMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyEtfDeduction());
+                            $salaryHistoryItem->setTotalEarning($salaryHistoryItem->displayTotalEarnings());
+                            $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->dispalyTotalDeduction());
+                            $salaryHistoryItem->setTotalNetsalary($salaryHistoryItem->dispalyTotalNetsalary());
+                        }
+                    }
+                    else{
+                        $salaryHistoryItem->setTotalEarning(number_format($row['totalEarning'],2));
+                        $salaryHistoryItem->setTotalDeduction(number_format($row['totalDeduction'],2));
+                        $salaryHistoryItem->setTotalNetsalary(number_format($row['netSalary'],2));
+                        $salaryHistoryItem->setMonthlyBasic($row['monthlyBasic']);
+                        $salaryHistoryItem->setId($row['salaryHistoryId']);
+                    }
+
                     $salaryHistoryList->add($salaryHistoryItem);
 
                     $employee->setEmployeeSalaryHistory($salaryHistoryList);
@@ -337,5 +363,16 @@ class DkEmployeeDao extends EmployeeDao
         }
         return $employees;
 
+    }
+
+
+    /**
+     * @return DkSalaryService
+     */
+    public function getSalaryService(){
+        if(is_null($this->salaryService)){
+            $this->salaryService = new DkSalaryService();
+        }
+        return $this->salaryService;
     }
 }

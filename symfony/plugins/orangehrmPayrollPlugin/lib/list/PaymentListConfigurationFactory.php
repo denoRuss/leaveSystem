@@ -112,7 +112,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'filters' => array('PaymentStatusFilter' => array()),
             'textAlignmentStyle' => 'left',
             'elementProperty' => array(
-                'labelGetter' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getMonthlyBasic')),
+                'labelGetter' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getId')),
                 'placeholderGetters' => array('id' => 'getEmpNumber'),
                 'linkable' => $this->getLinkable(),
                 'urlPattern' => public_path('index.php/admin/viewEmployeeSalaryPayment/empNumber/{id}'),

@@ -4,6 +4,7 @@
 class makePaymentAction extends viewEmployeeListAction
 {
     protected $employeeService;
+    protected $salaryService;
     public function execute($request) {
 
         /* For highlighting corresponding menu item */
@@ -89,7 +90,15 @@ class makePaymentAction extends viewEmployeeListAction
             $parameterHolder->setOffset($offset);
             $parameterHolder->setFilters($filters);
 
+
             $list = $this->getEmployeeService()->searchEmployees($parameterHolder);
+            if($this->form->getValue('isBulkPayment')=='yes'){
+                $result = $this->getSalaryService()->processBulkPayment($filters,$list);
+                $this->message = $result[0];
+                $this->messageType = $result[1];
+                $this->getUser()->setFlash('search.'.$this->messageType, $this->message);
+                $this->redirect($request->getReferer());
+            }
 
         } else {
             $count = 0;
@@ -112,6 +121,10 @@ class makePaymentAction extends viewEmployeeListAction
             }
 
         }
+        else{
+            $this->getUser()->setFlash('search.'.$this->messageType, $this->message, false);
+        }
+
     }
 
     protected function setListComponent($employeeList, $count, $noOfRecords, $page) {
@@ -177,5 +190,12 @@ class makePaymentAction extends viewEmployeeListAction
             $this->employeeService->setEmployeeDao(new DkEmployeeDao());
         }
         return $this->employeeService;
+    }
+
+    public function getSalaryService(){
+        if(is_null($this->salaryService)) {
+            $this->salaryService = new DkSalaryService();
+        }
+        return $this->salaryService;
     }
 }
