@@ -14,7 +14,7 @@ $(document).ready(function() {
 
             },
             'payroll_configuration[leave_type_id]': {
-                required: true,
+                required: false,
 
             },
             'payroll_configuration[nopay_leave_deduction]': {

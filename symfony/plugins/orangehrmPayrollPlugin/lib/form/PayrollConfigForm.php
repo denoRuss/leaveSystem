@@ -59,7 +59,7 @@ class PayrollConfigForm extends sfForm {
     private function _setLeaveTypeWidget() {
 
         $leaveTypeList = $this->getLeaveTypeService()->getLeaveTypeList();
-        $leaveTypeChoices = array('' => '--' . __('Select') . '--');
+        $leaveTypeChoices = array('-1' => '--' . __('Select') . '--');
         foreach ($leaveTypeList as $leaveType) {
             $leaveTypeChoices[$leaveType->getId()] = $leaveType->getName();
         }

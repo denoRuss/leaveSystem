@@ -143,7 +143,7 @@ UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 11;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 13;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 14;
 
--- UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'leave';
+UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'leave';
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'directory';
 
 
