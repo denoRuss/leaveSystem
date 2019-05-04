@@ -30,7 +30,7 @@ class saveEmployeeSalaryRecordAction extends viewSalaryTypeListAction
         }
         $this->getUser()->setFlash($messageType, __($message));
         if(preg_match('/admin/',$request->getReferer())){
-            $this->redirect('admin/employeeSalaryList');
+            $this->redirect('admin/makePayment');
         }
         else{
             $this->redirect($request->getReferer());

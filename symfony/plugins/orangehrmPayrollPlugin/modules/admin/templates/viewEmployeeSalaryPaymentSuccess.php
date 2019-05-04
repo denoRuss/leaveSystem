@@ -88,7 +88,7 @@
     var lang_AlreadyExists = '<?php echo __js(ValidationMessages::ALREADY_EXISTS); ?>';
     var lang_LengthExceeded_60 = '<?php echo __js(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 60)); ?>';
 
-    var url_employeeSalaryList = '<?php echo url_for('admin/employeeSalaryList'); ?>';
+    var url_employeeSalaryList = '<?php echo url_for('admin/makePayment'); ?>';
     var url_CheckEmployeeSalaryPaymentExist = '<?php echo url_for('admin/checkEmployeeSalaryPaymentExistAjax'); ?>';
     var url_getNopayLeaveBalanceAjax = '<?php echo url_for('admin/getNopayLeaveBalanceAjax'); ?>';
     var lang_salaryShouldBeNumeric = '<?php echo __js("Should be a positive number"); ?>';

@@ -38,3 +38,6 @@ UPDATE `ohrm_user_role_data_group` SET `can_read` =0 WHERE `data_group_id` IN ( 
 -- turn off password check
 UPDATE `hs_hr_config` SET `value` = 'off' WHERE `hs_hr_config`.`key` = 'authentication.enforce_password_strength';
 UPDATE `hs_hr_config` SET `value` = 'veryWeak' WHERE `hs_hr_config`.`key` = 'authentication.default_required_password_strength';
+
+-- Salary history screen is removed
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 20;
