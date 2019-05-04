@@ -8,6 +8,11 @@ $(document).ready(function() {
                 twoDecimals:true
 
             },
+            'payroll_configuration[company_epf_percentage]': {
+                required: true,
+                twoDecimals:true
+
+            },
             'payroll_configuration[etf_percentage]': {
                 required: true,
                 twoDecimals:true
@@ -27,6 +32,10 @@ $(document).ready(function() {
         messages: {
 
             'payroll_configuration[epf_percentage]': {
+                required: lang_Required,
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'payroll_configuration[company_epf_percentage]': {
                 required: lang_Required,
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
@@ -86,6 +95,7 @@ $(document).ready(function() {
     
     if (!editable) {
         $('#payroll_configuration_epf_percentage').attr('disabled', true);
+        $('#payroll_configuration_company_epf_percentage').attr('disabled', true);
         $('#payroll_configuration_etf_percentage').attr('disabled', true);
         $('#payroll_configuration_leave_type_id').attr('disabled', true);
         $('#payroll_configuration_nopay_leave_deduction').attr('disabled', true);

@@ -35,6 +35,10 @@
                         <?php echo $form['epf_percentage']->render(array("class" => "editable")); ?>
                     </li>
                     <li class="long">
+                        <label for="payroll_configuration_company_epf_percentage"><?php echo $form['company_epf_percentage']->renderLabel() ?></label>
+                        <?php echo $form['company_epf_percentage']->render(array("class" => "editable")); ?>
+                    </li>
+                    <li class="long">
                         <label for="payroll_configuration_etf_percentage"><?php echo $form['etf_percentage']->renderLabel() ?></label>
                         <?php echo $form['etf_percentage']->render(array("class" => "editable")); ?>
                     </li>

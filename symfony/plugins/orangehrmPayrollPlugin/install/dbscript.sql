@@ -204,6 +204,7 @@ INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
 --   Adding default payroll configuration values
 
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.epf_percentage', '0');
+INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.company_epf_percentage', '0');
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.etf_percentage', '0');
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.nopay_leave_type_id', -1);
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.nopay_leave_deduction', 0);

@@ -4,6 +4,7 @@
 class DkConfigService extends ConfigService
 {
     const KEY_EPF_PERCENTAGE = "payroll.epf_percentage";
+    const KEY_COMPANY_EPF_PERCENTAGE = "payroll.company_epf_percentage";
     const KEY_ETF_PERCENTAGE = "payroll.etf_percentage";
     const KEY_NOPAY_LEAVE_TYPE_ID = "payroll.nopay_leave_type_id";
     const KEY_NOPAY_LEAVE_DEDUCTION = "payroll.nopay_leave_deduction";
@@ -14,6 +15,14 @@ class DkConfigService extends ConfigService
      */
     public function setEpfPercentage($value) {
         $this->_setConfigValue(self::KEY_EPF_PERCENTAGE, $value);
+    }
+
+    /**
+     * @param $value
+     * @throws CoreServiceException
+     */
+    public function setCompanyEpfPercentage($value) {
+        $this->_setConfigValue(self::KEY_COMPANY_EPF_PERCENTAGE, $value);
     }
 
     /**
@@ -46,6 +55,14 @@ class DkConfigService extends ConfigService
      */
     public function getEpfPercentage() {
         return $this->_getConfigValue(self::KEY_EPF_PERCENTAGE);
+    }
+
+    /**
+     * @return String
+     * @throws CoreServiceException
+     */
+    public function getCompanyEpfPercentage() {
+        return $this->_getConfigValue(self::KEY_COMPANY_EPF_PERCENTAGE);
     }
 
     /**
