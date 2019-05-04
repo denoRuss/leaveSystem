@@ -17,7 +17,7 @@ set @make_payment_screen_id := (SELECT id FROM ohrm_screen WHERE action_url = 'm
 set @generate_payslip_screen_id := (SELECT id FROM ohrm_screen WHERE action_url = 'generatePaySlip');
 
 INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
-('Payroll', NULL , NULL, '1', '1200', NULL, '1');
+('Payroll', @make_payment_screen_id , NULL, '1', '1200', NULL, '1');
 
 set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
 
