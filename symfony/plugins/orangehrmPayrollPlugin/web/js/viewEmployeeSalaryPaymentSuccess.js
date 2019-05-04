@@ -76,7 +76,7 @@ $(document).ready(function () {
                             return $('#employee_salary_payment_month').val();
                         },
                         empNumber: function() {
-                            return 1;
+                            return $("#employee_salary_payment_employee_name_empId").val()
                         }
                     }
                 }
