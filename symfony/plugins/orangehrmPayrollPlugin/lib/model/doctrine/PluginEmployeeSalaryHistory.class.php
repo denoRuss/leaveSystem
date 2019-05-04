@@ -15,7 +15,7 @@ abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
 
     public function calculateTotalDeduction(){
         $deductions =0;
-        $deductions = $this->getMonthlyBasicTax()+$this->getMonthlyNopayLeave()+$this->getMonthlyEtfDeduction()+
+        $deductions = $this->getMonthlyBasicTax()+$this->getMonthlyNopayLeave()+
             $this->getMonthlyEpfDeduction();
         return $deductions;
     }
@@ -37,7 +37,7 @@ abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
     public function calculateTotalNetsalary(){
         $netSalary = 0;
         $netSalary = ($this->getMonthlyBasic() + $this->getOtherAllowance()) -($this->getMonthlyBasicTax()
-                +$this->getMonthlyNopayLeave()+$this->getMonthlyEtfDeduction()+$this->getMonthlyEpfDeduction()) ;
+                +$this->getMonthlyNopayLeave()+$this->getMonthlyEpfDeduction()) ;
         return $netSalary;
     }
 
