@@ -20,7 +20,7 @@
                 <p>
                     <input type="button" id="searchBtn" value="<?php echo __("Search") ?>" name="_search" />
                     <input type="button" class="reset" id="resetBtn" value="<?php echo __("Reset") ?>" name="_reset" />
-                    <input type="button" id="bulkPaymentBtn" value="<?php echo __("Bulk Payment") ?>" name="_bulkPayment" />
+                    <input type="button" id="bulkPaymentBtn" value="<?php echo __("Process Payrol") ?>" name="_bulkPayment" />
                 </p>
 
             </fieldset>
