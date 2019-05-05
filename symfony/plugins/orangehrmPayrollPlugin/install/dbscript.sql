@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `dk_salary_type` (
   `monthly_basic_tax` double default null,
   `monthly_nopay_leave` double default null,
   `monthly_epf_deduction` double default null,
+  `company_epf_deduction` double default null,
   `monthly_etf_deduction` double default null,
   CONSTRAINT FOREIGN KEY (`jobtitle_id`) REFERENCES `ohrm_job_title` (`id`) ON DELETE RESTRICT
 
@@ -79,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `dk_employee_salary` (
   `monthly_basic_tax` double default null,
   `monthly_nopay_leave` double default null,
   `monthly_epf_deduction` double default null,
+  `company_epf_deduction` double default null,
   `monthly_etf_deduction` double default null,
     CONSTRAINT FOREIGN KEY (`emp_number`) REFERENCES `hs_hr_employee` (`emp_number`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
@@ -91,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `dk_employee_salary_history` (
   `monthly_basic_tax` double default null,
   `monthly_nopay_leave` double default null,
   `monthly_epf_deduction` double default null,
+  `company_epf_deduction` double default null,
   `monthly_etf_deduction` double default null,
   `total_earning` double default null,
   `total_deduction` double default null,

@@ -178,7 +178,7 @@ class SalaryTypeForm extends sfForm {
             'other_allowance' => __('Other Allowance'),
             'monthly_basic_tax' => __('Tax deduction'),
             'monthly_nopay_leave' => __('No Pay Leave Deduction'),
-            'monthly_epf_deduction' => __('EPF contribution'),
+            'monthly_epf_deduction' => __('Employee EPF Contribution'),
             'monthly_etf_deduction' => __('ETF contribution'),
             'jobtitle_id' => __('Job Title'),
         );

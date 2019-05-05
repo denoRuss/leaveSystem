@@ -22,6 +22,7 @@ class viewPersonalSalaryAction extends basePimAction
         $this->editable = true;
         $this->form = $form;
         $this->epfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
+        $this->companyepfPercentage = $this->getSalaryConfigService()->getCompanyEpfPercentage();
         $this->etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
         $this->salaryPermission = $this->getDataGroupPermissions('Payroll', $empNumber);
         $this->empNumber = $empNumber;

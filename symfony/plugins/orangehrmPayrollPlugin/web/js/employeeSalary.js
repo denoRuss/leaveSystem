@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#employee_salary_record_employee_name_empName').attr('disabled','disabled');
     $('#employee_salary_record_monthly_basic_tax').attr('disabled','disabled');
     $('#employee_salary_record_monthly_epf_deduction').attr('disabled','disabled');
+    $('#employee_salary_record_company_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_record_monthly_etf_deduction').attr('disabled','disabled');
     $('#employee_salary_record_monthly_basic').attr('disabled','disabled');
     $('#employee_salary_record_monthly_nopay_leave').attr('disabled','disabled');
@@ -32,6 +33,10 @@ $(document).ready(function () {
                 twoDecimals:true
 
             },
+            'employee_salary_record[company_epf_deduction]': {
+                twoDecimals:true
+
+            },
             'employee_salary_record[monthly_etf_deduction]': {
                 twoDecimals:true
 
@@ -58,6 +63,9 @@ $(document).ready(function () {
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
             'employee_salary_record[monthly_epf_deduction]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'employee_salary_record[company_epf_deduction]': {
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
             'employee_salary_record[monthly_etf_deduction]': {
@@ -104,6 +112,9 @@ $(document).ready(function () {
                 var epf = value*EPF_Percentage/100;
                 $("#employee_salary_record_monthly_epf_deduction").val(epf);
 
+                var companyepf = value*COMPANY_EPF_Percentage/100;
+                $("#employee_salary_record_company_epf_deduction").val(companyepf);
+
                 var etf = value*ETF_Percentage/100;
                 $("#employee_salary_record_monthly_etf_deduction").val(etf);
                 return true;
@@ -111,6 +122,7 @@ $(document).ready(function () {
         }
         $("#employee_salary_record_monthly_basic_tax").val('');
         $("#employee_salary_record_monthly_epf_deduction").val('');
+        $("#employee_salary_record_company_epf_deduction").val('');
         $("#employee_salary_record_monthly_etf_deduction").val('');
         return isValid;
     });

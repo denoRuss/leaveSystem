@@ -6,6 +6,7 @@ $(document).ready(function () {
     $('#employee_salary_payment_monthly_basic_tax').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_nopay_leave').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_epf_deduction').attr('disabled','disabled');
+    $('#employee_salary_payment_company_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_etf_deduction').attr('disabled','disabled');
 
     $('#btnCancel').click(function() {
@@ -40,6 +41,10 @@ $(document).ready(function () {
 
             },
             'employee_salary_payment[monthly_epf_deduction]': {
+                twoDecimals:true
+
+            },
+            'employee_salary_payment[company_epf_deduction]': {
                 twoDecimals:true
 
             },
@@ -99,6 +104,9 @@ $(document).ready(function () {
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
             'employee_salary_payment[monthly_epf_deduction]': {
+                twoDecimals: lang_salaryShouldBeNumeric,
+            },
+            'employee_salary_payment[company_epf_deduction]': {
                 twoDecimals: lang_salaryShouldBeNumeric,
             },
             'employee_salary_payment[monthly_etf_deduction]': {

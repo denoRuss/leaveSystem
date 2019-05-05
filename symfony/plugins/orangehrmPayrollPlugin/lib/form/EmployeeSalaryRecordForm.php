@@ -15,6 +15,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         unset($widgets['name']);
 
         $widgets['employee_name'] =  new ohrmWidgetEmployeeNameAutoFill(array('loadingMethod'=>'ajax'));
+        $widgets['company_epf_deduction'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
         return $widgets;
     }
 
@@ -23,6 +24,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         $validators = parent::getFormValidators();
         unset($validators['name']);
         $validators['employee_name'] = new ohrmValidatorEmployeeNameAutoFill();
+        $validators['company_epf_deduction'] = new sfValidatorString(array('required' => false));
 
         return $validators;
 
@@ -33,6 +35,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         $labels = parent::getFormLabels();
         unset($labels['name']);
         $labels['employee_name'] = __('Employee Name').$requiredLabelSuffix;
+        $labels['company_epf_deduction'] = __('Employer EPF Contribution');
 
         return $labels;
     }
@@ -49,11 +52,13 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
             $this->setDefault('monthly_nopay_leave', $object->getMonthlyNopayLeave());
             $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
+            $this->setDefault('company_epf_deduction', $object->getCompanyEpfDeduction());
             $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
 
+        //TODO if payment date is going not 30, this has to be fixed, use diffrent from & to date
         $this->setDefault('monthly_nopay_leave',$this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));
     }
 
@@ -92,6 +97,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
             $object->setMonthlyBasicTax($object->calculateMonthlyBasicTax($this->getValue('monthly_basic')));
             $object->setMonthlyNopayLeave($this->getValue('monthly_nopay_leave')?$this->getValue('monthly_nopay_leave'):null);
             $object->setMonthlyEpfDeduction($object->calculateMonthlyEpfDeduction($this->getValue('monthly_basic')));
+            $object->setCompanyEpfDeduction($object->calculateCompanyEpfDeduction($this->getValue('monthly_basic')));
             $object->setMonthlyEtfDeduction($object->calculateMonthlyEtfDeduction($this->getValue('monthly_basic')));
 
             return $object;

@@ -32,6 +32,12 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
         return $tax;
     }
 
+    public function calculateCompanyEpfDeduction($salary){
+        $epfPercentage = $this->getSalaryConfigService()->getCompanyEpfPercentage();
+        $tax = $salary*$epfPercentage/100;
+        return $tax;
+    }
+
     public function calculateMonthlyEtfDeduction($salary){
         $etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
         $tax = $salary*$etfPercentage/100;

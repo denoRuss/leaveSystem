@@ -46,6 +46,10 @@
                         <?php echo $form['monthly_epf_deduction']->render(array("class" => "editable")); ?>
                     </li>
                     <li class="long">
+                        <label for="employee_salary_record_company_epf_deduction"><?php echo $form['company_epf_deduction']->renderLabel() ?></label>
+                        <?php echo $form['company_epf_deduction']->render(array("class" => "editable")); ?>
+                    </li>
+                    <li class="long">
                         <label for="employee_salary_record_monthly_etf_deduction"><?php echo $form['monthly_etf_deduction']->renderLabel() ?></label>
                         <?php echo $form['monthly_etf_deduction']->render(array("class" => "editable")); ?>
                     </li>
@@ -86,6 +90,7 @@
     var taxBracketList = <?php echo str_replace('&#039;', "'", $form->getTaxBracketListAsJson()) ?>;
 
     var EPF_Percentage = <?php echo $epfPercentage;?>;
+    var COMPANY_EPF_Percentage = <?php echo $companyepfPercentage;?>;
     var ETF_Percentage = <?php echo $etfPercentage;?>;
 
 </script>

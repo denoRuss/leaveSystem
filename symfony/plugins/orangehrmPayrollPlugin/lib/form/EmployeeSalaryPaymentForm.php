@@ -86,6 +86,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $object->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax()?$employeeSalaryRecord->getMonthlyBasicTax():null);
             $object->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
             $object->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction()?$employeeSalaryRecord->getMonthlyEpfDeduction():null);
+            $object->setCompanyEpfDeduction($employeeSalaryRecord->getCompanyEpfDeduction()?$employeeSalaryRecord->getCompanyEpfDeduction():null);
             $object->setMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyEtfDeduction()?$employeeSalaryRecord->getMonthlyEtfDeduction():null);
             $object->setTotalEarning($object->calculateTotalEarnings());
             $object->setTotalDeduction($object->calculateTotalDeduction());
@@ -106,6 +107,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $this->setDefault('other_allowance', $object->getOtherAllowance());
             $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
             $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
+            $this->setDefault('company_epf_deduction', $object->getCompanyEpfDeduction());
             $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
         }
 

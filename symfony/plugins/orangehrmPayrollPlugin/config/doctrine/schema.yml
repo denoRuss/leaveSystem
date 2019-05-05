@@ -25,6 +25,9 @@ SalaryType:
     monthly_epf_deduction:
       type: float
       notnull: false
+    company_epf_deduction:
+      type: float
+      notnull: false
     monthly_etf_deduction:
       type: float
       notnull: false
@@ -58,6 +61,9 @@ EmployeeSalaryRecord:
     monthly_epf_deduction:
       type: float
       notnull: false
+    company_epf_deduction:
+      type: float
+      notnull: false
     monthly_etf_deduction:
       type: float
       notnull: false
@@ -88,6 +94,9 @@ EmployeeSalaryHistory:
       type: float
       notnull: false
     monthly_epf_deduction:
+      type: float
+      notnull: false
+    company_epf_deduction:
       type: float
       notnull: false
     monthly_etf_deduction:

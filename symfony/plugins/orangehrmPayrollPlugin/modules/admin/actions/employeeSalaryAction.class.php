@@ -22,6 +22,7 @@ class employeeSalaryAction extends basePayrollAction
         $this->form = $form;
         $this->title = $employeeSalaryRecord instanceof EmployeeSalaryRecord? 'Edit Employee Salary Type' : 'Add Employee Salary Type';
         $this->epfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
+        $this->companyepfPercentage = $this->getSalaryConfigService()->getCompanyEpfPercentage();
         $this->etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
     }
 
