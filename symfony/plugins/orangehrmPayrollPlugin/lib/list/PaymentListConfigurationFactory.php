@@ -20,6 +20,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
         $header6 = new ListHeader();
         $header7 = new ListHeader();
         $header8 = new ListHeader();
+        $header9 = new ListHeader();
 
         $header1->populateFromArray(array(
             'name' => 'Id',
@@ -94,6 +95,16 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'textAlignmentStyle' => 'left',
             'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getTotalDeduction'))
         ));
+
+        $header9->populateFromArray(array(
+            'name' => 'Employer Contribution',
+            'width' => '15%',
+            'isSortable' => false,
+            'sortField' => 'employeeStatus',
+            'elementType' => 'label',
+            'textAlignmentStyle' => 'left',
+            'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getEmployerContribution'))
+        ));
         $header7->populateFromArray(array(
             'name' => 'Net Salary',
             'width' => '15%',
@@ -121,7 +132,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
 
 
 
-        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6,$header7,$header8);
+        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6,$header9,$header7,$header8);
     }
     
     public function getClassName() {

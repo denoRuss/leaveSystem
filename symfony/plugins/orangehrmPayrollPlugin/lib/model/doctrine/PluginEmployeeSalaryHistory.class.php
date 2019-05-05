@@ -12,6 +12,23 @@
  */
 abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
 {   protected $monthList = array(1=>'January',2=>'February',3=>'March',4=>'April',5=>'May',6=>'June');
+    protected $employerContribution;
+
+    /**
+     * @return mixed
+     */
+    public function getEmployerContribution()
+    {
+        return $this->employerContribution;
+    }
+
+    /**
+     * @param mixed $employerContribution
+     */
+    public function setEmployerContribution($employerContribution)
+    {
+        $this->employerContribution = $employerContribution;
+    }
 
     public function calculateTotalDeduction(){
         $deductions =0;

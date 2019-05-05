@@ -40,6 +40,7 @@ class DkEmployeeDao extends EmployeeDao
             'cs.name AS subDivision, cs.id AS subDivisionId,' .
             'j.job_title AS jobTitle, j.id AS jobTitleId, j.is_deleted AS isDeleted, ' .
             'd.total_earning as totalEarning, d.total_deduction as totalDeduction, d.total_netsalary as netSalary,d.monthly_basic as monthlyBasic,d.id as salaryHistoryId,'.
+            'd.company_epf_deduction as companyEpf, d.monthly_etf_deduction as etf,'.
             'es.name AS employeeStatus, es.id AS employeeStatusId, '.
             'GROUP_CONCAT(s.emp_firstname, \'## \', s.emp_middle_name, \'## \', s.emp_lastname, \'## \',s.emp_number) AS supervisors,'.
             'GROUP_CONCAT(DISTINCT loc.id, \'##\',loc.name) AS locationIds';
@@ -306,9 +307,11 @@ class DkEmployeeDao extends EmployeeDao
                             $salaryHistoryItem->setTotalEarning($salaryHistoryItem->displayTotalEarnings());
                             $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->dispalyTotalDeduction());
                             $salaryHistoryItem->setTotalNetsalary($salaryHistoryItem->dispalyTotalNetsalary());
+                            $salaryHistoryItem->setEmployerContribution(number_format($employeeSalaryRecord->getMonthlyEtfDeduction()+$employeeSalaryRecord->getCompanyEpfDeduction(),2));
                         }
                     }
                     else{
+                        $salaryHistoryItem->setEmployerContribution(number_format($row['companyEpf']+$row['etf'],2));
                         $salaryHistoryItem->setTotalEarning(number_format($row['totalEarning'],2));
                         $salaryHistoryItem->setTotalDeduction(number_format($row['totalDeduction'],2));
                         $salaryHistoryItem->setTotalNetsalary(number_format($row['netSalary'],2));
