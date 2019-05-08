@@ -138,6 +138,36 @@ TaxBracket:
       type: float
       notnull: true
 
+EmailPool:
+  tableName: dk_email_pool
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer(10)
+      primary: true
+      autoincrement: true
+    to_address:
+      type: text
+    cc_address:
+      type: text
+    from_address:
+      type: text
+      notnull: true
+    subject:
+      type: string(255)
+      notnull: true
+    body:
+      type: clob
+    category:
+      type: string(60)
+    content_type:
+      type: enum(10)
+      values: ["text/html", "text/plain"]
+    status:
+      type: enum(7)
+      values: [PROCESSING, SENT, PENDING, FAILED]
+
 
 
 

@@ -1,0 +1,5 @@
+Hi #employeeFullName ,
+We have processed the salary for #month #year today. You can view your payslips at #link
+
+Thanks and regards,
+Finance Manager

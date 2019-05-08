@@ -1,3 +1,4 @@
 all:
   orangehrmOpenidAuthenticationPlugin:
-    version: '1.0'   
+    version: '1.0'
+  system_finace_email: admin@example.com

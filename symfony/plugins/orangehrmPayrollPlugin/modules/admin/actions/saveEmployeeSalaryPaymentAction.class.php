@@ -3,6 +3,8 @@
 
 class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
 {
+    protected $emailPoolService;
+
     public function execute($request) {
         $message = null;
         $messageType = null;
@@ -17,6 +19,7 @@ class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
                     $employeeSalaryHistory = $form->getObject();
 
                     $this->getSalaryService()->saveEmployeeSalaryHistory($employeeSalaryHistory);
+                    $this->getEmailPoolService()->saveMakePaymentNotification(array($employeeSalaryHistory),$postData['month'],$postData['year']);
                     $messageType = 'success';
                     $message = __('Payment Completed');
                 } catch (Exception $e) {
@@ -30,5 +33,15 @@ class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
         }
         $this->getUser()->setFlash($messageType, __($message));
         $this->redirect('admin/makePayment');
+    }
+
+    /**
+     * @return DkEmailPoolService
+     */
+    public function getEmailPoolService() {
+        if (!($this->emailPoolService instanceof DkEmailPoolService)) {
+            $this->emailPoolService = new DkEmailPoolService();
+        }
+        return $this->emailPoolService;
     }
 }

@@ -6,6 +6,7 @@ class DkSalaryService
     protected $salaryDao;
     protected $leaveRequestService;
     protected $salaryConfigService;
+    protected $emailPoolService;
 
 
     /**
@@ -352,7 +353,10 @@ class DkSalaryService
         }
 
         try{
-            $salaryHistoryList->save();
+            $result =$salaryHistoryList->save();
+
+            $this->getEmailPoolService()->saveMakePaymentNotification($salaryHistoryList,$filters['month'],$filters['year']);
+
         }
         catch (Exception $exception){
             $result[0] = array('Failed to Process');
@@ -374,6 +378,13 @@ class DkSalaryService
             $this->salaryConfigService = new DkConfigService();
         }
         return $this->salaryConfigService;
+    }
+
+    public function getEmailPoolService(){
+        if (!($this->emailPoolService instanceof DkEmailPoolService)) {
+            $this->emailPoolService = new DkEmailPoolService();
+        }
+        return $this->emailPoolService;
     }
 
 }

@@ -14,7 +14,7 @@ UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 20;
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 22;
 
 -- hide "Admin -Configuration" menu
-UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id`  IN (23,24,25,27,28,94,95);
+-- UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id`  IN (23,24,25,27,28,94,95);
 
 -- hide "Pim  -Configuration" menu
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `id` IN (32,33,34,35,36);
