@@ -30,7 +30,8 @@ class PDFWrapper
     {
         $this->tempHtmlfile = tempnam(sys_get_temp_dir(), 'ohrmpayroll').'.html';
         $this->tempPdfFile  = tempnam(sys_get_temp_dir(), 'ohrmpayroll').'.pdf';
-        $this->pdfLibCommnad = sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'orangehrmPayrollPlugin' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR .'pdf' . DIRECTORY_SEPARATOR . 'wkhtmltopdf-' . $this->_getCPU();
+        //$this->pdfLibCommnad = sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'orangehrmPayrollPlugin' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR .'pdf' . DIRECTORY_SEPARATOR . 'wkhtmltopdf-' . $this->_getCPU();
+        $this->pdfLibCommnad = 'wkhtmltopdf';
     }
 
     private static function _getCPU(){
@@ -46,7 +47,8 @@ class PDFWrapper
 
     public function generatePDF(){
 
-        $pdfCommand = ' "'.$this->pdfLibCommnad.'" '.$this->tempHtmlfile.' '.$this->tempPdfFile.' 2>&1';
+//        $pdfCommand = ' "'.$this->pdfLibCommnad.'" '.$this->tempHtmlfile.' '.$this->tempPdfFile.' 2>&1';
+        $pdfCommand = ' '.$this->pdfLibCommnad.' '.$this->tempHtmlfile.' '.$this->tempPdfFile.' 2>&1';
         $result = exec($pdfCommand, $output, $returnStatus);
 
         if($returnStatus !=0){
