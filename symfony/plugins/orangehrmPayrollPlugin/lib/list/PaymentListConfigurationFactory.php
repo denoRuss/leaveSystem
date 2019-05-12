@@ -21,6 +21,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
         $header7 = new ListHeader();
         $header8 = new ListHeader();
         $header9 = new ListHeader();
+        $header10 = new ListHeader();
 
         $header1->populateFromArray(array(
             'name' => 'Id',
@@ -79,7 +80,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
 
         $header5->populateFromArray(array(
             'name' => 'Gross Salary',
-            'width' => '15%',
+            'width' => '10%',
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
@@ -88,7 +89,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
         ));
         $header6->populateFromArray(array(
             'name' => 'Total Deduction',
-            'width' => '15%',
+            'width' => '10%',
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
@@ -98,7 +99,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
 
         $header9->populateFromArray(array(
             'name' => 'Employer Contribution',
-            'width' => '15%',
+            'width' => '10%',
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
@@ -107,7 +108,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
         ));
         $header7->populateFromArray(array(
             'name' => 'Net Salary',
-            'width' => '15%',
+            'width' => '10%',
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
@@ -129,10 +130,24 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
                 'urlPattern' => public_path('index.php/admin/viewEmployeeSalaryPayment/empNumber/{id}'),
             ),
         ));
+        $header10->populateFromArray(array(
+            'name' => 'Action',
+            'width' => '20%',
+            'isSortable' => false,
+            'sortField' => 'lastName',
+            'elementType' => 'linkPaymentOption',
+            'textAlignmentStyle' => 'left',
+            'elementProperty' => array(
+                'labelGetter' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getId')),
+                'placeholderGetters' => array('empNumber' => 'getEmpNumber'),
+                'linkable' => $this->getLinkable(),
+                'urlPattern' => public_path('index.php/admin/viewEmployeePayslip/empNumber/{empNumber}'),
+            ),
+        ));
 
 
 
-        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6,$header9,$header7,$header8);
+        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6,$header9,$header7,$header8,$header10);
     }
     
     public function getClassName() {

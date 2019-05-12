@@ -65,4 +65,33 @@ abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
     public function getMonthName(){
         return $this->monthList[$this->getMonth()];
     }
+
+    public function displayCompanyEpfDeduction(){
+        return number_format($this->getCompanyEpfDeduction(),2);
+    }
+
+    public function displayMonthlyEtfDeduction(){
+        return number_format($this->getMonthlyEtfDeduction(),2);
+    }
+
+    public function displayMonthlyEpfDeduction(){
+        return number_format($this->getMonthlyEpfDeduction(),2);
+    }
+
+    public function displayEmployerContribution(){
+        return number_format($this->getMonthlyEtfDeduction()+$this->getCompanyEpfDeduction(),2);
+    }
+
+    public function displayMonthlyNopayLeave(){
+        return number_format($this->getMonthlyNopayLeave(),2);
+    }
+
+    public function displayMonthlyBasicTax(){
+        return number_format($this->getMonthlyBasicTax(),2);
+    }
+
+    public function displayTotalNetsalary(){
+        return number_format($this->getTotalNetsalary(),2);
+    }
+
 }
