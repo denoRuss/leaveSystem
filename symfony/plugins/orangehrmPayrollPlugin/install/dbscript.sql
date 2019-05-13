@@ -25,7 +25,7 @@ INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint,
 ('Manage Salary Detail', @mange_salary_detail_screen_id , @parent_menu_id, 2, '100', null, 0),
 ('Employee Salary List', @employee_salary_list_screen_id, @parent_menu_id, 2, '200', null, 1),
 ('Make Payment', @make_payment_screen_id, @parent_menu_id, 2, '300', null, 1),
-('Generate Payslip', @generate_payslip_screen_id, @parent_menu_id, 2, '400', null, 1);
+('Generate Payslip', @generate_payslip_screen_id, @parent_menu_id, 2, '400', null, 0);
 
 
 
