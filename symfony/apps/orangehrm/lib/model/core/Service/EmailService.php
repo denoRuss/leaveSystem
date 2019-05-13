@@ -42,6 +42,23 @@ class EmailService extends BaseService {
     private $messageBody;
     private $messageCc;
     private $messageBcc;
+    private $contentType;
+
+    /**
+     * @return mixed
+     */
+    public function getContentType()
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * @param mixed $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+    }
     
     protected $emailDao;
     
@@ -207,7 +224,7 @@ class EmailService extends BaseService {
         $message->setSubject($this->messageSubject);
         $message->setFrom($this->messageFrom);
         $message->setTo($this->messageTo);
-        $message->setBody($this->messageBody);
+        $message->setBody($this->messageBody,$this->contentType);
 
         if (!empty($this->messageCc)) {
             $message->setCc($this->messageCc);
