@@ -4,6 +4,7 @@
 class DkEmailPoolService
 {
     protected $emailPoolDao;
+    protected $configDao;
 
     /**
      * @return DKEmailPoolDao
@@ -36,10 +37,14 @@ class DkEmailPoolService
             if(!empty($to)){
                 $emailPoolitem = new EmailPool();
 
+
+                $payslipUrl = $this->getConfigDao()->getValue('domain.name')."/admin/viewEmployeePayslip?empNumber=" . $salaryHistoryItem->getEmployee()->getEmpNumber()
+                    . "&id=" . $salaryHistoryItem->getId()."&mode=view";
+
                 $startDate = $year.'-'.$month.'-01';
                 $bodyTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/mail/en_US/makePaymentBody.txt");
-                $bodyReplacementKeys = array('/#employeeFullName/', '/#month/', '/#year/');
-                $bodyReplacementValues = array($salaryHistoryItem->getEmployee()->getFullName(),date("F", strtotime($startDate)),$year);
+                $bodyReplacementKeys = array('/#employeeFullName/', '/#month/', '/#year/','/#link/');
+                $bodyReplacementValues = array($salaryHistoryItem->getEmployee()->getFullName(),date("F", strtotime($startDate)),$year,$payslipUrl);
 
 
 
@@ -53,6 +58,7 @@ class DkEmailPoolService
                 $emailPoolitem->setSubject(preg_replace($subjectReplacementKeys, $subjectReplacementValues, $subjectTemplate));
                 $emailPoolitem->setBody(preg_replace($bodyReplacementKeys, $bodyReplacementValues, $bodyTemplate));
                 $emailPoolitem->setStatus(EmailPool::STATUS_PENDING);
+                $emailPoolitem->setContentType(EmailPool::CONTENT_TYPE_HTML);
 
                 $emailPoolCollection->add($emailPoolitem);
 
@@ -91,5 +97,13 @@ class DkEmailPoolService
      */
     public function searchEmailPoolByStatus($status=array()){
         return $this->getEmailPoolDao()->searchEmailPoolByStatus($status);
+    }
+
+    public function getConfigDao(){
+        if(is_null($this->configDao)){
+            $this->configDao = new ConfigDao();
+        }
+
+        return $this->configDao;
     }
 }

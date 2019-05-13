@@ -95,7 +95,7 @@ EOF;
                 $contType = EmailPool::CONTENT_TYPE_PLAIN;
             }
             $mailService->setMessageBody($email->getBody());
-//            $mailService->setMessageContentType($contType);
+            $mailService->setContentType($contType);
 
 
             $result = $mailService->sendEmail();

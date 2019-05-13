@@ -1,5 +1,8 @@
 Hi #employeeFullName ,
-We have processed the salary for #month #year today. You can view your payslips at #link
-
-Thanks and regards,
+<br><br>
+We have processed the salary for #month #year today.
+<br>
+You can view your payslips at <a href="#link" target="_blank">#link</a>
+<br><br>
+Thanks and regards,<br>
 Finance Manager
