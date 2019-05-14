@@ -41,6 +41,7 @@
 
     $(document).ready(function() {
 
+        $("#empsearch_sub_unit").parent().hide();
         var supervisors = <?php echo str_replace('&#039;', "'", $form->getSupervisorListAsJson()) ?>;
 
         $('#btnDelete').attr('disabled', 'disabled');
