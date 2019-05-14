@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $("#personal_txtOtherID").parent().hide();
+
     //form validation
     $("#frmEmpPersonalDetails").validate({
         rules: {
