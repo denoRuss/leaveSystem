@@ -19,11 +19,11 @@ class viewTaxBracketListAction extends viewSalaryTypeListAction
         $configurationFactory = new TaxBracketListConfigurationFactory();
 
         $buttons['Add'] = array('label' => 'Add');
-        $buttons['Delete'] = array('label' => 'Delete',
-            'type' => 'submit',
-            'data-toggle' => 'modal',
-            'data-target' => '#deleteConfModal',
-            'class' => 'delete');
+//        $buttons['Delete'] = array('label' => 'Delete',
+//            'type' => 'submit',
+//            'data-toggle' => 'modal',
+//            'data-target' => '#deleteConfModal',
+//            'class' => 'delete');
 
         $runtimeDefinitions['buttons'] = $buttons;
         $configurationFactory->setRuntimeDefinitions($runtimeDefinitions);
