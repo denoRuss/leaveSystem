@@ -982,7 +982,7 @@
       </trans-unit>
       <trans-unit id="245">
         <source>Driver's License Number</source>
-        <target>Driver's License Number</target>
+        <target>NIC</target>
       </trans-unit>
       <trans-unit id="246">
         <source>Duration</source>
