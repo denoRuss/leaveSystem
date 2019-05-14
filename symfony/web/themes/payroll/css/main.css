@@ -188,7 +188,7 @@ textarea {
     left:-9999px;
     height:36px;
     /*background:url(../images/sub-nav.png) left bottom repeat-x;*/
-	background : #7cca84;
+	/*background : #7cca84;*/
     opacity:0;
     padding:4px 0 0 25px;
     width:100%;
@@ -216,7 +216,7 @@ textarea {
 }
 .menu > ul > li.current > ul > li > a {
 	display:block;
-	color:#fff;
+	/*color:#fff;*/
 	line-height:30px;
 	text-decoration:none;
 	padding:0 10px;
