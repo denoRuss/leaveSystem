@@ -14,4 +14,7 @@ CREATE TABLE IF NOT EXISTS `dk_email_pool` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
+-- TODO this should be renamed based on domain name
+UPDATE `hs_hr_config` SET `value` = 'http://52.14.55.103/symfony/web/index.php' WHERE `hs_hr_config`.`key` = 'domain.name';
+
 
