@@ -41,3 +41,9 @@ UPDATE `hs_hr_config` SET `value` = 'veryWeak' WHERE `hs_hr_config`.`key` = 'aut
 
 -- Salary history screen is removed
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 103;
+
+-- hie Admin - Location menu
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 14;
+
+-- hide Admin - Structure menu
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 15;
