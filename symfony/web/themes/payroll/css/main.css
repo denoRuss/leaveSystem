@@ -232,7 +232,7 @@ textarea {
 }
 .menu > ul > li.current > ul > li > a.arrow {
 	padding: 0 20px 0 10px;
-	background:url(../images/sub-nav-arrow.png) no-repeat 92% 48%;
+	/*background:url(../images/sub-nav-arrow.png) no-repeat 92% 48%;*/
 }
 .menu > ul > li > ul > li > ul {
 	position:absolute;
