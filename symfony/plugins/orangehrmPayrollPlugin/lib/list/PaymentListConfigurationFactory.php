@@ -131,7 +131,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             ),
         ));
         $header10->populateFromArray(array(
-            'name' => 'Action',
+            'name' => 'Pay Slip',
             'width' => '20%',
             'isSortable' => false,
             'sortField' => 'lastName',
