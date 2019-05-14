@@ -53,4 +53,4 @@ UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 10;
 
 -- hide Admin - Qulification menu
 
-UPDATE `ohrm_user_role_data_group` SET `can_read` =0 WHERE `data_group_id` IN ( 16,17,18,21);
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` IN ( 16,17,18,21);
