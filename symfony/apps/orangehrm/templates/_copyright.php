@@ -5,7 +5,7 @@ if (@include_once $rootPath."/lib/confs/sysConf.php") {
     $conf = new sysConf();
     $version = $conf->getVersion();
 }
-$prodName = 'Diakonia';
+$prodName = 'iTeQ HRM Solutions';
 $copyrightYear = date('Y');
 $version = '1.0'
 ?>
