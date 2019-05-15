@@ -14,7 +14,7 @@ include_slot('header', get_partial('global/header'));
                 <a href="http://www.orangehrm.com/" target="_blank"><img src="<?php echo theme_path('images/logo.png')?>" width="283" height="56" alt="OrangeHRM"/></a>
                 <!--<a href="http://www.orangehrm.com/user-survey-registration.php" class="subscribe" target="_blank"><?php echo __('Join OrangeHRM Community'); ?></a>-->
                 <a href="#" id="welcome" class="panelTrigger"><?php echo __("Welcome %username%", array("%username%" => $sf_user->getAttribute('auth.firstName'))); ?></a>
-                <div id="MP_btn">
+                <div id="MP_btn" style="display: none">
                     <input id="MP_link" type="button" class="button" value="<?php echo __('Marketplace'); ?>"/>
                 </div>
                 <script>
