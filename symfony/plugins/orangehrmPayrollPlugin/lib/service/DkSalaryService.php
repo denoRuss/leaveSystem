@@ -353,9 +353,9 @@ class DkSalaryService
         }
 
         try{
-            $result =$salaryHistoryList->save();
+            $savedSalaryList =$salaryHistoryList->save();
 
-            $this->getEmailPoolService()->saveMakePaymentNotification($salaryHistoryList,$filters['month'],$filters['year']);
+            $this->getEmailPoolService()->saveMakePaymentNotification($savedSalaryList,$filters['month'],$filters['year']);
 
         }
         catch (Exception $exception){
@@ -364,6 +364,15 @@ class DkSalaryService
             Logger::getLogger('orangehrm')->error($exception->getMessage());
         }
         return $result;
+    }
+
+
+    public function deleteTaxBrackets($ids){
+        try {
+            return $this->getSalaryDao()->deleteTaxBrackets($ids);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
     }
 
     public function getLeaveRequestService(){
