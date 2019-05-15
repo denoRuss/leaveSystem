@@ -37,7 +37,7 @@ class viewEmployeePayslipAction extends basePayrollAction
         return sfView::NONE;
     }
 
-    public function getHtmlForPayslip($employeeSalaryHistoryRecord){
+    public function getHtmlForPayslip(EmployeeSalaryHistory $employeeSalaryHistoryRecord){
 
         $payslipTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/payslip/payslip.txt");
         $payslipReplacementKeys = array(

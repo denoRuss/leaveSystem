@@ -334,6 +334,7 @@ class DkSalaryService
                     $salaryHistoryItem->setMonthlyBasicTax($employeeCurrentSalaryRecord->getMonthlyBasicTax());
                     $salaryHistoryItem->setMonthlyNopayLeave($this->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
                     $salaryHistoryItem->setMonthlyEpfDeduction($employeeCurrentSalaryRecord->getMonthlyEpfDeduction());
+                    $salaryHistoryItem->setCompanyEpfDeduction($employeeCurrentSalaryRecord->getCompanyEpfDeduction());
                     $salaryHistoryItem->setMonthlyEtfDeduction($employeeCurrentSalaryRecord->getMonthlyEtfDeduction());
                     $salaryHistoryItem->setTotalEarning($salaryHistoryItem->calculateTotalEarnings());
                     $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->calculateTotalDeduction());
