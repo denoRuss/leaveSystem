@@ -34,6 +34,7 @@ class LinkPaymentOptionCell extends LinkCell {
             $salaryHistoryRecordId = $this->dataObject->getRawValue()->getEmployeeSalaryHistory()->getFirst()->getId();
             $linkAttributes1 = array(
                 'href' => $url.'/id/'.$salaryHistoryRecordId.'/mode/view',
+                'target'=>'_blank'
             );
             $linkAttributes2 = array(
                 'href' => $url.'/id/'.$salaryHistoryRecordId.'/mode/download',
