@@ -97,6 +97,7 @@ class makePaymentAction extends viewEmployeeListAction
                 $this->message = $result[0];
                 $this->messageType = $result[1];
                 $this->getUser()->setFlash('search.'.$this->messageType, $this->message);
+                $this->getUser()->setAttribute('isBulkPayment', true);
                 $this->redirect($request->getReferer());
             }
 
@@ -109,10 +110,13 @@ class makePaymentAction extends viewEmployeeListAction
         if($this->form->getValue('isReset')=='yes'){
             $this->showList = false;
         }
-        else if ($request->isMethod('post')) {
+        else if ($request->isMethod('post') || $this->getUser()->getAttribute('isBulkPayment')==true) {
             $this->setListComponent($list, $count, $noOfRecords, $pageNumber);
             $this->showList  = true;
+
+            $this->getUser()->setAttribute('isBulkPayment', false);
         }
+
 
 
 
