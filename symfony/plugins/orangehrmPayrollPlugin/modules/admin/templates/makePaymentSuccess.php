@@ -18,9 +18,9 @@
                 <input type="hidden" name="hdnAction" id="hdnAction" value="search" />
 
                 <p>
-                    <input type="button" id="searchBtn" value="<?php echo __("Search") ?>" name="_search" />
+                    <input type="button" id="searchBtn" value="<?php echo __("Generate Payroll") ?>" name="_search" />
                     <input type="button" class="reset" id="resetBtn" value="<?php echo __("Reset") ?>" name="_reset" />
-                    <input type="button" id="bulkPaymentBtn" value="<?php echo __("Process Payroll") ?>" name="_bulkPayment" />
+                    <input type="button" id="bulkPaymentBtn" value="<?php echo __("Make Payment") ?>" name="_bulkPayment" />
                 </p>
 
             </fieldset>
@@ -33,7 +33,11 @@
 
 </div> <!-- employee-information -->
 
-<?php include_component('core', 'ohrmList'); ?>
+<?php
+if($showList){
+    include_component('core', 'ohrmList');
+}
+ ?>
 
 <?php include_partial('global/delete_confirmation'); ?>
 
@@ -101,6 +105,7 @@
         $('#searchBtn').click(function() {
             $("#empsearch_isSubmitted").val('yes');
             $("#empsearch_isBulkPayment").val('');
+            $("#empsearch_isReset").val('');
             $('#search_form input.inputFormatHint').val('');
             $('#search_form input.ac_loading').val('');
             $('#search_form').submit();
@@ -109,6 +114,7 @@
         $('#bulkPaymentBtn').click(function() {
             $("#empsearch_isSubmitted").val('yes');
             $("#empsearch_isBulkPayment").val('yes');
+            $("#empsearch_isReset").val('');
             $('#search_form input.inputFormatHint').val('');
             $('#search_form input.ac_loading').val('');
             $('#search_form').submit();
@@ -117,6 +123,7 @@
         $('#resetBtn').click(function() {
             $("#empsearch_isSubmitted").val('yes');
             $("#empsearch_isBulkPayment").val('');
+            $("#empsearch_isReset").val('yes');
             $("#empsearch_employee_name_empName").val('');
             $("#empsearch_supervisor_name").val('');
             $("#empsearch_id").val('');

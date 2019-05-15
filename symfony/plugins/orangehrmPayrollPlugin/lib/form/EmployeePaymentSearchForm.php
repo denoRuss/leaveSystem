@@ -55,7 +55,9 @@ class EmployeePaymentSearchForm extends BaseForm {
         $this->setWidget('isSubmitted', new sfWidgetFormInputHidden(array(), array()));
         $this->setValidator('isSubmitted', new sfValidatorString(array('required' => false)));
         $this->setWidget('isBulkPayment', new sfWidgetFormInputHidden(array(), array()));
+        $this->setWidget('isReset', new sfWidgetFormInputHidden(array(), array()));
         $this->setValidator('isBulkPayment', new sfValidatorString(array('required' => false)));
+        $this->setValidator('isReset', new sfValidatorString(array('required' => false)));
         $this->setValidator('employee_name', new ohrmValidatorEmployeeNameAutoFill());
         $this->setValidator('id', new sfValidatorString(array('required' => false)));
 

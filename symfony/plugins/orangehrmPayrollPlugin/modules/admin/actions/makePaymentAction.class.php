@@ -105,7 +105,18 @@ class makePaymentAction extends viewEmployeeListAction
             $list = array();
         }
 
-        $this->setListComponent($list, $count, $noOfRecords, $pageNumber);
+        $this->showList = false;
+        if($this->form->getValue('isReset')=='yes'){
+            $this->showList = false;
+        }
+        else if ($request->isMethod('post')) {
+            $this->setListComponent($list, $count, $noOfRecords, $pageNumber);
+            $this->showList  = true;
+        }
+
+
+
+
 
         // Show message if list is empty, and we don't already have a message.
         if (empty($this->message) && (count($list) == 0)) {
