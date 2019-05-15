@@ -28,14 +28,15 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'width' => '5%',
             'isSortable' => true,
             'sortField' => 'employeeId',
-            'elementType' => 'link',
+            'elementType' => 'label',
             'textAlignmentStyle' => 'left',
-            'elementProperty' => array(
-                'labelGetter' => array('getEmployeeId'),
-                'placeholderGetters' => array('id' => 'getEmpNumber'),
-                'linkable' => $this->getLinkable(),
-                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
-            ),
+            'elementProperty' => array('getter' => 'getEmployeeId')
+//            'elementProperty' => array(
+//                'labelGetter' => array('getEmployeeId'),
+//                'placeholderGetters' => array('id' => 'getEmpNumber'),
+//                'linkable' => $this->getLinkable(),
+//                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
+//            ),
         ));
 
         $header2->populateFromArray(array(
@@ -43,14 +44,15 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'width' => '13%',
             'isSortable' => true,
             'sortField' => 'firstMiddleName',
-            'elementType' => 'link',
+            'elementType' => 'label',
             'textAlignmentStyle' => 'left',
-            'elementProperty' => array(
-                'labelGetter' => array('getFirstAndMiddleName'),
-                'placeholderGetters' => array('id' => 'getEmpNumber'),
-                'linkable' => $this->getLinkable(),
-                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
-            ),
+            'elementProperty' => array('getter' => 'getFirstAndMiddleName')
+//            'elementProperty' => array(
+//                'labelGetter' => array('getFirstAndMiddleName'),
+//                'placeholderGetters' => array('id' => 'getEmpNumber'),
+//                'linkable' => $this->getLinkable(),
+//                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
+//            ),
         ));
 
         $header3->populateFromArray(array(
@@ -58,14 +60,15 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'width' => '10%',
             'isSortable' => true,
             'sortField' => 'lastName',
-            'elementType' => 'link',
+            'elementType' => 'label',
             'textAlignmentStyle' => 'left',
-            'elementProperty' => array(
-                'labelGetter' => array('getFullLastName'),
-                'placeholderGetters' => array('id' => 'getEmpNumber'),
-                'linkable' => $this->getLinkable(),
-                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
-            ),
+            'elementProperty' => array('getter' => 'getFullLastName')
+//            'elementProperty' => array(
+//                'labelGetter' => array('getFullLastName'),
+//                'placeholderGetters' => array('id' => 'getEmpNumber'),
+//                'linkable' => $this->getLinkable(),
+//                'urlPattern' => public_path('index.php/admin/employeeSalary/empNumber/{id}'),
+//            ),
         ));
 
         $header4->populateFromArray(array(
