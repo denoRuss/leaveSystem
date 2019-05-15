@@ -29,12 +29,22 @@ class saveEmployeeSalaryRecordAction extends viewSalaryTypeListAction
             }
         }
         $this->getUser()->setFlash($messageType, __($message));
-        if(preg_match('/admin/',$request->getReferer())){
-            $this->redirect('admin/makePayment');
+
+        $this->redirect($this->getRedirectUrl($postData));
+
+    }
+
+    public function getRedirectUrl($postData){
+
+        $screen = $postData['screen'];
+        $redirect = '';
+        if($screen==EmployeeSalaryRecord::ADMIN_SCREEN){
+            $redirect = 'admin/makePayment';
         }
-        else{
-            $this->redirect($request->getReferer());
+        elseif ($screen==EmployeeSalaryRecord::PIM_SALARY_SCREEN){
+            $redirect = 'pim/viewSalaryList?empNumber='.$postData['employee_name']['empId'];
         }
 
+        return $redirect;
     }
 }

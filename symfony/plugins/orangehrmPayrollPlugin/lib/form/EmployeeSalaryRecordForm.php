@@ -14,6 +14,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         $widgets =parent::getFormWidgets();
         unset($widgets['name']);
 
+        $widgets['screen'] = new sfWidgetFormInputHidden(array(), array());
         $widgets['employee_name'] =  new ohrmWidgetEmployeeNameAutoFill(array('loadingMethod'=>'ajax'));
         $widgets['company_epf_deduction'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
         return $widgets;
@@ -23,6 +24,8 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     {
         $validators = parent::getFormValidators();
         unset($validators['name']);
+
+        $validators['screen'] = new sfValidatorPass(array("required" => false));
         $validators['employee_name'] = new ohrmValidatorEmployeeNameAutoFill();
         $validators['company_epf_deduction'] = new sfValidatorString(array('required' => false));
 
@@ -43,7 +46,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     /**
      * @param $object
      */
-    public function setEmployeeSalaryRecordObject($object,$employee)
+    public function setEmployeeSalaryRecordObject($object,$employee,$screen)
     {
         if($object instanceof EmployeeSalaryRecord){
             $this->setDefault('id', $object->getId());
@@ -57,6 +60,7 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
+        $this->setDefault('screen',$screen);
 
         //TODO if payment date is going not 30, this has to be fixed, use diffrent from & to date
         $this->setDefault('monthly_nopay_leave',$this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));

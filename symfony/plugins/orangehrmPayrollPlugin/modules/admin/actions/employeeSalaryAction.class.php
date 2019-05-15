@@ -16,7 +16,7 @@ class employeeSalaryAction extends basePayrollAction
         $employee = $this->getEmployeeService()->getEmployee($empNumber);
         $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
         $form = new EmployeeSalaryRecordForm();
-        $form->setEmployeeSalaryRecordObject($employeeSalaryRecord,$employee);
+        $form->setEmployeeSalaryRecordObject($employeeSalaryRecord,$employee,EmployeeSalaryRecord::ADMIN_SCREEN);
 
         $this->editable = true;
         $this->form = $form;

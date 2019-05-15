@@ -14,6 +14,8 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
 {
     protected $salaryComponentService;
     protected $salaryConfigService;
+    const ADMIN_SCREEN = 'admin';
+    const PIM_SALARY_SCREEN = 'pim_salary';
 
     public function calculateMonthlyBasicTax($salary){
 

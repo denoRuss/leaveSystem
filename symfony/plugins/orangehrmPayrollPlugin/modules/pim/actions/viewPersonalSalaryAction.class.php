@@ -17,7 +17,7 @@ class viewPersonalSalaryAction extends basePimAction
         $employee = $this->getEmployeeService()->getEmployee($empNumber);
         $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
         $form = new EmployeeSalaryRecordForm();
-        $form->setEmployeeSalaryRecordObject($employeeSalaryRecord,$employee);
+        $form->setEmployeeSalaryRecordObject($employeeSalaryRecord,$employee,EmployeeSalaryRecord::PIM_SALARY_SCREEN);
 
         $this->editable = true;
         $this->form = $form;

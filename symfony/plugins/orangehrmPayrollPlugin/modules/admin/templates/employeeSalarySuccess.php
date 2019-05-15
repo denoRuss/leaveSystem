@@ -15,6 +15,7 @@
 
             <?php echo $form['_csrf_token']; ?>
             <?php echo $form['id']->render(); ?>
+            <?php echo $form['screen']->render(); ?>
             <fieldset>
                 <ol>
                     <li class="long">
