@@ -62,9 +62,9 @@ class TaxBracketForm extends sfForm {
                 $object = $this->getSalaryService()->getTaxBracket($id);
             }
 
-            $object->setLowerBound($this->getValue('lower_bound')?$this->getValue('lower_bound'):null);
-            $object->setUpperBound($this->getValue('upper_bound')?$this->getValue('upper_bound'):null);
-            $object->setPercentage($this->getValue('percentage')?$this->getValue('percentage'):null);
+            $object->setLowerBound($this->getValue('lower_bound')?$this->getValue('lower_bound'):0);
+            $object->setUpperBound($this->getValue('upper_bound')?$this->getValue('upper_bound'):0);
+            $object->setPercentage($this->getValue('percentage')?$this->getValue('percentage'):0);
 
             return $object;
         } else {

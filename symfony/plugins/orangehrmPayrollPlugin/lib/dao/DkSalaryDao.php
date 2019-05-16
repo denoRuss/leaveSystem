@@ -243,9 +243,9 @@ class DkSalaryDao
             if(!empty($searchParams['upper_bound'])){
                 $query->andWhere('lower_bound <= ?',$searchParams['upper_bound']);
             }
-//            if(!empty($searchParams['id'])){
-//                $query->andWhere('id != ?',$searchParams['id']);
-//            }
+            if(!empty($searchParams['id'])){
+                $query->andWhere('id != ?',$searchParams['id']);
+            }
 
             $result= $query->execute();
 
@@ -277,6 +277,24 @@ class DkSalaryDao
 
         } catch (Exception $e) {
             throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $ids
+     * @return Doctrine_Collection
+     * @throws DaoException
+     */
+    public function deleteTaxBrackets($ids){
+        try {
+            $query = Doctrine_Query::create()
+                ->delete('TaxBracket')
+                ->whereIn('id', $ids);
+
+            return $query->execute();
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+            throw new DaoException($message);
         }
     }
 }
