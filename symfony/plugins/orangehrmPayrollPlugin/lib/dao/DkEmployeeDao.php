@@ -34,7 +34,7 @@ class DkEmployeeDao extends EmployeeDao
 
 
 
-        $select = 'SELECT e.emp_number AS empNumber, e.employee_id AS employeeId, ' .
+        $select = 'SELECT e.emp_number AS empNumber, e.employee_id AS employeeId, e.joined_date AS joinedDate, ' .
             'e.emp_firstname AS firstName, e.emp_lastname AS lastName, ' .
             'e.emp_middle_name AS middleName,e.emp_birthday AS employeeBirthday, e.termination_id AS terminationId, ' .
             'cs.name AS subDivision, cs.id AS subDivisionId,' .
@@ -53,12 +53,13 @@ class DkEmployeeDao extends EmployeeDao
             '  LEFT JOIN hs_hr_emp_reportto rt on e.emp_number = rt.erep_sub_emp_number ' .
             '  LEFT JOIN hs_hr_employee s on s.emp_number = rt.erep_sup_emp_number '.
             '  LEFT JOIN hs_hr_emp_locations l ON l.emp_number = e.emp_number ' .
-            '  LEFT JOIN dk_employee_salary_history d ON d.emp_number = e.emp_number AND d.month = ?' .
+            '  LEFT JOIN dk_employee_salary_history d ON d.emp_number = e.emp_number AND d.month = ? AND d.year = ?' .
             '  LEFT JOIN ohrm_location loc ON l.location_id = loc.id';
 
         /* search filters */
         $conditions = array();
         $bindParams[]= $filters['month'];
+        $bindParams[]= $filters['year'];
         if (!empty($filters)) {
 
             $filterCount = 0;
@@ -261,6 +262,12 @@ class DkEmployeeDao extends EmployeeDao
                 $to = date('Y-m-t',strtotime($from));
 
                 while ($row = $statement->fetch() ) {
+
+                    $joinedDate = $row['joinedDate'];
+                    // drop employee having joined date after the process month
+                    if(!is_null($joinedDate) && ($joinedDate>$from && $joinedDate > $to ))continue;
+
+
                     $employee = new Employee();
 
                     $employee->setEmpNumber($row['empNumber']);
