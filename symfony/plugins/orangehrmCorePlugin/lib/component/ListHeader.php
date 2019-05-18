@@ -18,7 +18,8 @@ class ListHeader extends ComponentProperty {
         'linkDate',
         'checkbox',
         'linkPayment',
-        'linkPaymentOption'
+        'linkPaymentOption',
+        'pimLinkPaymentOption'
     );
     private $textAlignmentStyles = array(
         'left',
