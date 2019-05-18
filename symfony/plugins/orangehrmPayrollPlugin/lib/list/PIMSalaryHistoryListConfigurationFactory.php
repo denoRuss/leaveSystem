@@ -58,7 +58,7 @@ class PIMSalaryHistoryListConfigurationFactory extends ohrmListConfigurationFact
         $header = new ListHeader();
         $header->populateFromArray(array(
             'width' => '20%',
-            'name' => 'Total Earnings',
+            'name' => 'Gross Salary',
             'elementType' => 'label',
             'filters' => array('I18nCellFilter' => array()),
             'elementProperty' => array('getter' => array('displayTotalEarnings')),
