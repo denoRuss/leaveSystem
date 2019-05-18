@@ -71,6 +71,10 @@
             </form>
         </div>
     </div>
+
+    <div>
+        <?php include_component('core', 'ohrmList'); ?>
+    </div>
 </div> <!-- Box -->
 
 

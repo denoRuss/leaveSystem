@@ -43,3 +43,7 @@ ul.radio_list li {
     float: left;
     display: block;
 }
+
+#search-results{
+    margin: 0px;
+}

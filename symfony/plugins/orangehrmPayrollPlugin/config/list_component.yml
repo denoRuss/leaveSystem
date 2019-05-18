@@ -50,6 +50,20 @@ EmployeeSalaryHistory:
   formAction: 'pim/deleteEmployees'
   assets: []
   jsInitMethods: []
+PIMSalaryHistory:
+  pluginName: orangehrmPayrollPlugin
+  hasSelectableRows: false
+  unselectableRowIds: []
+  idValueGetter: getId
+  title: 'Salary History'
+  tableWidth: 100%
+  hasSummary: false
+  summary: []
+  buttonsPosition: before-data
+  formMethod: post
+  formAction: 'pim/deleteEmployees'
+  assets: []
+  jsInitMethods: []
 
 TaxBracket:
   pluginName: orangehrmPayrollPlugin
