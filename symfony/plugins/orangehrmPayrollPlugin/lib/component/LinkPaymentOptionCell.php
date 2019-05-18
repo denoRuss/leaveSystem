@@ -2,7 +2,7 @@
 
 class LinkPaymentOptionCell extends LinkCell {
 
-    private $dataSourceType = self::DATASOURCE_TYPE_OBJECT;
+    protected $dataSourceType = self::DATASOURCE_TYPE_OBJECT;
 
     public function __toString() {
 

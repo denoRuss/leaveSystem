@@ -80,16 +80,16 @@ class PIMSalaryHistoryListConfigurationFactory extends ohrmListConfigurationFact
 
         $header = new ListHeader();
         $header->populateFromArray(array(
-            'width' => '40%',
-            'name' => '',
-            'elementType' => 'link',
-            'sortField' => 'name',
+            'name' => 'Pay Slip',
+            'width' => '20%',
             'isSortable' => false,
-            'filters' => array('I18nCellFilter' => array()),
+            'sortField' => 'lastName',
+            'elementType' => 'pimLinkPaymentOption',
+            'textAlignmentStyle' => 'left',
             'elementProperty' => array(
-                'label'=>'Download',
-                'placeholderGetters' => array('empNumber' => 'getEmpNumber','id'=> 'getId'),
-                'urlPattern' => 'index.php/admin/viewEmployeePayslip/empNumber/{empNumber}/id/{id}/mode/view',
+                'labelGetter' => array('getter' => array('getId')),
+                'placeholderGetters' => array('empNumber' => 'getEmpNumber'),
+                'urlPattern' => public_path('index.php/admin/viewEmployeePayslip/empNumber/{empNumber}'),
             ),
         ));
         $headers[] = $header;
