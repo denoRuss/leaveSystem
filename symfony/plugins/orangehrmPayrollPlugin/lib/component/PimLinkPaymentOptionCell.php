@@ -36,6 +36,6 @@ class PimLinkPaymentOptionCell extends LinkPaymentOptionCell {
 
 
         return content_tag('a', $label1, $linkAttributes1)
-            . $this->getHiddenFieldHTML().'&nbsp&nbsp'.content_tag('a', $label2, $linkAttributes2);
+            . $this->getHiddenFieldHTML().'<br><br>'.content_tag('a', $label2, $linkAttributes2);
     }
 }

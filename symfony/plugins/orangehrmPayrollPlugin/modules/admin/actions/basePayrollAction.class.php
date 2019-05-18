@@ -12,6 +12,22 @@ class basePayrollAction extends sfAction
 
     }
 
+    protected function IsActionAccessible($empNumber) {
+
+        $isValidUser = true;
+
+        $loggedInEmpNum = $this->getUser()->getEmployeeNumber();
+
+        $userRoleManager = $this->getContext()->getUserRoleManager();
+        $accessible = $userRoleManager->isEntityAccessible('Employee', $empNumber);
+
+        if ($empNumber != $loggedInEmpNum && (!$accessible)) {
+            $isValidUser = false;
+        }
+
+        return $isValidUser;
+    }
+
     public function getSalaryConfigService() {
         if (!($this->salaryConfigService instanceof DkConfigService)) {
             $this->salaryConfigService = new DkConfigService();

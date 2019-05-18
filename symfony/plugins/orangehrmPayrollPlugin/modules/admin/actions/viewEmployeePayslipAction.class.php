@@ -15,6 +15,10 @@ class viewEmployeePayslipAction extends basePayrollAction
 
             if($employeeSalaryHistoryRecord instanceof EmployeeSalaryHistory){
 
+                if (!$this->IsActionAccessible($employeeSalaryHistoryRecord->getEmpNumber())) {
+//                    $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
+                    return sfView::NONE;
+                }
                 $pdf = new PDFWrapper();
                 $pdf->setHtml($this->getHtmlForPayslip($employeeSalaryHistoryRecord));
                 $pdf->generatePDF();
