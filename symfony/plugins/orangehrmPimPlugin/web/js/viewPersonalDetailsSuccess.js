@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
+    //BASE CODE CHANGES
     $("#personal_txtOtherID").parent().hide();
+    $("#personal_txtLicExpDate").parent().hide();
 
     //form validation
     $("#frmEmpPersonalDetails").validate({
