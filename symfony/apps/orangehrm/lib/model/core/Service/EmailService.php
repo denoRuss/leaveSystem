@@ -209,7 +209,7 @@ class EmailService extends BaseService {
 
         if (empty($this->messageFrom)) {
             $this->_validateEmailAddress($this->emailConfig->getSentAs());
-            $this->messageFrom = array($this->emailConfig->getSentAs() => 'OrangeHRM');
+            $this->messageFrom = array($this->emailConfig->getSentAs() => 'iTeQ HRM Solutions');
         }
 
         if (empty($this->messageTo)) {
