@@ -38,8 +38,10 @@ class DkEmailPoolService
                 $emailPoolitem = new EmailPool();
 
 
-                $payslipUrl = $this->getConfigDao()->getValue('domain.name')."/admin/viewEmployeePayslip?empNumber=" . $salaryHistoryItem->getEmployee()->getEmpNumber()
-                    . "&id=" . $salaryHistoryItem->getId()."&mode=view";
+//                $payslipUrl = $this->getConfigDao()->getValue('domain.name')."/admin/viewEmployeePayslip?empNumber=" . $salaryHistoryItem->getEmployee()->getEmpNumber()
+//                    . "&id=" . $salaryHistoryItem->getId()."&mode=view";
+
+                $payslipUrl = $this->getConfigDao()->getValue('domain.name');
 
                 $startDate = $year.'-'.$month.'-01';
                 $bodyTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/mail/en_US/makePaymentBody.txt");
