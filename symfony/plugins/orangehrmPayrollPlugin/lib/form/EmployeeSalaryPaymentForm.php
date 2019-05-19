@@ -78,7 +78,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
 
         $labels['year'] = __('Year').$requiredLabelSuffix;
         $labels['month'] = __('Month').$requiredLabelSuffix;
-        $labels['nopay_leave_count'] = __('Num of Nopay Leave');
+        $labels['nopay_leave_count'] = __('No-pay Leave Count');
 
         return $labels;
     }
@@ -95,7 +95,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $searchParams = array(
                 'month'=>$this->getValue('month'),
                 'year'=>$this->getValue('year'),
-                'emp_number'=>$this->getValue('employee_name')['empId']
+                'empNumber'=>$this->getValue('employee_name')['empId']
             );
             $existingMonthlySalaryRecord = $this->getSalaryService()->getEmployeeMonthlySalaryRecord($searchParams);
             $nopayLeaveCount = 0;
@@ -188,7 +188,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $searchParams = array(
                 'month'=>$this->getValue('month'),
                 'year'=>$this->getValue('year'),
-                'emp_number'=>$this->getValue('employee_name')['empId']);
+                'empNumber'=>$this->getValue('employee_name')['empId']);
             $existingEmployeeMonthlySalaryRecord = $this->getSalaryService()->getEmployeeMonthlySalaryRecord($searchParams);
 
             if($existingEmployeeMonthlySalaryRecord instanceof EmployeeMonthlySalaryRecord){

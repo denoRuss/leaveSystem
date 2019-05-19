@@ -9,6 +9,8 @@ $(document).ready(function () {
     $('#employee_salary_payment_monthly_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_payment_company_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_etf_deduction').attr('disabled','disabled');
+    $('#employee_salary_payment_month').attr('disabled','disabled');
+    $('#employee_salary_payment_year').attr('disabled','disabled');
 
     $('#btnCancel').click(function() {
         location.href = url_employeeSalaryList;
@@ -21,12 +23,16 @@ $(document).ready(function () {
         if($(this).attr('value')=='Make Payment'){
             $('#employee_salary_payment_hdnAction').val('pay');
             $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+            $('#employee_salary_payment_month').removeAttr('disabled');
+            $('#employee_salary_payment_year').removeAttr('disabled');
         }
         else {
             $('#employee_salary_payment_hdnAction').val('adjust_pay');
             $('#employee_salary_payment_other_allowance').removeAttr('disabled');
             $('#employee_salary_payment_nopay_leave_count').removeAttr('disabled');
             $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+            $('#employee_salary_payment_month').removeAttr('disabled');
+            $('#employee_salary_payment_year').removeAttr('disabled');
         }
         $("#frmEmployeeSalaryPayment").submit()
     });
@@ -34,7 +40,7 @@ $(document).ready(function () {
     $('#btnEdit').click(function(e) {
         e.preventDefault();
 
-        if($(this).attr('value')=='Edit'){
+        if($(this).attr('value')=='Adjust Salary'){
             $(this).attr('value','Save');
             $("#btnSave").attr('value','Save & Make Payment');
 
@@ -45,6 +51,8 @@ $(document).ready(function () {
         else {
             $('#employee_salary_payment_hdnAction').val('adjust');
             $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+            $('#employee_salary_payment_month').removeAttr('disabled');
+            $('#employee_salary_payment_year').removeAttr('disabled');
             $("#frmEmployeeSalaryPayment").submit();
         }
 

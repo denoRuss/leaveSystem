@@ -6,7 +6,7 @@ class PaymentStatusFilter extends ohrmCellFilter
     protected $employeeService;
     public function filter($value)
     {
-        return is_null($value) ?'Make Payment':'Paid';
+        return is_null($value) ?'Salary Details':'Paid';
     }
 
     public function getEmployeeService() {

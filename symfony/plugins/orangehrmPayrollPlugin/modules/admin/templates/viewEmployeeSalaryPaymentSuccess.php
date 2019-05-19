@@ -77,7 +77,7 @@
             </fieldset>
             <div class="formbuttons">
                 <?php if ($editable): ?>
-                    <input type="submit" class="plainbtn" id="btnEdit" value="<?php echo 'Edit'; ?>" />
+                    <input type="submit" class="plainbtn" id="btnEdit" value="<?php echo 'Adjust Salary'; ?>" />
                     <input type="submit" class="plainbtn" id="btnSave" value="<?php echo 'Make Payment'; ?>" />
                     <input type="button" class="reset" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
                 <?php else: ?>
