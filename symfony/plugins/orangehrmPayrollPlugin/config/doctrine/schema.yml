@@ -72,6 +72,48 @@ EmployeeSalaryRecord:
       local: emp_number
       foreign: emp_number
 
+EmployeeMonthlySalaryRecord:
+  tableName: dk_employee_monthly_salary
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    emp_number:
+      type: integer
+    monthly_basic:
+      type: float
+      notnull: true
+    other_allowance:
+      type: float
+      notnull: false
+    monthly_basic_tax:
+      type: float
+      notnull: false
+    nopay_leave_count:
+      type: float
+      notnull: false
+    monthly_nopay_leave:
+      type: float
+      notnull: false
+    monthly_epf_deduction:
+      type: float
+      notnull: false
+    company_epf_deduction:
+      type: float
+      notnull: false
+    monthly_etf_deduction:
+      type: float
+      notnull: false
+    month:
+      type: integer
+    year:
+      type: integer
+  relations:
+    Employee:
+      local: emp_number
+      foreign: emp_number
+
 EmployeeSalaryHistory:
   tableName: dk_employee_salary_history
   columns:

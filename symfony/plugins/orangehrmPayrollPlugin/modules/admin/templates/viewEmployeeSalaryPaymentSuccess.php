@@ -16,6 +16,7 @@
 
             <?php echo $form['_csrf_token']; ?>
             <?php echo $form['id']->render(); ?>
+            <?php echo $form['hdnAction']->render(); ?>
             <fieldset>
                 <ol>
                     <li class="long">
@@ -34,6 +35,10 @@
                     <li class="long">
                         <label for="employee_salary_payment_monthly_basic_tax"><?php echo $form['monthly_basic_tax']->renderLabel() ?></label>
                         <?php echo $form['monthly_basic_tax']->render(array("class" => "editable")); ?>
+                    </li>
+                    <li class="long">
+                        <label for="employee_salary_payment_nopay_leave_count"><?php echo $form['nopay_leave_count']->renderLabel() ?></label>
+                        <?php echo $form['nopay_leave_count']->render(array("class" => "editable")); ?>
                     </li>
                     <li class="long">
                         <label for="employee_salary_payment_monthly_nopay_leave"><?php echo $form['monthly_nopay_leave']->renderLabel() ?></label>
@@ -72,6 +77,7 @@
             </fieldset>
             <div class="formbuttons">
                 <?php if ($editable): ?>
+                    <input type="submit" class="plainbtn" id="btnEdit" value="<?php echo 'Edit'; ?>" />
                     <input type="submit" class="plainbtn" id="btnSave" value="<?php echo 'Make Payment'; ?>" />
                     <input type="button" class="reset" id="btnCancel" value="<?php echo 'Cancel'; ?>" />
                 <?php else: ?>

@@ -187,6 +187,19 @@ class DkSalaryService
     }
 
     /**
+     * @param $employeeMonthlySalaryRecord
+     * @return mixed
+     * @throws ServiceException
+     */
+    public function saveEmployeeMonthlySalaryRecord($employeeMonthlySalaryRecord){
+        try {
+            return $this->getSalaryDao()->saveEmployeeMonthlySalaryRecord($employeeMonthlySalaryRecord);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $id
      * @param $name
      * @return bool
@@ -306,7 +319,9 @@ class DkSalaryService
         return $numOfTakenNopayLeave *$deductionForNopayLeave;
     }
 
-
+    public function calculateNopayLeaveDedcutionBasedOnSalary($monthlyBasic,$nopayLeaveCount){
+        return number_format($nopayLeaveCount*($monthlyBasic/30),2,'.','');
+    }
     public function processBulkPayment($filters,$employeeList){
         $result = array();
         $result[0] = array('Payment Completed successfully');
@@ -376,6 +391,18 @@ class DkSalaryService
         }
     }
 
+    /**
+     * @param $searchParams
+     * @return array|Doctrine_Record
+     * @throws ServiceException
+     */
+    public function getEmployeeMonthlySalaryRecord($searchParams){
+        try {
+            return $this->getSalaryDao()->getEmployeeMonthlySalaryRecord($searchParams);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
     public function getLeaveRequestService(){
         if (!($this->leaveRequestService instanceof LeaveRequestService)) {
             $this->leaveRequestService = new LeaveRequestService();

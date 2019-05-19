@@ -210,6 +210,20 @@ class DkSalaryDao
     }
 
     /**
+     * @param $employeeMonthlySalaryRecord
+     * @return mixed
+     * @throws DaoException
+     */
+    public function saveEmployeeMonthlySalaryRecord($employeeMonthlySalaryRecord){
+        try {
+            $employeeMonthlySalaryRecord->save();
+            return $employeeMonthlySalaryRecord;
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $name
      * @return array|Doctrine_Record
      * @throws DaoException
@@ -295,6 +309,34 @@ class DkSalaryDao
         } catch (Exception $e) {
             $message = $e->getMessage();
             throw new DaoException($message);
+        }
+    }
+
+    /**
+     * @param $searchParams
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function getEmployeeMonthlySalaryRecord($searchParams){
+        try {
+            $query = Doctrine_Query::create()
+                ->from('EmployeeMonthlySalaryRecord');
+
+
+            if(isset($searchParams['empNumber'])){
+                $query->andWhere('emp_number = ?',$searchParams['empNumber']);
+            }
+            if(isset($searchParams['month'])){
+                $query->andWhere('month = ?',$searchParams['month']);
+            }
+            if(isset($searchParams['year'])){
+                $query->andWhere('year = ?',$searchParams['year']);
+            }
+
+            return $query->fetchOne();
+
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
         }
     }
 }

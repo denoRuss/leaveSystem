@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('#employee_salary_payment_other_allowance').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_basic_tax').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_nopay_leave').attr('disabled','disabled');
+    $('#employee_salary_payment_nopay_leave_count').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_payment_company_epf_deduction').attr('disabled','disabled');
     $('#employee_salary_payment_monthly_etf_deduction').attr('disabled','disabled');
@@ -16,10 +17,38 @@ $(document).ready(function () {
 
     $('#btnSave').click(function (e) {
         e.preventDefault();
-        $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+
+        if($(this).attr('value')=='Make Payment'){
+            $('#employee_salary_payment_hdnAction').val('pay');
+            $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+        }
+        else {
+            $('#employee_salary_payment_hdnAction').val('adjust_pay');
+            $('#employee_salary_payment_other_allowance').removeAttr('disabled');
+            $('#employee_salary_payment_nopay_leave_count').removeAttr('disabled');
+            $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+        }
         $("#frmEmployeeSalaryPayment").submit()
     });
 
+    $('#btnEdit').click(function(e) {
+        e.preventDefault();
+
+        if($(this).attr('value')=='Edit'){
+            $(this).attr('value','Save');
+            $("#btnSave").attr('value','Save & Make Payment');
+
+
+            $('#employee_salary_payment_other_allowance').removeAttr('disabled');
+            $('#employee_salary_payment_nopay_leave_count').removeAttr('disabled');
+        }
+        else {
+            $('#employee_salary_payment_hdnAction').val('adjust');
+            $('#employee_salary_payment_monthly_basic').removeAttr('disabled');
+            $("#frmEmployeeSalaryPayment").submit();
+        }
+
+    });
 
     var validator = $('#frmEmployeeSalaryPayment').validate({
         rules: {
@@ -162,6 +191,12 @@ $(document).ready(function () {
                 console.log(error);
             }
         })
+    })
+
+    $("#employee_salary_payment_nopay_leave_count").change(function () {
+
+        var nopayLeaveDeduction = $(this).val()*$('#employee_salary_payment_monthly_basic').val()/30;
+        $('#employee_salary_payment_monthly_nopay_leave').val(parseFloat(nopayLeaveDeduction).toFixed(2));
     })
 
 });

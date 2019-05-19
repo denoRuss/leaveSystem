@@ -16,12 +16,33 @@ class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
 
             if ($form->isValid()) {
                 try {
-                    $employeeSalaryHistory = $form->getObject();
 
-                    $this->getSalaryService()->saveEmployeeSalaryHistory($employeeSalaryHistory);
-                    $this->getEmailPoolService()->saveMakePaymentNotification(array($employeeSalaryHistory),$postData['month'],$postData['year']);
-                    $messageType = 'success';
-                    $message = __('Payment Completed');
+                    $hdnAction = $postData['hdnAction'];
+
+                    if($hdnAction==$form::MAKE_PAYMENT){
+
+                        $employeeSalaryHistory = $form->getObject();
+
+                        $this->getSalaryService()->saveEmployeeSalaryHistory($employeeSalaryHistory);
+                        $this->getEmailPoolService()->saveMakePaymentNotification(array($employeeSalaryHistory),$postData['month'],$postData['year']);
+                        $messageType = 'success';
+                        $message = __('Payment Completed');
+                    }
+                    elseif ($hdnAction==$form::ADJUST_AND_MAKE_PAYMENT){
+
+                        $modifiedEmployeeSalaryHistory = $form->getModifiedEmployeeSalaryHistory();
+                        $this->getSalaryService()->saveEmployeeSalaryHistory($modifiedEmployeeSalaryHistory);
+                        $this->getEmailPoolService()->saveMakePaymentNotification(array($modifiedEmployeeSalaryHistory),$postData['month'],$postData['year']);
+                        $messageType = 'success';
+                        $message = __('Payment Completed');
+                    }
+                    else{
+
+                        $employeeMonthlyRecord = $form->getEmployeeMonthlySalaryRecord();
+                        $this->getSalaryService()->saveEmployeeMonthlySalaryRecord($employeeMonthlyRecord);
+                        $messageType = 'success';
+                        $message = __('Salary Adjusted Successfully');
+                    }
                 } catch (Exception $e) {
                     $messageType = 'error';
                     $message = 'Failed to Save';
@@ -31,7 +52,8 @@ class saveEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
                 $this->redirect($request->getReferer());
             }
         }
-        $this->getUser()->setFlash($messageType, __($message));
+        $this->getUser()->setAttribute('showMakePaymentData', true);
+        $this->getUser()->setFlash('templateMessage',array($messageType, __($message)));
         $this->redirect('admin/makePayment');
     }
 

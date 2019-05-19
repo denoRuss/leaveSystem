@@ -110,11 +110,14 @@ class makePaymentAction extends viewEmployeeListAction
         if($this->form->getValue('isReset')=='yes'){
             $this->showList = false;
         }
-        else if ($request->isMethod('post') || $this->getUser()->getAttribute('isBulkPayment')==true) {
+        else if ($request->isMethod('post') || $this->getUser()->getAttribute('isBulkPayment')==true ||
+            $this->getUser()->getAttribute('showMakePaymentData')) {
+
             $this->setListComponent($list, $count, $noOfRecords, $pageNumber);
             $this->showList  = true;
 
             $this->getUser()->setAttribute('isBulkPayment', false);
+            $this->getUser()->setAttribute('showMakePaymentData',false);
         }
 
 

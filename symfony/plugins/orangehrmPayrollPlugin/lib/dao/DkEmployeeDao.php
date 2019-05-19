@@ -300,15 +300,30 @@ class DkEmployeeDao extends EmployeeDao
                     $salaryHistoryItem = new EmployeeSalaryHistory();
                     if(is_null($row['salaryHistoryId'])){
                         //payment has not done yet, projected values are shown
-                        $employeeSalaryRecord = $this->getSalaryService()->getSalaryDao()->getEmployeeSalaryRecordByEmpNumber($row['empNumber']);
-                        if($employeeSalaryRecord instanceof EmployeeSalaryRecord){
+
+                        //since projected salary is editable, check whether an edited salary record exists, if not then take the employee PIM sal record
+
+                        $searchParam = array('month'=>$filters['month'],'year'=>$filters['year'],'empNumber'=>$row['empNumber']);
+                        $emaployeeMonthlySalaryRecord = $this->getSalaryService()->getSalaryDao()->getEmployeeMonthlySalaryRecord($searchParam);
+                        //TODO this is still pending
+                        $nopayLeaveCount = 0;
+                        if($emaployeeMonthlySalaryRecord instanceof EmployeeMonthlySalaryRecord){
+                            $employeeSalaryRecord = $emaployeeMonthlySalaryRecord;
+                            $nopayLeaveCount = $employeeSalaryRecord->getNopayLeaveCount();
+                        }
+                        else{
+                            $employeeSalaryRecord = $this->getSalaryService()->getSalaryDao()->getEmployeeSalaryRecordByEmpNumber($row['empNumber']);
+                        }
+
+
+                        if($employeeSalaryRecord instanceof EmployeeSalaryRecord || $employeeSalaryRecord instanceof EmployeeMonthlySalaryRecord){
 
 
 
                             $salaryHistoryItem->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
                             $salaryHistoryItem->setOtherAllowance($employeeSalaryRecord->getOtherAllowance());
                             $salaryHistoryItem->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax());
-                            $salaryHistoryItem->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($row['empNumber'],$from,$to));
+                            $salaryHistoryItem->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),$nopayLeaveCount));
                             $salaryHistoryItem->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction());
                             $salaryHistoryItem->setMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyEtfDeduction());
                             $salaryHistoryItem->setTotalEarning($salaryHistoryItem->displayTotalEarnings());

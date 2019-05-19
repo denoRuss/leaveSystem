@@ -14,9 +14,24 @@ class viewEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
 
         $empNumber = $request->getParameter('empNumber');
         $employee = $this->getEmployeeService()->getEmployee($empNumber);
-        $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
+
+        $filtes = $this->getUser()->getAttribute('emplist.filters', null, 'pim_module');
+        $month = $filtes['month'];
+        $year = $filtes['year'];
+        $searchParam = array(
+            'month'=>$month,
+            'year'=>$year,
+            'empNumber'=>$empNumber
+        );
+
+        $employeeSalaryRecord = $this->getSalaryService()->getSalaryDao()->getEmployeeMonthlySalaryRecord($searchParam);
+        if(! $employeeSalaryRecord instanceof EmployeeMonthlySalaryRecord){
+            $employeeSalaryRecord = $employee->getEmployeeSalaryRecord()->getFirst();
+        }
+
+
         $form = new EmployeeSalaryPaymentForm();
-        $form->setEmployeeSalaryPaymentObject($employeeSalaryRecord,$employee);
+        $form->setEmployeeSalaryPaymentObject($employeeSalaryRecord,$employee,$year,$month);
 
         $this->editable = true;
         $this->form = $form;

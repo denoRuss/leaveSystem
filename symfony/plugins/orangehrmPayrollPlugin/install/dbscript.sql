@@ -85,6 +85,22 @@ CREATE TABLE IF NOT EXISTS `dk_employee_salary` (
     CONSTRAINT FOREIGN KEY (`emp_number`) REFERENCES `hs_hr_employee` (`emp_number`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
+CREATE TABLE IF NOT EXISTS `dk_employee_monthly_salary` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `emp_number` INT(7) NOT NULL,
+    `monthly_basic` double default null,
+  `other_allowance` double default null,
+  `monthly_basic_tax` double default null,
+  `nopay_leave_count` double default null,
+  `monthly_nopay_leave` double default null,
+  `monthly_epf_deduction` double default null,
+  `company_epf_deduction` double default null,
+  `monthly_etf_deduction` double default null,
+  `month` INT default null,
+  `year` INT default null,
+    CONSTRAINT FOREIGN KEY (`emp_number`) REFERENCES `hs_hr_employee` (`emp_number`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
 CREATE TABLE IF NOT EXISTS `dk_employee_salary_history` (
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `emp_number` INT(7) NOT NULL,
