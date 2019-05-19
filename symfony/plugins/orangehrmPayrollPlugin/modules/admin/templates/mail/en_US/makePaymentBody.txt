@@ -1,9 +1,9 @@
 Hi #employeeFullName ,
 <br><br>
 We have processed the salary for #month #year today.
-<br>
+<br><br>
 You can view your payslips under <strong>My Info -> Salary</strong> by logging into the HRM system using your personal login.
-<br>
+<br><br>
 <a href="#link" target="_blank">#link</a>
 <br><br>
 Thanks and regards,<br>
