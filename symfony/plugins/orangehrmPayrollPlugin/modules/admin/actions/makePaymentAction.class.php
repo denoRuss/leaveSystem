@@ -60,6 +60,9 @@ class makePaymentAction extends viewEmployeeListAction
                 "order"=>$request->getParameter('sortOrder'));
             $this->setSortParameter($sortParam);
             $this->setPage(1);
+            if(!is_null($request->getParameter('sortField'))){
+                $this->getUser()->setAttribute('showMakePaymentData',true);
+            }
         }
 
         $sort = $this->getSortParameter();
