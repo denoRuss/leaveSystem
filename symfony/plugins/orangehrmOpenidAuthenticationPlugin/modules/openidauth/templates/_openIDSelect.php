@@ -18,7 +18,7 @@
  *  
  */
 ?>
-<div style="text-align: center;padding: 10px;">
+<div style="text-align: center;padding: 10px;display: none">
     <form id="openIDForm" method="post" action="<?php echo url_for('openidauth/openIdCredentials'); ?>" style="text-align: center">
 
         <?php if (isset($form)) {
