@@ -1,3 +1,5 @@
+<strong>Please note that this email is generated for testing purposes</strong>
+<br><br>
 Hi #employeeFullName ,
 <br><br>
 We have processed the salary for #month #year today.
