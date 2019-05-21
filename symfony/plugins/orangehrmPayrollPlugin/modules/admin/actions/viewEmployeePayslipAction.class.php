@@ -90,7 +90,7 @@ class viewEmployeePayslipAction extends basePayrollAction
         $payslipReplacementValues[] =  $organization instanceof Organization? $organization->getName():'';
 
         $joinedDate = $employeeSalaryHistoryRecord->getEmployee()->getJoinedDate();
-        $payslipReplacementValues[] = is_null($joinedDate)?'Not Defined':date('F d, Y');
+        $payslipReplacementValues[] = is_null($joinedDate)?'Not Defined':date('F d, Y',strtotime($joinedDate));
 
         $payslipReplacementValues[] = $employeeSalaryHistoryRecord->displayTotalEarnings();
 
