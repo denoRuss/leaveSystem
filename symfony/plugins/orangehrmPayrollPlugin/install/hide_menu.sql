@@ -46,7 +46,7 @@ UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 103;
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 14;
 
 -- hide Admin - Structure menu
-UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 15;
+-- UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 15;
 
 -- hide Job Categories menu
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 10;
@@ -54,3 +54,8 @@ UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 10;
 -- hide Admin - Qulification menu
 
 UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` IN ( 16,17,18,21);
+
+-- hide leave reports
+
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 79;
+UPDATE `ohrm_menu_item` SET `status` = '0' WHERE `ohrm_menu_item`.`id` = 80;
