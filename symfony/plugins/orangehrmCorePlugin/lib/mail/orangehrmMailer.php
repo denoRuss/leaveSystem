@@ -72,7 +72,7 @@ abstract class orangehrmMailer {
 
         $emailConfigurationService = new EmailConfigurationService();
         $emailConfig = $emailConfigurationService->getEmailConfiguration();
-        return array($emailConfig->getSentAs() => 'OrangeHRM');
+        return array($emailConfig->getSentAs() => 'iTeQ HRM Solutions');
 
     }
 

@@ -480,7 +480,7 @@ class EmailService extends BaseService {
 
                         try {
                             $message->setTo($to);
-                            $message->setFrom(array($this->emailConfig->getSentAs() => 'OrangeHRM'));
+                            $message->setFrom(array($this->emailConfig->getSentAs() => 'iTeQ HRM Solutions'));
 
                             $message->setSubject($emailSubject);
                             $message->setBody($emailBody);
