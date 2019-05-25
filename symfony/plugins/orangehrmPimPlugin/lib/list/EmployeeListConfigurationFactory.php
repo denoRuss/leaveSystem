@@ -105,7 +105,7 @@ class EmployeeListConfigurationFactory extends ohrmListConfigurationFactory {
             'elementProperty' => array('getter' => 'getSupervisorNames')
         ));
 
-        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header7);
+        $this->headers = array($header1, $header2, $header3, $header4, $header5, $header6,$header7);
     }
     
     public function getClassName() {
