@@ -87,7 +87,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
-            'textAlignmentStyle' => 'left',
+            'textAlignmentStyle' => 'right',
             'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getTotalEarning'))
         ));
         $header6->populateFromArray(array(
@@ -96,7 +96,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
-            'textAlignmentStyle' => 'left',
+            'textAlignmentStyle' => 'right',
             'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getTotalDeduction'))
         ));
 
@@ -106,7 +106,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
-            'textAlignmentStyle' => 'left',
+            'textAlignmentStyle' => 'right',
             'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getEmployerContribution'))
         ));
         $header7->populateFromArray(array(
@@ -115,7 +115,7 @@ class PaymentListConfigurationFactory extends ohrmListConfigurationFactory {
             'isSortable' => false,
             'sortField' => 'employeeStatus',
             'elementType' => 'label',
-            'textAlignmentStyle' => 'left',
+            'textAlignmentStyle' => 'right',
             'elementProperty' => array('getter' => array('getEmployeeSalaryHistory','getFirst','getTotalNetsalary'))
         ));
         $header8->populateFromArray(array(
