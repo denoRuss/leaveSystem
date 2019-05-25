@@ -256,7 +256,7 @@
     
     $(document).ready(function() {
 
-        $("#job_sub_unit").parent().hide();
+
         $("#job_location").parent().hide();
         $("#job_eeo_category").parent().hide();
 
