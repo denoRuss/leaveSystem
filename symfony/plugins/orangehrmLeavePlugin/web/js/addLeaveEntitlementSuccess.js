@@ -6,7 +6,9 @@
            $('ol#filter li:not(:first)').show();                
         } else {
             $('ol#filter li:not(:first)').hide();
-        }        
+        }
+        //hide location
+        $("#entitlements_filters_location").parent().hide();
     }
     
     
