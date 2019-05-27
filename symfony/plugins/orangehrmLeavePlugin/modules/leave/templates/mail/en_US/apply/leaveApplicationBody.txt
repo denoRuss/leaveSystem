@@ -5,7 +5,7 @@ Hi %recipientFirstName%,
 %leaveDetails%      
 You were sent this mail, as you are a supervisor assigned for %performerFirstName%.
 
-Please login to OrangeHRM, and either approve or reject from Leave List.
+Please login to ITeQ HRM, and either approve or reject from Leave List.
 
 Thank you.
 

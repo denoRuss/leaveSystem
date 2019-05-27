@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has approved leave request of %applicantFullName%. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to OrangeHRM leave approvals.
+You were sent this mail, as you have subscribed to ITeQ HRM leave approvals.
 
 Thank you.
 
