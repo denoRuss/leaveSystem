@@ -50,7 +50,7 @@ $(document).ready(function() {
             },
             'tax_bracket[percentage]': {
                 required: true,
-                twoDecimals:true
+                fourDecimals:true
 
             },
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
             },
             'tax_bracket[percentage]': {
                 required: lang_Required,
-                twoDecimals: lang_salaryShouldBeNumeric,
+                fourDecimals: lang_salaryShouldBeNumeric,
             },
 
         },
@@ -97,6 +97,25 @@ $(document).ready(function() {
             isValid = true;
         }
         return isValid;
+    });
+
+    $.validator.addMethod("fourDecimals", function(value, element, params) {
+
+        var numeric =  !isNaN(parseFloat(value)) && isFinite(value);
+
+        if (numeric) {
+
+            // Get decimal points
+            var trimmedValue = $.trim(value);
+            var parts = trimmedValue.split(".");
+            if (parts.length === 2 && parts[1].length > 4) {
+                return false;
+            }
+            else {
+                return  true;
+            }
+        }
+        return false;
     });
 
     $.validator.addMethod("validSalaryRange", function(value, element, params) {
