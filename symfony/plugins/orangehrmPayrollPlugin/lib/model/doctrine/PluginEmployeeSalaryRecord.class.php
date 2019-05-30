@@ -16,14 +16,25 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
     protected $salaryConfigService;
     const ADMIN_SCREEN = 'admin';
     const PIM_SALARY_SCREEN = 'pim_salary';
+    const MAX_SALARY = 350000;
+    const MAX_SALARY_TAX_PERCENTAGE = 24;
 
     public function calculateMonthlyBasicTax($salary){
 
-        $taxBracket = $this->getSalaryService()->getMatchingTaxBracket($salary);
-        if ($taxBracket instanceof TaxBracket){
+        if($salary<=self::MAX_SALARY){
+            $taxBracket = $this->getSalaryService()->getMatchingTaxBracket($salary);
+            if ($taxBracket instanceof TaxBracket){
                 $tax= $salary*$taxBracket->getPercentage()/100;
                 return $tax;
             }
+        }
+        else{
+            $taxBracket = $this->getSalaryService()->getMatchingTaxBracket(self::MAX_SALARY);
+            if ($taxBracket instanceof TaxBracket){
+                $tax= (self::MAX_SALARY*$taxBracket->getPercentage()/100)+(($salary-self::MAX_SALARY)*self::MAX_SALARY_TAX_PERCENTAGE/100);
+                return $tax;
+            }
+        }
 
         return null;
     }

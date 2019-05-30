@@ -31,6 +31,8 @@ class viewPersonalSalaryAction extends basePimAction
         $this->etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
         $this->salaryPermission = $this->getDataGroupPermissions('Payroll', $empNumber);
         $this->empNumber = $empNumber;
+        $this->maxSalary = EmployeeSalaryRecord::MAX_SALARY;
+        $this->maxSalaryTaxPercentage = EmployeeSalaryRecord::MAX_SALARY_TAX_PERCENTAGE;
 
         $listData = $this->getSalaryService()->searchEmployeeSalaryHistory(array('emp_number'=>$empNumber));
         $this->setListComponent($listData);

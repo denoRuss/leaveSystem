@@ -98,6 +98,8 @@
     var EPF_Percentage = <?php echo $epfPercentage;?>;
     var COMPANY_EPF_Percentage = <?php echo $companyepfPercentage;?>;
     var ETF_Percentage = <?php echo $etfPercentage;?>;
+    var MAX_SALARY = <?php echo $maxSalary;?>;
+    var MAX_SALARY_TAX_PERCENTAGE = <?php echo $maxSalaryTaxPercentage;?>;
 
     var url_employeeSalaryList = '<?php echo url_for('pim/viewSalaryList').'/empNumber/'.$empNumber; ?>';
 

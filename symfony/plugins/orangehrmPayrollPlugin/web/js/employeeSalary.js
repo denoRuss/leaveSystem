@@ -102,21 +102,30 @@ $(document).ready(function () {
     $.validator.addMethod("validTaxBracket", function(value, element, params) {
 
         value = parseFloat(value);
+        var orginalValue = value;
+        if(MAX_SALARY<value){
+            value = MAX_SALARY;
+        }
         var isValid = false;
         for(i=0;i<taxBracketList.length;i++){
             var taxBracket = taxBracketList[i];
             if(taxBracket.lower_bound<=value && value<=taxBracket.upper_bound){
                 var tax= value*taxBracket.percentage/100;
-                $("#employee_salary_record_monthly_basic_tax").val(tax);
+
+                if(MAX_SALARY < orginalValue){
+                    tax += (orginalValue-MAX_SALARY)*MAX_SALARY_TAX_PERCENTAGE/100;
+                }
+
+                $("#employee_salary_record_monthly_basic_tax").val(tax.toFixed(2));
 
                 var epf = value*EPF_Percentage/100;
-                $("#employee_salary_record_monthly_epf_deduction").val(epf);
+                $("#employee_salary_record_monthly_epf_deduction").val(epf.toFixed(2));
 
                 var companyepf = value*COMPANY_EPF_Percentage/100;
-                $("#employee_salary_record_company_epf_deduction").val(companyepf);
+                $("#employee_salary_record_company_epf_deduction").val(companyepf.toFixed(2));
 
                 var etf = value*ETF_Percentage/100;
-                $("#employee_salary_record_monthly_etf_deduction").val(etf);
+                $("#employee_salary_record_monthly_etf_deduction").val(etf.toFixed(2));
                 return true;
             }
         }
