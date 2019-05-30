@@ -162,7 +162,7 @@ UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 11;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 13;
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`id` = 14;
 
-UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'leave';
+-- UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'leave';
 UPDATE `ohrm_module` SET `status` = '0' WHERE `ohrm_module`.`name` = 'directory';
 
 
@@ -227,6 +227,7 @@ INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.company_epf_percent
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.etf_percentage', '0');
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.nopay_leave_type_id', -1);
 INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.nopay_leave_deduction', 0);
+-- INSERT INTO `hs_hr_config` (`key`, `value`) VALUES ('payroll.system_deployment_date', curdate());
 
 -- configure new theme
 UPDATE `hs_hr_config` SET `value` = 'payroll' WHERE `hs_hr_config`.`key` = 'themeName';
