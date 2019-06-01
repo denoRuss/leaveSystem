@@ -93,6 +93,27 @@ class DkSalaryDao
     }
 
     /**
+     * @param $searchParams
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function searchEmployeeSalaryRecord($searchParams){
+        try {
+            $query = Doctrine_Query::create()
+                ->from('EmployeeSalaryRecord');
+
+                if(isset($searchParams['emp_number'])){
+                    $query->andWhere('emp_number = ?',$searchParams['emp_number']);
+                }
+
+            return $query->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+
+    /**
      * @param $empNumber
      * @return array|Doctrine_Record
      * @throws DaoException
@@ -334,6 +355,30 @@ class DkSalaryDao
             }
 
             return $query->fetchOne();
+
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
+    public function getProcessedSalaryHisorySummary($searchParams){
+        try {
+
+            $sql = "SELECT count(*) as records ,h.emp_number as empNumber ,e.joined_date as joinedDate
+                    FROM `dk_employee_salary_history` h
+                    LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
+                    WHERE h.`monthly_basic` >= ? AND h.`monthly_basic` <= ?
+                    GROUP BY h.emp_number";
+
+            $bindParams = array($searchParams['lower_bound'],$searchParams['upper_bound']);
+
+
+            $pdo = Doctrine_Manager::connection()->getDbh();
+            $query = $pdo->prepare($sql);
+            $query->execute($bindParams);
+            $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
 
         } catch (Exception $e) {
             throw new DaoException($e->getMessage());

@@ -230,24 +230,14 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
 
     public function setEmployeeSalaryPaymentObject($object,$employee,$year,$month){
 
-        if($object instanceof EmployeeSalaryRecord || $object instanceof EmployeeMonthlySalaryRecord){
+        if($object instanceof EmployeeSalaryRecord){
             $this->setDefault('monthly_basic', $object->valueFormatter($object->getMonthlyBasic()));
             $this->setDefault('other_allowance', $object->valueFormatter($object->getOtherAllowance()));
-            $this->setDefault('monthly_basic_tax', $object->valueFormatter($object->getMonthlyBasicTax()));
-            $this->setDefault('monthly_epf_deduction', $object->valueFormatter($object->getMonthlyEpfDeduction()));
-            $this->setDefault('company_epf_deduction', $object->valueFormatter($object->getCompanyEpfDeduction()));
-            $this->setDefault('monthly_etf_deduction', $object->valueFormatter($object->getMonthlyEtfDeduction()));
-        }
+            $this->setDefault('monthly_basic_tax', $object->calculateMonthlyBasicTax($object->getMonthlyBasic()));
+            $this->setDefault('monthly_epf_deduction', $object->calculateMonthlyEpfDeduction($object->getMonthlyBasic()));
+            $this->setDefault('company_epf_deduction', $object->calculateCompanyEpfDeduction($object->getMonthlyBasic()));
+            $this->setDefault('monthly_etf_deduction', $object->calculateMonthlyEtfDeduction($object->getMonthlyBasic()));
 
-        $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
-
-        if($object instanceof EmployeeMonthlySalaryRecord){
-            $this->setDefault('year',$object->getYear());
-            $this->setDefault('month',$object->getMonth());
-            $this->setDefault('monthly_nopay_leave',$object->valueFormatter($object->getMonthlyNopayLeave()));
-            $this->setDefault('nopay_leave_count',$object->getNopayLeaveCount());
-        }
-        else{
             $this->setDefault('year',$year);
             $this->setDefault('month',$month);
 
@@ -255,6 +245,40 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $this->setDefault('monthly_nopay_leave', number_format($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()),2,'.',''));
         }
 
+        else if($object instanceof EmployeeMonthlySalaryRecord){
+
+            if($object->getMonth()==date('m') && $object->getYear() ==date('Y')){
+                //somehow there is a history reocrd for current month, but still it need to calclulated values until payments completed
+
+                $currentMonthEmployeeSalaryRecord = $this->getSalaryService()->searchEmployeeSalaryRecord(array('emp_number'=>$employee->getEmpNumber()));
+                /**
+                 * @var EmployeeSalaryRecord $currentMonthEmployeeSalaryRecord;
+                 */
+                $this->setDefault('monthly_basic', $object->valueFormatter($currentMonthEmployeeSalaryRecord->getMonthlyBasic()));
+                $this->setDefault('other_allowance', $object->valueFormatter($currentMonthEmployeeSalaryRecord->getOtherAllowance()));
+                $this->setDefault('monthly_basic_tax', $currentMonthEmployeeSalaryRecord->calculateMonthlyBasicTax($currentMonthEmployeeSalaryRecord->getMonthlyBasic()));
+                $this->setDefault('monthly_epf_deduction', $currentMonthEmployeeSalaryRecord->calculateMonthlyEpfDeduction($currentMonthEmployeeSalaryRecord->getMonthlyBasic()));
+                $this->setDefault('company_epf_deduction', $currentMonthEmployeeSalaryRecord->calculateCompanyEpfDeduction($currentMonthEmployeeSalaryRecord->getMonthlyBasic()));
+                $this->setDefault('monthly_etf_deduction', $currentMonthEmployeeSalaryRecord->calculateMonthlyEtfDeduction($currentMonthEmployeeSalaryRecord->getMonthlyBasic()));
+            }
+            else{
+                $this->setDefault('monthly_basic', $object->valueFormatter($object->getMonthlyBasic()));
+                $this->setDefault('other_allowance', $object->valueFormatter($object->getOtherAllowance()));
+                $this->setDefault('monthly_basic_tax', $object->valueFormatter($object->getMonthlyBasicTax()));
+                $this->setDefault('monthly_epf_deduction', $object->valueFormatter($object->getMonthlyEpfDeduction()));
+                $this->setDefault('company_epf_deduction', $object->valueFormatter($object->getCompanyEpfDeduction()));
+                $this->setDefault('monthly_etf_deduction', $object->valueFormatter($object->getMonthlyEtfDeduction()));
+            }
+
+
+
+            $this->setDefault('year',$object->getYear());
+            $this->setDefault('month',$object->getMonth());
+            $this->setDefault('monthly_nopay_leave',$object->valueFormatter($object->getMonthlyNopayLeave()));
+            $this->setDefault('nopay_leave_count',$object->getNopayLeaveCount());
+        }
+
+        $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
         $this->setDefault('hdnAction',self::ADJUST_SALARY);
 
     }
