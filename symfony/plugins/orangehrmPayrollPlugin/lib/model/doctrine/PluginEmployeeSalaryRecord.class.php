@@ -25,14 +25,14 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
             $taxBracket = $this->getSalaryService()->getMatchingTaxBracket($salary);
             if ($taxBracket instanceof TaxBracket){
                 $tax= $salary*$taxBracket->getPercentage()/100;
-                return $tax;
+                return $this->valueFormatter($tax);
             }
         }
         else{
             $taxBracket = $this->getSalaryService()->getMatchingTaxBracket(self::MAX_SALARY);
             if ($taxBracket instanceof TaxBracket){
                 $tax= (self::MAX_SALARY*$taxBracket->getPercentage()/100)+(($salary-self::MAX_SALARY)*self::MAX_SALARY_TAX_PERCENTAGE/100);
-                return $tax;
+                return $this->valueFormatter($tax);
             }
         }
 
@@ -42,19 +42,19 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
     public function calculateMonthlyEpfDeduction($salary){
         $epfPercentage = $this->getSalaryConfigService()->getEpfPercentage();
         $tax = $salary*$epfPercentage/100;
-        return $tax;
+        return $this->valueFormatter($tax);
     }
 
     public function calculateCompanyEpfDeduction($salary){
         $epfPercentage = $this->getSalaryConfigService()->getCompanyEpfPercentage();
         $tax = $salary*$epfPercentage/100;
-        return $tax;
+        return $this->valueFormatter($tax);
     }
 
     public function calculateMonthlyEtfDeduction($salary){
         $etfPercentage = $this->getSalaryConfigService()->getEtfPercentage();
         $tax = $salary*$etfPercentage/100;
-        return $tax;
+        return $this->valueFormatter($tax);
     }
 
     public function getSalaryService() {
@@ -69,5 +69,13 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
             $this->salaryConfigService = new DkConfigService();
         }
         return $this->salaryConfigService;
+    }
+
+    public function valueFormatter($value){
+        return number_format($value,2,'.','');
+    }
+
+    public function displayValueFormatter($value){
+        return number_format($value,2,'.',',');
     }
 }

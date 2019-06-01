@@ -50,20 +50,20 @@ class EmployeeSalaryRecordForm extends SalaryTypeForm
     {
         if($object instanceof EmployeeSalaryRecord){
             $this->setDefault('id', $object->getId());
-            $this->setDefault('monthly_basic', $object->getMonthlyBasic());
-            $this->setDefault('other_allowance', $object->getOtherAllowance());
-            $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
-            $this->setDefault('monthly_nopay_leave', $object->getMonthlyNopayLeave());
-            $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
-            $this->setDefault('company_epf_deduction', $object->getCompanyEpfDeduction());
-            $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
+            $this->setDefault('monthly_basic', $object->valueFormatter($object->getMonthlyBasic()));
+            $this->setDefault('other_allowance', $object->valueFormatter($object->getOtherAllowance()));
+            $this->setDefault('monthly_basic_tax', $object->valueFormatter($object->getMonthlyBasicTax()));
+            $this->setDefault('monthly_nopay_leave', $object->valueFormatter($object->getMonthlyNopayLeave()));
+            $this->setDefault('monthly_epf_deduction', $object->valueFormatter($object->getMonthlyEpfDeduction()));
+            $this->setDefault('company_epf_deduction', $object->valueFormatter($object->getCompanyEpfDeduction()));
+            $this->setDefault('monthly_etf_deduction', $object->valueFormatter($object->getMonthlyEtfDeduction()));
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
         $this->setDefault('screen',$screen);
 
         //TODO if payment date is going not 30, this has to be fixed, use diffrent from & to date
-        $this->setDefault('monthly_nopay_leave',$this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));
+        $this->setDefault('monthly_nopay_leave',number_format($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()),2,'.',''));
     }
 
     protected function _setSalaryTypeeWidget() {

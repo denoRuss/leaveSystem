@@ -119,7 +119,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
 
             //TODO this is still pending
 //            $object->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
-            $object->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),$nopayLeaveCount));
+            $object->setMonthlyNopayLeave(number_format($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),$nopayLeaveCount),2,'.',''));
 
 
             $object->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction()?$employeeSalaryRecord->getMonthlyEpfDeduction():null);
@@ -157,8 +157,8 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $object->setMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasicTax()?$employeeSalaryRecord->getMonthlyBasicTax():null);
 
             //TODO this is still pending
-            $object->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),
-                $this->getValue('nopay_leave_count')));
+            $object->setMonthlyNopayLeave(number_format($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),
+                $this->getValue('nopay_leave_count')),2,'.',''));
 
 
             $object->setMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyEpfDeduction()?$employeeSalaryRecord->getMonthlyEpfDeduction():null);
@@ -210,12 +210,12 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             }
 
 
-            $object->setOtherAllowance($this->getValue('other_allowance')?$this->getValue('other_allowance'):null);
+            $object->setOtherAllowance($this->getValue('other_allowance')?$employeeSalaryRecord->valueFormatter($this->getValue('other_allowance')):null);
 
             //TODO this is still pending
             $object->setNopayLeaveCount($this->getValue('nopay_leave_count')?$this->getValue('nopay_leave_count'):null);
-            $object->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),
-                $this->getValue('nopay_leave_count')));
+            $object->setMonthlyNopayLeave($object->valueFormatter($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),
+                $this->getValue('nopay_leave_count'))));
             //$object->setMonthlyNopayLeave($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber(),$from,$to));
 
 
@@ -231,12 +231,12 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
     public function setEmployeeSalaryPaymentObject($object,$employee,$year,$month){
 
         if($object instanceof EmployeeSalaryRecord || $object instanceof EmployeeMonthlySalaryRecord){
-            $this->setDefault('monthly_basic', $object->getMonthlyBasic());
-            $this->setDefault('other_allowance', $object->getOtherAllowance());
-            $this->setDefault('monthly_basic_tax', $object->getMonthlyBasicTax());
-            $this->setDefault('monthly_epf_deduction', $object->getMonthlyEpfDeduction());
-            $this->setDefault('company_epf_deduction', $object->getCompanyEpfDeduction());
-            $this->setDefault('monthly_etf_deduction', $object->getMonthlyEtfDeduction());
+            $this->setDefault('monthly_basic', $object->valueFormatter($object->getMonthlyBasic()));
+            $this->setDefault('other_allowance', $object->valueFormatter($object->getOtherAllowance()));
+            $this->setDefault('monthly_basic_tax', $object->valueFormatter($object->getMonthlyBasicTax()));
+            $this->setDefault('monthly_epf_deduction', $object->valueFormatter($object->getMonthlyEpfDeduction()));
+            $this->setDefault('company_epf_deduction', $object->valueFormatter($object->getCompanyEpfDeduction()));
+            $this->setDefault('monthly_etf_deduction', $object->valueFormatter($object->getMonthlyEtfDeduction()));
         }
 
         $this->setDefault('employee_name', array('empName' => $employee->getFullName(), 'empId' => $employee->getEmpNumber()));
@@ -244,7 +244,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
         if($object instanceof EmployeeMonthlySalaryRecord){
             $this->setDefault('year',$object->getYear());
             $this->setDefault('month',$object->getMonth());
-            $this->setDefault('monthly_nopay_leave',$object->getMonthlyNopayLeave());
+            $this->setDefault('monthly_nopay_leave',$object->valueFormatter($object->getMonthlyNopayLeave()));
             $this->setDefault('nopay_leave_count',$object->getNopayLeaveCount());
         }
         else{
@@ -252,7 +252,7 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
             $this->setDefault('month',$month);
 
             //TODO this is still pending
-            $this->setDefault('monthly_nopay_leave', $this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()));
+            $this->setDefault('monthly_nopay_leave', number_format($this->getSalaryService()->calulateNopayLeaveDeduction($employee->getEmpNumber()),2,'.',''));
         }
 
         $this->setDefault('hdnAction',self::ADJUST_SALARY);
