@@ -112,6 +112,15 @@ class DkSalaryService
     }
 
     /**
+     * @param $searchParams
+     * @return array|Doctrine_Record
+     * @throws DaoException
+     */
+    public function searchEmployeeSalaryRecord($searchParams){
+        return $this->getSalaryDao()->searchEmployeeSalaryRecord($searchParams);
+    }
+
+    /**
      * @param $id
      * @return array|Doctrine_Record|EmployeeSalaryHistory
      * @throws Doctrine_Connection_Exception

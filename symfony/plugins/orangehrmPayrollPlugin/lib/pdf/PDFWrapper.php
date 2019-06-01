@@ -30,8 +30,8 @@ class PDFWrapper
     {
         $this->tempHtmlfile = tempnam(sys_get_temp_dir(), 'ohrmpayroll').'.html';
         $this->tempPdfFile  = tempnam(sys_get_temp_dir(), 'ohrmpayroll').'.pdf';
-        $this->pdfLibCommnad = sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'orangehrmPayrollPlugin' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR .'pdf' . DIRECTORY_SEPARATOR . 'wkhtmltopdf-' . $this->_getCPU();
-//        $this->pdfLibCommnad = 'wkhtmltopdf';
+//        $this->pdfLibCommnad = sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'orangehrmPayrollPlugin' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR .'pdf' . DIRECTORY_SEPARATOR . 'wkhtmltopdf-' . $this->_getCPU();
+        $this->pdfLibCommnad = 'wkhtmltopdf';
     }
 
     private static function _getCPU(){
