@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    //hide unused field
+    $("#employee_salary_record_monthly_nopay_leave").parent().hide();
+
+
     $('#employee_salary_record_employee_name_empName').attr('disabled','disabled');
     $('#employee_salary_record_monthly_basic_tax').attr('disabled','disabled');
     $('#employee_salary_record_monthly_epf_deduction').attr('disabled','disabled');

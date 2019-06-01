@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    //hide unused menu
+    $("#payroll_configuration_nopay_leave_deduction").parent().hide();
+
     var validator = $('#frmPayrollConfiguration').validate({
         rules: {
 
