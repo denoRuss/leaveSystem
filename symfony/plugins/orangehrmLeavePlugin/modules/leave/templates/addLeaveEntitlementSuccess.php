@@ -78,7 +78,7 @@ use_stylesheets_for_form($form);
 <div class="modal hide" id="preview" style="width:500px">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo 'OrangeHRM - ' . __('Matching Employees'); ?></h3>
+    <h3><?php echo   __('Matching Employees'); ?></h3>
   </div>
   <div class="modal-body">
       <span><?php echo __('The selected leave entitlement will be applied to the following employees.');?></span>
@@ -98,7 +98,7 @@ use_stylesheets_for_form($form);
 <div class="modal hide" id="employeeEntitlement" style="width:500px">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo 'OrangeHRM - ' . __('Updating Entitlement'); ?></h3>
+    <h3><?php echo   __('Updating Entitlement'); ?></h3>
   </div>
   <div class="modal-body">
       
@@ -115,7 +115,7 @@ use_stylesheets_for_form($form);
 <!-- Confirmation box for employee entitlement-->
 <div class="modal hide" id="bulkAssignWaitDlg" style="width:500px">
   <div class="modal-header">
-    <h3><?php echo 'OrangeHRM - ' . __('Updating Entitlement'); ?></h3>
+    <h3><?php echo   __('Updating Entitlement'); ?></h3>
   </div>
   <div class="modal-body">
       <p id="buildAssignWait" class="loading_message"></p>
