@@ -65,7 +65,7 @@ use_stylesheets_for_form($form);
 <div class="modal hide" id="noselection">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo 'OrangeHRM - ' . __('No matching employees'); ?></h3>
+    <h3><?php echo  __('No matching employees'); ?></h3>
   </div>
   <div class="modal-body">
     <p><?php echo __('No employees match the selected filters'); ?></p>
