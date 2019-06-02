@@ -354,16 +354,19 @@ class DkEmployeeDao extends EmployeeDao
                             /**
                              * @var EmployeeSalaryRecord $employeeSalaryRecord
                              */
-                            $salaryHistoryItem->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
-                            $salaryHistoryItem->setOtherAllowance($employeeSalaryRecord->getOtherAllowance());
-                            $salaryHistoryItem->setMonthlyBasicTax($employeeSalaryRecord->calculateMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasic()));
-                            $salaryHistoryItem->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),$nopayLeaveCount));
-                            $salaryHistoryItem->setMonthlyEpfDeduction($employeeSalaryRecord->calculateMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyBasic()));
-                            $salaryHistoryItem->setMonthlyEtfDeduction($employeeSalaryRecord->calculateMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyBasic()));
-                            $salaryHistoryItem->setTotalEarning($salaryHistoryItem->displayTotalEarnings());
-                            $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->dispalyTotalDeduction());
-                            $salaryHistoryItem->setTotalNetsalary($salaryHistoryItem->dispalyTotalNetsalary());
-                            $salaryHistoryItem->setEmployerContribution(number_format($employeeSalaryRecord->calculateMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyBasic())+$employeeSalaryRecord->calculateCompanyEpfDeduction($employeeSalaryRecord->getMonthlyBasic()),2));
+                            if($employeeSalaryRecord instanceof EmployeeSalaryRecord){
+                                $salaryHistoryItem->setMonthlyBasic($employeeSalaryRecord->getMonthlyBasic());
+                                $salaryHistoryItem->setOtherAllowance($employeeSalaryRecord->getOtherAllowance());
+                                $salaryHistoryItem->setMonthlyBasicTax($employeeSalaryRecord->calculateMonthlyBasicTax($employeeSalaryRecord->getMonthlyBasic()));
+                                $salaryHistoryItem->setMonthlyNopayLeave($this->getSalaryService()->calculateNopayLeaveDedcutionBasedOnSalary($employeeSalaryRecord->getMonthlyBasic(),$nopayLeaveCount));
+                                $salaryHistoryItem->setMonthlyEpfDeduction($employeeSalaryRecord->calculateMonthlyEpfDeduction($employeeSalaryRecord->getMonthlyBasic()));
+                                $salaryHistoryItem->setMonthlyEtfDeduction($employeeSalaryRecord->calculateMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyBasic()));
+                                $salaryHistoryItem->setTotalEarning($salaryHistoryItem->displayTotalEarnings());
+                                $salaryHistoryItem->setTotalDeduction($salaryHistoryItem->dispalyTotalDeduction());
+                                $salaryHistoryItem->setTotalNetsalary($salaryHistoryItem->dispalyTotalNetsalary());
+                                $salaryHistoryItem->setEmployerContribution(number_format($employeeSalaryRecord->calculateMonthlyEtfDeduction($employeeSalaryRecord->getMonthlyBasic())+$employeeSalaryRecord->calculateCompanyEpfDeduction($employeeSalaryRecord->getMonthlyBasic()),2));
+
+                            }
 
                         }
 
