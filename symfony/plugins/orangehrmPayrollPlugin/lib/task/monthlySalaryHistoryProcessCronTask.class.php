@@ -12,7 +12,7 @@ class monthlySalaryHistoryProcessCronTask extends sfBaseTask
             new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod'),
             new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine'),
             new sfCommandOption('start', null, sfCommandOption::PARAMETER_OPTIONAL, 'Starting Month', ''),
-            new sfCommandOption('end', null, sfCommandOption::PARAMETER_REQUIRED, 'Ending month', ''),
+            new sfCommandOption('end', null, sfCommandOption::PARAMETER_REQUIRED, 'Ending month', date('Y-m-d')),
             // add your own options here
         ));
 
@@ -38,6 +38,21 @@ EOF;
      */
     protected function execute($arguments = array(), $options = array())
     {
+
+        // create context
+        $context = sfContext::createInstance($this->configuration);
+
+        // set date format
+        $configService = new ConfigService();
+        $datePattern = $configService->getAdminLocalizationDefaultDateFormat();
+        $context->getUser()->setDateFormat($datePattern);
+
+        // initialize the database connection
+        $databaseManager = new sfDatabaseManager($this->configuration);
+        $databaseManager->getDatabase($options['connection'] ? $options['connection'] : null)->getConnection();
+
+
+
         $endDate = $options['end'];
         $startDate =$options['start'];
 
@@ -49,7 +64,7 @@ EOF;
         $endDateMonth = date('m',strtotime($endDate));
         $year = date('Y', strtotime('-1 day', strtotime($startDate)));
 
-        $employeeSalaryRecords = $this->getSalaryService()->searchEmployeeSalaryRecord(array());
+        $employeeSalaryRecords = $this->getSalaryService()->searchEmployeeSalaryRecords(array());
 
         foreach ($employeeSalaryRecords as $employeeSalaryRecord){
 
@@ -60,6 +75,12 @@ EOF;
 
             for($i=$realStartDateMonth ; $i< $endDateMonth; $i++){
                 echo "process month $i \n";
+
+                //check employee joined at least in processing month
+                $joinedDate = $employeeSalaryRecord->getEmployee()->getJoinedDate();
+                if(!is_null($joinedDate) && $joinedDate> date('Y-m-t',strtotime($year.'-'.$i.'-01'))){
+                    continue;
+                }
 
                 //check whether payment has done
                 $searchParams = array('emp_number'=>$empNumber,'month'=>$i,'year'=>$year);

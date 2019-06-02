@@ -112,6 +112,26 @@ class DkSalaryDao
         }
     }
 
+    /**
+     * @param $searchParams
+     * @return Doctrine_Collection
+     * @throws DaoException
+     */
+    public function searchEmployeeSalaryRecords($searchParams){
+        try {
+            $query = Doctrine_Query::create()
+                ->from('EmployeeSalaryRecord');
+
+                if(isset($searchParams['emp_number'])){
+                    $query->andWhere('emp_number = ?',$searchParams['emp_number']);
+                }
+
+            return $query->execute();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage());
+        }
+    }
+
 
     /**
      * @param $empNumber
