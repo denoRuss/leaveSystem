@@ -440,6 +440,20 @@ class DkSalaryService
             throw new ServiceException($e->getMessage());
         }
     }
+
+    /**
+     * @param $searchParams
+     * @return array
+     * @throws ServiceException
+     */
+    public function getSummaryOfPaymentRecords($searchParams){
+        try {
+            return $this->getSalaryDao()->getSummaryOfPaymentRecords($searchParams);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
     public function getLeaveRequestService(){
         if (!($this->leaveRequestService instanceof LeaveRequestService)) {
             $this->leaveRequestService = new LeaveRequestService();
