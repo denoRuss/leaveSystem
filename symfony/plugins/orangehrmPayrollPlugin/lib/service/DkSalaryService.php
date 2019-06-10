@@ -454,6 +454,15 @@ class DkSalaryService
         }
     }
 
+
+    public function getSummaryOfETF($searchParams){
+        try {
+            return $this->getSalaryDao()->getSummaryOfETF($searchParams);
+        } catch (DaoException $e) {
+            throw new ServiceException($e->getMessage());
+        }
+    }
+
     public function getLeaveRequestService(){
         if (!($this->leaveRequestService instanceof LeaveRequestService)) {
             $this->leaveRequestService = new LeaveRequestService();
