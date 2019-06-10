@@ -11,7 +11,7 @@ class generateEtfReportAction extends viewEtfReportAction
         $pdf = new PDFWrapper();
         $pdf->setHtml($this->getHtmlForReport($fromDate,$toDate));
         $pdf->generatePDF();
-        $fileName = $this->getFileName($fromDate,$toDate,'EPF');
+        $fileName = $this->getFileName($fromDate,$toDate,'ETF');
         $pdf->viewPDF($fileName);
         return sfView::NONE;
     }

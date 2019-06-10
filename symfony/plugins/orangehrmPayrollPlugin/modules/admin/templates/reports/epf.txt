@@ -251,7 +251,7 @@
     }
 
     table, th, td {
-      border: 0.8px solid #a2a1a1;
+      border: 1px solid #a2a1a1;
       font-family: 'Roboto', sans-serif;
       font-size: 10px !important;
 
