@@ -194,6 +194,10 @@ class MenuService {
         return $this->getMenuDao()->enableModuleMenuItems($moduleName, $menuTitles);
     }
 
+    public function disableModuleMenuItems($moduleName, $menuTitles = array()) {
+        return $this->getMenuDao()->disableModuleMenuItems($moduleName, $menuTitles);
+    }
+
     private function _extractMenuItemToArray(MenuItem $menuItem) {
         
         $menu['id'] = $menuItem->getId();

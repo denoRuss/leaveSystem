@@ -101,5 +101,42 @@ class MenuDao {
         
         
     }
+
+
+    public function disableModuleMenuItems($moduleName, $menuTitles = array()) {
+
+        try {
+
+            $query = Doctrine_Query::create()
+                ->from('MenuItem mi')
+                ->leftJoin('mi.Screen sc')
+                ->leftJoin('sc.Module mo')
+                ->andWhere('mo.name = ?', $moduleName);
+            if (!empty($menuTitles)) {
+                $query->andWhereIn('mi.menu_title', $menuTitles);
+            }
+            $menuItemList = $query->execute();
+            $i = 0;
+
+            foreach ($menuItemList as $menuItem) {
+
+                $menuItem->setStatus(MenuItem::STATUS_DISABLED);
+                $menuItem->save();
+                $i++;
+
+            }
+
+            return $i;
+
+            // @codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }
+        // @codeCoverageIgnoreEnd
+
+
+
+
+    }
     
 }

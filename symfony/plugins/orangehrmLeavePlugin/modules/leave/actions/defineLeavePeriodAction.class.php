@@ -124,8 +124,12 @@ class defineLeavePeriodAction extends baseLeaveAction {
                     // Enable leave module menu items the first time leave period is defined
                     if (!$this->isLeavePeriodDefined) {
                         $this->getMenuService()->enableModuleMenuItems('leave');
+
+                        //hide Leave Report Menus (Base code change)
+                        $this->getMenuService()->disableModuleMenuItems('leave',array('Leave Entitlements and Usage Report','My Leave Entitlements and Usage Report'));
+
                     }
-                    
+
                     $this->getUser()->getAttributeHolder()->remove(mainMenuComponent::MAIN_MENU_USER_ATTRIBUTE);
 
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
