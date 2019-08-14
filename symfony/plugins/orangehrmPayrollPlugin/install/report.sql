@@ -45,3 +45,22 @@ INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
 SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
 INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
   (@data_group_id, @view_etf_report_screen_id, 1);
+
+
+
+-- Banking Letter
+INSERT INTO ohrm_screen (name, module_id, action_url) VALUES
+('Banking Letter', @module_id , 'viewBankingLetter');
+
+set @view_banking_letter_screen_id := (SELECT id FROM ohrm_screen WHERE action_url = 'viewBankingLetter');
+
+INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
+('Banking Letter', @view_banking_letter_screen_id , @payroll_report_menu_id, 3, '300', null, 1);
+
+
+INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
+(@admin_role_id, @view_banking_letter_screen_id, 1);
+
+SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
+INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
+  (@data_group_id, @view_banking_letter_screen_id, 1);
