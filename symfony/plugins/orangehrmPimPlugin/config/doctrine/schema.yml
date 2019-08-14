@@ -102,6 +102,7 @@ Employee:
     custom9: string(250)
     custom10: string(250)
     purged_at: timestamp
+    is_excluded: integer(1)
   relations:
     subDivision:
       class: Subunit

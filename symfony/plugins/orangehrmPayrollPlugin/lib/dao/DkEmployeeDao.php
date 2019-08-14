@@ -147,7 +147,8 @@ class DkEmployeeDao extends EmployeeDao
             $conditions[] = "( e.purged_at IS NULL )";
         }
 
-
+        /* Add additional restriction to avoid showing selected employees */
+        $conditions[] = "( e.is_excluded IS NULL )";
 
         /* Build the query */
         $numConditions = 0;

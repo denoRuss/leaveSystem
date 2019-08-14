@@ -76,6 +76,11 @@ EOF;
             for($i=$realStartDateMonth ; $i< $endDateMonth; $i++){
                 echo "process month $i \n";
 
+                //check employee is eligible for salary reports
+                if(!is_null($employeeSalaryRecord->getEmployee()->getIsExcluded())){
+                    continue;
+                }
+
                 //check employee joined at least in processing month
                 $joinedDate = $employeeSalaryRecord->getEmployee()->getJoinedDate();
                 if(!is_null($joinedDate) && $joinedDate> date('Y-m-t',strtotime($year.'-'.$i.'-01'))){

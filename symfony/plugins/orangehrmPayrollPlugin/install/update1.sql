@@ -1,0 +1,1 @@
+ALTER TABLE `hs_hr_employee` ADD `is_excluded` TINYINT NULL DEFAULT NULL AFTER `purged_at`;
