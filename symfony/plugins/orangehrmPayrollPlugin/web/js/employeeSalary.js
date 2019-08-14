@@ -115,7 +115,7 @@ $(document).ready(function () {
         for(i=0;i<taxBracketList.length;i++){
             var taxBracket = taxBracketList[i];
             if(taxBracket.lower_bound<=value && value<=taxBracket.upper_bound){
-                var tax= value*taxBracket.percentage/100;
+                var tax= taxBracket.percentage;
 
                 if(MAX_SALARY < orginalValue){
                     tax += (orginalValue-MAX_SALARY)*MAX_SALARY_TAX_PERCENTAGE/100;

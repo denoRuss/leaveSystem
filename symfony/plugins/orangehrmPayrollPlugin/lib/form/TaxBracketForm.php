@@ -115,7 +115,7 @@ class TaxBracketForm extends sfForm {
         $labels = array(
             'lower_bound' => __('Lower Bound') . $requiredLabelSuffix,
             'upper_bound' => __('Upper Bound') . $requiredLabelSuffix,
-            'percentage' => __('Percentage') . $requiredLabelSuffix,
+            'percentage' => __('Tax Value') . $requiredLabelSuffix,
         );
 
         return $labels;

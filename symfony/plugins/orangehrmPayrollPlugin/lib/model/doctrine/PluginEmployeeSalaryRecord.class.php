@@ -24,14 +24,14 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
         if($salary<=self::MAX_SALARY){
             $taxBracket = $this->getSalaryService()->getMatchingTaxBracket($salary);
             if ($taxBracket instanceof TaxBracket){
-                $tax= $salary*$taxBracket->getPercentage()/100;
+                $tax= $taxBracket->getPercentage();
                 return $this->valueFormatter($tax);
             }
         }
         else{
             $taxBracket = $this->getSalaryService()->getMatchingTaxBracket(self::MAX_SALARY);
             if ($taxBracket instanceof TaxBracket){
-                $tax= (self::MAX_SALARY*$taxBracket->getPercentage()/100)+(($salary-self::MAX_SALARY)*self::MAX_SALARY_TAX_PERCENTAGE/100);
+                $tax= $taxBracket->getPercentage()+(($salary-self::MAX_SALARY)*self::MAX_SALARY_TAX_PERCENTAGE/100);
                 return $this->valueFormatter($tax);
             }
         }

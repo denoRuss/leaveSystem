@@ -50,7 +50,7 @@ $(document).ready(function() {
             },
             'tax_bracket[percentage]': {
                 required: true,
-                fourDecimals:true
+                twoDecimals:true
 
             },
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
             },
             'tax_bracket[percentage]': {
                 required: lang_Required,
-                fourDecimals: lang_salaryShouldBeNumeric,
+                twoDecimals: lang_salaryShouldBeNumeric,
             },
 
         },

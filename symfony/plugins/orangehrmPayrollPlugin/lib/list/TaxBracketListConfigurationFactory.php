@@ -57,7 +57,7 @@ class TaxBracketListConfigurationFactory extends ohrmListConfigurationFactory {
         $header = new ListHeader();
         $header->populateFromArray(array(
             'width' => '10%',
-            'name' => 'Percentage',
+            'name' => 'Tax value',
             'elementType' => 'label',
             'filters' => array('I18nCellFilter' => array()),
             'elementProperty' => array('getter' => 'getPercentage'),
