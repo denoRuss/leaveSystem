@@ -69,8 +69,8 @@ class viewBankingLetterAction extends basePayrollAction
 								<td>".$employee->getFirstName().' '.$employee->getLastName()."</td>
 								<td style='text-align: right'>{$result->dispalyTotalNetsalary()}</td>
 								<td class='account-no-row'>{$employee->getCustom1()}</td>
-								<td class='account-no-row'>{$employee->getCustom2()}</td>
-								<td >{$employee->getCustom3()}</td>
+								<td class='bank-row'>{$employee->getCustom2()}</td>
+								<td class='branch-row'>{$employee->getCustom3()}</td>
 							</tr>";
         }
 
