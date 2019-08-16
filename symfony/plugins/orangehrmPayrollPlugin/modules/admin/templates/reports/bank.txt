@@ -287,8 +287,13 @@
 	}
 	.total-row-label{
 		 font-weight: 700;
-		 text-align: right;
+		 text-align: left;
 	 }
+	 .total-row-value{
+	    font-weight: 700;
+        text-align: right;
+	 }
+
 
 
 

@@ -77,7 +77,7 @@ class viewBankingLetterAction extends basePayrollAction
         $totalPayment = number_format($totalPayment,2);
         $tableBodyContent .="<tr>
 								<td class='total-row-label'>TOTAL</td>
-							    <td class='total-row-label'>{$totalPayment}</td>
+							    <td class='total-row-value'>{$totalPayment}</td>
 								<td ></td>
 								<td ></td>
 								<td ></td>
