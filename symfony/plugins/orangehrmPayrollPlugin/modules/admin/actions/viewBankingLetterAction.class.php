@@ -94,7 +94,7 @@ class viewBankingLetterAction extends basePayrollAction
             '/#addressDate/'
 
         );
-        $addressDate = date('jS F Y',strtotime($publishDate));
+        $addressDate = date('jS F Y');
         $bankLetterReplacementValues  = array($tableBodyContent,date('d.m.Y',strtotime($publishDate)),$addressDate);
 
         $htmlContent = preg_replace($bankLetterReplacementKeys, $bankLetterReplacementValues, $bankLetterTemplate);
