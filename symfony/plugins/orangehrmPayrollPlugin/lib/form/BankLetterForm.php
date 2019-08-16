@@ -34,7 +34,7 @@ class BankLetterForm extends sfForm
     public function getFormLabels(){
         $requiredLabelSuffix = ' <span class="required">*</span>';
         $labels = array();
-        $labels['publishDate'] = __('Publish Date').$requiredLabelSuffix;
+        $labels['publishDate'] = __('Transaction Date').$requiredLabelSuffix;
 
         return $labels;
     }
