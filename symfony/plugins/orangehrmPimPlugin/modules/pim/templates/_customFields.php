@@ -19,7 +19,8 @@ if (!empty($customFieldList) && (count($customFieldList) > 0)) {
         <a name="custom"> </a>
         <?php if ($permission->canRead()) { ?>
         <div class="single">
-            <div class="head"><h1><?php echo __('Custom Fields'); ?></h1></div>
+<!--            BASE CODE CHANGE-->
+            <div class="head"><h1><?php echo __('Bank Details'); ?></h1></div>
             
             <div class="inner">
                 
