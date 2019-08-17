@@ -17,7 +17,7 @@ class viewBankingLetterAction extends basePayrollAction
                 try {
 
                     $pdf = new PDFWrapper();
-                    $pdf->setHtml($this->getHtmlForReport($postData['publishDate']));
+                    $pdf->setHtml($this->getHtmlForReport($postData['publishDate'],$postData['year'],$postData['month']));
                     $pdf->generatePDF();
                     $fileName = $this->getFileName($postData['publishDate']);
 
@@ -39,13 +39,17 @@ class viewBankingLetterAction extends basePayrollAction
         }
     }
 
-    public function getHtmlForReport($publishDate){
+    public function getHtmlForReport($publishDate,$year=null,$month=null){
 
 
 
+        if(is_null($year)){
+            $year = date('Y');
+        }
+        if(is_null($month)){
+            $month = date('m');
+        }
 
-        $year = date('Y');
-        $month = date('m');
 
         $searchParams = array('year'=>$year,'month'=>$month);
 

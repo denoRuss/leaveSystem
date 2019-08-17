@@ -48,7 +48,9 @@
 
             if($("#search_form").valid()){
                 var publishDate = $("#publishDate").val();
-                window.open(bankLetterGenerateUrl+'?publishDate='+publishDate);
+                var year = $('#bankletter_year').val();
+                var month = $('#bankletter_month').val();
+                window.open(bankLetterGenerateUrl+'?publishDate='+publishDate+'&year='+year+'&month='+month);
             }
 
         });
@@ -62,7 +64,7 @@
         var validator = $("#search_form").validate(
             {
                 rules: {
-                    'report[publishDate]': {
+                    'bankletter[publishDate]': {
                         required: true,
                         valid_date: function() {
                             return {
@@ -74,7 +76,7 @@
                     }
                 },
                 messages: {
-                    'report[calFromDate]': {
+                    'bankletter[publishDate]': {
                         required:lang_invalidDate,
                         valid_date: lang_invalidDate
                     }
