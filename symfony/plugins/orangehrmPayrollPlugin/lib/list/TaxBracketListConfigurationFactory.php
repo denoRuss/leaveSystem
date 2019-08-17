@@ -38,6 +38,8 @@ class TaxBracketListConfigurationFactory extends ohrmListConfigurationFactory {
             'width' => '40%',
             'name' => 'Lower bound',
             'elementType' => 'label',
+            'sortField' => 'lower_bound',
+            'isSortable' => true,
             'filters' => array('I18nCellFilter' => array()),
             'elementProperty' => array('getter' => 'getLowerBound'),
         ));
@@ -48,6 +50,9 @@ class TaxBracketListConfigurationFactory extends ohrmListConfigurationFactory {
             'width' => '40%',
             'name' => 'Upper bound',
             'elementType' => 'label',
+            'elementType' => 'label',
+            'sortField' => 'upper_bound',
+            'isSortable' => true,
             'filters' => array('I18nCellFilter' => array()),
             'elementProperty' => array('getter' => 'getUpperBound'),
         ));

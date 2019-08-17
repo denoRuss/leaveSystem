@@ -8,7 +8,7 @@ class viewTaxBracketListAction extends viewSalaryTypeListAction
         if (!$this->getUser()->getAttribute('user')->isAdmin()) {
             $this->redirect('default/secure');
         }
-        $sortField= $request->getParameter('sortField','id');
+        $sortField= $request->getParameter('sortField','lower_bound');
         $sortOrder = $request->getParameter('sortOrder','ASC');
         $list = $this->getSalaryService()->getTaxBracketList($sortField,$sortOrder);
         $this->setListComponent($list);
