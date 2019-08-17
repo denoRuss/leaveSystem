@@ -123,13 +123,13 @@ $(document).ready(function () {
 
                 $("#employee_salary_record_monthly_basic_tax").val(tax.toFixed(2));
 
-                var epf = value*EPF_Percentage/100;
+                var epf = orginalValue*EPF_Percentage/100;
                 $("#employee_salary_record_monthly_epf_deduction").val(epf.toFixed(2));
 
-                var companyepf = value*COMPANY_EPF_Percentage/100;
+                var companyepf = orginalValue*COMPANY_EPF_Percentage/100;
                 $("#employee_salary_record_company_epf_deduction").val(companyepf.toFixed(2));
 
-                var etf = value*ETF_Percentage/100;
+                var etf = orginalValue*ETF_Percentage/100;
                 $("#employee_salary_record_monthly_etf_deduction").val(etf.toFixed(2));
                 return true;
             }
