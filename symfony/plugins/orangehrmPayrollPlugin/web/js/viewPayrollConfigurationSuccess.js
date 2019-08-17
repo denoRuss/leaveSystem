@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     //hide unused menu
     $("#payroll_configuration_nopay_leave_deduction").parent().hide();
+    $("#payroll_configuration_leave_type_id").parent().hide();
 
     var validator = $('#frmPayrollConfiguration').validate({
         rules: {
