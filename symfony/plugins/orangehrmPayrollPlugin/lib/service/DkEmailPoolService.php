@@ -41,12 +41,12 @@ class DkEmailPoolService
 //                $payslipUrl = $this->getConfigDao()->getValue('domain.name')."/admin/viewEmployeePayslip?empNumber=" . $salaryHistoryItem->getEmployee()->getEmpNumber()
 //                    . "&id=" . $salaryHistoryItem->getId()."&mode=view";
 
-                $payslipUrl = $this->getConfigDao()->getValue('domain.name');
+//                $payslipUrl = $this->getConfigDao()->getValue('domain.name');
 
                 $startDate = $year.'-'.$month.'-01';
                 $bodyTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/mail/en_US/makePaymentBody.txt");
-                $bodyReplacementKeys = array('/#employeeFullName/', '/#month/', '/#year/','/#link/');
-                $bodyReplacementValues = array($salaryHistoryItem->getEmployee()->getFullName(),date("F", strtotime($startDate)),$year,$payslipUrl);
+                $bodyReplacementKeys = array('/#employeeFullName/', '/#month/', '/#year/');
+                $bodyReplacementValues = array($salaryHistoryItem->getEmployee()->getFullName(),date("F", strtotime($startDate)),$year);
 
 
 
