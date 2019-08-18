@@ -43,13 +43,8 @@ class viewBankingLetterAction extends basePayrollAction
 
 
 
-        if(is_null($year)){
-            $year = date('Y');
-        }
-        if(is_null($month)){
-            $month = date('m');
-        }
-
+        $year = date('Y',strtotime($publishDate));
+        $month = date('m',strtotime($publishDate));
 
         $searchParams = array('year'=>$year,'month'=>$month);
 

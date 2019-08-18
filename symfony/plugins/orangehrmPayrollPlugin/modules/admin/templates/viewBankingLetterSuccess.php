@@ -33,6 +33,10 @@
 
 
 <script>
+
+    $('#bankletter_year').parent().hide();
+    $('#bankletter_month').parent().hide();
+    
     var bankLetterGenerateUrl = '<?php echo $letterGenerateUrl; ?>';
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var datepickerDateFormat = '<?php echo get_datepicker_date_format($sf_user->getDateFormat()); ?>';
