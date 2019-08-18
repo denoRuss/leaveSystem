@@ -6,7 +6,7 @@ set @admin_role_id := (SELECT id FROM ohrm_user_role WHERE name = 'Admin');
 set @parent_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Payroll');
 
 INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
-('Report', null , @parent_menu_id, 2, '500', null, 1);
+('Reports', null , @parent_menu_id, 2, '500', null, 1);
 
 set @payroll_report_menu_id := (SELECT id FROM ohrm_menu_item WHERE menu_title = 'Report' AND parent_id = @parent_menu_id);
 
