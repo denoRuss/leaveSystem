@@ -13,6 +13,8 @@ class ReportSearchForm extends sfForm
 
     public function getFormWidgets(){
         $widgets = array();
+
+        $widgets['checkNo'] = new sfWidgetFormInputText(array(), array('class' => 'formInputText'));
         $widgets['calFromDate'] = new ohrmWidgetDatePicker(array(), array('id' => 'calFromDate'));
         $widgets['calToDate'] = new ohrmWidgetDatePicker(array(), array('id' => 'calToDate'));
 
@@ -25,6 +27,8 @@ class ReportSearchForm extends sfForm
         $inputDatePattern = sfContext::getInstance()->getUser()->getDateFormat();
 
         $validators = array();
+
+        $validators['checkNo'] = new sfValidatorString(array('required' => true));
 
         $validators['calFromDate'] = new ohrmDateValidator(
             array('date_format' => $inputDatePattern, 'required' => true),
@@ -41,6 +45,7 @@ class ReportSearchForm extends sfForm
         $requiredLabelSuffix = ' <span class="required">*</span>';
 
         $labels = array();
+        $labels['checkNo'] = __('CHEQUE NO').$requiredLabelSuffix;
         $labels['calFromDate'] = __('From').$requiredLabelSuffix;
         $labels['calToDate'] = __('To').$requiredLabelSuffix;
 

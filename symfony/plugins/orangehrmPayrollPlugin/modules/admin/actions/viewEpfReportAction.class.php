@@ -17,7 +17,7 @@ class viewEpfReportAction extends basePayrollAction
                 try {
 
                     $pdf = new PDFWrapper();
-                    $pdf->setHtml($this->getHtmlForReport($postData['calFromDate'],$postData['calToDate']));
+                    $pdf->setHtml($this->getHtmlForReport($postData['checkNo'],$postData['calFromDate'],$postData['calToDate']));
                     $pdf->generatePDF();
                     $fileName = $this->getFileName($postData['calFromDate'],$postData['calToDate'],'EPF');
 
@@ -49,7 +49,7 @@ class viewEpfReportAction extends basePayrollAction
         return $reportType.'_'.$fromDate.'_to_'.$toDate.$ext;
     }
 
-    public function getHtmlForReport($from,$to=null){
+    public function getHtmlForReport($checkNo,$from,$to=null){
 
         $startYear = date('Y',strtotime($from));
         $startMonth = date('m',strtotime($from));
@@ -106,12 +106,15 @@ class viewEpfReportAction extends basePayrollAction
             '/#monthAndYear/',
             '/#totalCompanyContribution/',
             '/#tableBodyContent/',
+            '/#checkNo/',
 
         );
         $epfReportReplacementValues  = array(
             $monthAndYear,
             number_format($totalCompanyContribution,2),
-            $tableBodyContent);
+            $tableBodyContent,
+            $checkNo
+            );
 
         $htmlContent = preg_replace($epfReportReplacementKeys, $epfReportReplacementValues, $epfReportTemplate);
 

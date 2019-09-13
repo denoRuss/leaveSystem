@@ -35,7 +35,7 @@
 				</div>
 				<div class="entry">
                     <div class="label" style="display: inline-block">CHEQUE NO</div>
-                    <div class="value " style="display: inline-block;float: right">610070</div>
+                    <div class="value " style="display: inline-block;float: right">#checkNo</div>
                     <br>
                 </div>
                 <div class="entry" ">

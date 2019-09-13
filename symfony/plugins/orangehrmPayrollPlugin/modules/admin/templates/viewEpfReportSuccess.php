@@ -49,7 +49,8 @@
             if($("#search_form").valid()){
                 var fromDate = $("#calFromDate").val();
                 var toDate = $("#calToDate").val();
-                window.open(epfGenerateUrl+'?from='+fromDate+'&to='+toDate);
+                var checkNo = $("#report_checkNo").val();
+                window.open(epfGenerateUrl+'?from='+fromDate+'&to='+toDate+'&checkNo='+checkNo);
             }
 
         });
@@ -63,6 +64,9 @@
         var validator = $("#search_form").validate(
             {
                 rules: {
+                    'report[checkNo]': {
+                        required: true,
+                    },
                     'report[calFromDate]': {
                         required: true,
                         valid_date: function() {
@@ -92,6 +96,9 @@
                     }
                 },
                 messages: {
+                    'report[checkNo]': {
+                        required:lang_Required,
+                    },
                     'report[calFromDate]': {
                         required:lang_invalidDate,
                         valid_date: lang_invalidDate
