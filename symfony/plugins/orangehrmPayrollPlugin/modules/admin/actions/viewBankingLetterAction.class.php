@@ -84,7 +84,6 @@ class viewBankingLetterAction extends basePayrollAction
 
 
 
-        $epfReportTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/reports/etf.txt");
         $bankLetterTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/reports/bank.txt");
 
         $bankLetterReplacementKeys = array(
