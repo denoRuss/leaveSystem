@@ -19,24 +19,29 @@
 			</div>
 			<div class="details">
 				<div class="entry">
-					<div class="label">E.P.F REGISTRATION NO </div>
-					<div class="value">D16640</div>
+					<div class="label" style="display: inline-block">E.P.F REGISTRATION NO </div>
+					<div class="value" style="display: inline-block;float: right">D16640</div>
+					<br>
 				</div>
 				<div class="entry">
-					<div class="label">MONTH AND YEAR OF CONTRIBUTION </div>
-					<div class="value">#monthAndYear</div>
+					<div class="label" style="display: inline-block">MONTH AND YEAR OF CONTRIBUTION </div>
+					<div class="value" style="display: inline-block;float: right">#monthAndYear</div>
+					<br>
 				</div>
 				<div class="entry">
-					<div class="label">CONTRIBUTION</div>
-					<div class="value">#totalCompanyContribution</div>
+					<div class="label" style="display: inline-block">CONTRIBUTION</div>
+					<div class="value" style="display: inline-block;float: right">#totalCompanyContribution</div>
+					<br>
 				</div>
 				<div class="entry">
-                    <div class="label">CHEQUE NO</div>
-                    <div class="value ">610070</div>
+                    <div class="label" style="display: inline-block">CHEQUE NO</div>
+                    <div class="value" style="display: inline-block;float: right">610070</div>
+                    <br>
                 </div>
-                <div class="entry" ">
-                    <div class="label">BANK NAME AND BRANCH NAME </div>
-                    <div class="value ">COMMERCIAL BANK , KIRULAPONE</div>
+                <div class="entry">
+                    <div class="label" style="display: inline-block">BANK NAME AND BRANCH NAME </div>
+                    <div class="value" style="display: inline-block;float: right">COMMERCIAL BANK , KIRULAPONE</div>
+                    <br>
                  </div>
 			</div>
 			<div class="contributions">
@@ -65,19 +70,20 @@
 					    <p>.........................</p>
 					    SIGNATURE OF EMPLOYER
 					 </div>
+					 <br><br>
 				</div>
 				<div class="entry">
-					<div class="label">TELEPHONE: </div>
-					<div class="value">0112822769/0112822762</div>
+					<div class="label" style="display: inline-block">TELEPHONE: </div>
+					<div class="value" style="display: inline-block;float: right">0112822769/0112822762</div>
 				</div>
 				<div class="entry">
-					<div class="label">FAX:</div>
-					<div class="value">0112822769/0112822762</div>
+					<div class="label" style="display: inline-block">FAX: </div>
+					<div class="value" style="display: inline-block;float: right">0112822769/0112822762</div>
 				</div>
 				<div class="entry">
-                					<div class="label">EMAIL :</div>
-                					<div class="value">aruni.abeysinghe@diakonia.se</div>
-                				</div>
+                    <div class="label" style="display: inline-block">EMAIL: </div>
+                    <div class="value" style="display: inline-block;float: right">aruni.abeysinghe@diakonia.se</div>
+                </div>
 
 			</div>
 
