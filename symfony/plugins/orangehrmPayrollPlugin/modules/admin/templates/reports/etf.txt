@@ -30,6 +30,14 @@
 					<div class="label">CONTRIBUTION</div>
 					<div class="value">#totalCompanyContribution</div>
 				</div>
+				<div class="entry">
+                    <div class="label">CHEQUE NO</div>
+                    <div class="value ">610070</div>
+                </div>
+                <div class="entry" ">
+                    <div class="label">BANK NAME AND BRANCH NAME </div>
+                    <div class="value ">COMMERCIAL BANK , KIRULAPONE</div>
+                 </div>
 			</div>
 			<div class="contributions">
 				<div class="title">Employer Contribution</div>

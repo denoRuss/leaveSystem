@@ -24,12 +24,20 @@
 				</div>
 				<div class="entry">
 					<div class="label">MONTH AND YEAR OF CONTRIBUTION </div>
-					<div class="value">#monthAndYear</div>
+					<div class="value ">#monthAndYear</div>
 				</div>
 				<div class="entry">
 					<div class="label">CONTRIBUTION</div>
-					<div class="value">#totalCompanyContribution</div>
+					<div class="value ">#totalCompanyContribution</div>
 				</div>
+				<div class="entry">
+                    <div class="label">CHEQUE NO</div>
+                    <div class="value ">610070</div>
+                </div>
+                <div class="entry" ">
+                    <div class="label">BANK NAME AND BRANCH NAME </div>
+                    <div class="value ">COMMERCIAL BANK , KIRULAPONE</div>
+                 </div>
 			</div>
 			<div class="contributions">
 				<div class="title">Employer Contribution</div>
@@ -175,7 +183,7 @@
 	}
 
 	.details .entry, .contributions .entry, .ytd .entry {
-		/*display: flex;*/
+		display: flex;
 		justify-content: space-between;
 		margin-bottom: 6px;
 	}
@@ -291,6 +299,12 @@
     .sub-header{
         text-align: center;
     }
-
+    .label{
+        display: inline;
+    }
+    .label-value{
+        display: inline;
+        float: right;
+    }
 
 </style>
