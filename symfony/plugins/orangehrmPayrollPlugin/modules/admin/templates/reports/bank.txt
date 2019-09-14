@@ -57,11 +57,11 @@
             <br><br><br><br>
 			<div class="contributions">
 				<div class="entry" style="display: inline-block">
-					<div class="label">Frank Stephen</div>
+					<div class="label">Frank Davis</div>
 					<div class="label">Country Manager</div>
 				</div>
 				<div class="entry" style="display: inline-block;float: right">
-					<div class="label">Aruni Abeysinghe</div>
+					<div class="label">Amal Perera</div>
 					<div class="label">Finance and Administration Officer</div>
 				</div>
 			</div>
