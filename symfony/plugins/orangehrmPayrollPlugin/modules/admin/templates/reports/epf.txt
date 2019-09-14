@@ -11,16 +11,16 @@
 		<div class="left-panel">
 			<div id="employee">
 				<div id="name">
-					DIAKONIA SRI LANKA
+					IteqHub Inc
 				</div>
 				<div id="email">
-					NO 143/1,S D S JAYASINGHE MAWATHA, NUGEGODA.
+					NO 14/1,MAIN STREET, COLOMBO.
 				</div>
 			</div>
 			<div class="details">
 				<div class="entry">
 					<div class="label" style="display: inline-block">E.P.F REGISTRATION NO </div>
-					<div class="value" style="display: inline-block;float: right">D16640</div>
+					<div class="value" style="display: inline-block;float: right">A70707</div>
 					<br>
 				</div>
 				<div class="entry">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="entry" ">
                     <div class="label" style="display: inline-block">BANK NAME AND BRANCH NAME </div>
-                    <div class="value " style="display: inline-block;float: right">COMMERCIAL BANK , KIRULAPONE</div>
+                    <div class="value " style="display: inline-block;float: right">COMMERCIAL BANK , COLOMBO</div>
                     <br>
                  </div>
 			</div>
@@ -81,15 +81,15 @@
 				</div>
 				<div class="entry">
 					<div class="label" style="display: inline-block">TELEPHONE: </div>
-					<div class="value" style="display: inline-block;float: right">0112822769/0112822762</div>
+					<div class="value" style="display: inline-block;float: right">0112333333/0112444444</div>
 				</div>
 				<div class="entry">
 					<div class="label" style="display: inline-block">FAX:</div>
-					<div class="value" style="display: inline-block;float: right">0112822769/0112822762</div>
+					<div class="value" style="display: inline-block;float: right">0112333333/0112444444</div>
 				</div>
 				<div class="entry">
                     <div class="label" style="display: inline-block">EMAIL :</div>
-                    <div class="value" style="display: inline-block;float: right">aruni.abeysinghe@diakonia.se</div>
+                    <div class="value" style="display: inline-block;float: right">hrcontact@iteqhub.com</div>
                 </div>
 
 			</div>
