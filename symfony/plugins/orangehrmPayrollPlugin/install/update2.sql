@@ -21,3 +21,7 @@ INSERT INTO ohrm_user_role_screen (user_role_id,screen_id, can_read) VALUES
 SET @data_group_id := (SELECT id FROM ohrm_data_group WHERE name = 'Payroll');
 INSERT INTO ohrm_data_group_screen (data_group_id, screen_id, permission) VALUES
   (@data_group_id, @view_banking_letter_screen_id, 1);
+
+
+-- menu issue fix
+update ohrm_menu_item set parent_id = 109 where id > 109;
