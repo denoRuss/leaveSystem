@@ -95,6 +95,13 @@ abstract class PluginEmployeeSalaryHistory extends BaseEmployeeSalaryHistory
         return number_format($this->getTotalNetsalary(),2);
     }
 
+    public function displayMonthlyBasic(){
+        return number_format($this->getMonthlyBasic(),2);
+    }
+
+
+
+
     public function valueFormatter($value){
         return number_format($value,2,'.','');
     }

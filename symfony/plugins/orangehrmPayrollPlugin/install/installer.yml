@@ -1,3 +1,3 @@
 plugin_name: orangehrmPayrollPlugin
-dbscript_path: {0: install/dbscript.sql, 1: install/hide_menu.sql, 2: install/email.sql, 3: install/report.sql, 4: install/update1.sql }
+dbscript_path: {0: install/dbscript.sql, 1: install/hide_menu.sql, 2: install/email.sql, 3: install/report.sql, 4: install/update1.sql, 5: install/update2.sql }
 symfony_commands: { 0: php symfony orangehrm:publish-assets,1: php symfony doctrine:build-model,2: php symfony cc}
