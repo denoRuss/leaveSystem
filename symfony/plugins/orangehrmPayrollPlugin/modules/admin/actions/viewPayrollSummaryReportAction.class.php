@@ -173,7 +173,7 @@ class viewPayrollSummaryReportAction extends basePayrollAction
             }
             $totalPayment =$totalPayment + $result->getTotalNetsalary();
             $csvRow = array();
-            $csvRow[] = $employee->getFirstName().' '.$employee->getLastName(); //NAME
+            $csvRow[] = $employee->getCustom4() ? $employee->getCustom4():$employee->getFirstName().' '.$employee->getLastName(); //NAME
             $csvRow[] = $result->displayMonthlyBasic(); //BASIC SALARY
             $csvRow[] = $result->displayTotalEarnings(); //GROSS SALARY TODO
             $csvRow[] = $result->displayMonthlyEpfDeduction(); //EPF 8%
