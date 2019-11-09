@@ -419,7 +419,8 @@ class DkSalaryDao
         try {
 
             $sql = "SELECT sum(h.company_epf_deduction) as employerContribution, sum(h.monthly_epf_deduction)  as employeeContribution, h.total_earning as totalEarning, 
-                    h.emp_number as empNumber, e.emp_firstname as firstName, e.emp_lastname as lastName, e.employee_id as memberNo, e.emp_dri_lice_num as nic
+                    h.emp_number as empNumber, e.emp_firstname as firstName, e.emp_lastname as lastName, e.employee_id as memberNo, e.emp_dri_lice_num as nic,
+                    e.custom4 as reportName
                     FROM `dk_employee_salary_history` h
                     LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
                     WHERE h.`year` >= ? AND h.`month` >= ? AND h.year <= ? AND h.month <= ?
@@ -449,7 +450,8 @@ class DkSalaryDao
         try {
 
             $sql = "SELECT sum(h.monthly_etf_deduction) as etfContribution, 
-                    h.emp_number as empNumber, e.emp_firstname as firstName, e.emp_lastname as lastName, e.employee_id as memberNo, e.emp_dri_lice_num as nic
+                    h.emp_number as empNumber, e.emp_firstname as firstName, e.emp_lastname as lastName, e.employee_id as memberNo, e.emp_dri_lice_num as nic,
+                    e.custom4 as reportName
                     FROM `dk_employee_salary_history` h
                     LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
                     WHERE h.`year` >= ? AND h.`month` >= ? AND h.year <= ? AND h.month <= ?

@@ -69,10 +69,11 @@ class viewEpfReportAction extends basePayrollAction
         $totalCompanyContribution = 0;
         $tableBodyContent = '';
         foreach ($results as $result){
+            $formattedEmployeeName = empty($result['reportName']) ? $result['lastName'].' '.$result['firstName'] : $result['reportName'];
             $totalContPerEmployee = $result['employerContribution']+$result['employeeContribution'];
             $totalCompanyContribution =$totalCompanyContribution + $totalContPerEmployee;
             $tableBodyContent .="<tr>
-								<td>".$result['lastName'].' '.$result['firstName']."</td>
+								<td>".$formattedEmployeeName."</td>
 								<td>{$result['nic']}</td>
 								<td>{$result['memberNo']}</td>
 								<td class='total-row-value'>".number_format($totalContPerEmployee,2)."</td>

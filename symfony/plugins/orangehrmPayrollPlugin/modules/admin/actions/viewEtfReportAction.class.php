@@ -69,10 +69,11 @@ class viewEtfReportAction extends basePayrollAction
         $totalCompanyContribution = 0;
         $tableBodyContent = '';
         foreach ($results as $result){
+            $formattedEmployeeName = empty($result['reportName']) ? $result['lastName'].' '.$result['firstName'] : $result['reportName'];
             $totalContPerEmployee = $result['etfContribution'];
             $totalCompanyContribution =$totalCompanyContribution + $totalContPerEmployee;
             $tableBodyContent .="<tr>
-								<td>".$result['lastName'].' '.$result['firstName']."</td>
+								<td>".$formattedEmployeeName."</td>
 								<td>{$result['nic']}</td>
 								<td class='nic-value-col'>{$result['memberNo']}</td>
 								<td class='contribution-value-col'>".number_format($totalContPerEmployee,2)."</td>
