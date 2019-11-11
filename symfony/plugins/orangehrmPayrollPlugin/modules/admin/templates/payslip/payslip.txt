@@ -27,10 +27,6 @@
 					<div class="label">Company Name</div>
 					<div class="value">#companyName</div>
 				</div>
-				<div class="entry">
-					<div class="label">Date Hired</div>
-					<div class="value">#joinedDate</div>
-				</div>
 
 				<div class="entry">
 					<div class="label">Payroll Cycle</div>

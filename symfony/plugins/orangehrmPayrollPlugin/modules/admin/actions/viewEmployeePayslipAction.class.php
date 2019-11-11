@@ -52,7 +52,6 @@ class viewEmployeePayslipAction extends basePayrollAction
             '/#year/',
             '/#employeeId/',
             '/#companyName/',
-            '/#joinedDate/',
             '/#grossIncome/',
             '/#companyEPFPercentage/',
             '/#companyEPFDeduction/',
@@ -89,8 +88,7 @@ class viewEmployeePayslipAction extends basePayrollAction
         $organization = $this->getOrganizationService()->getOrganizationGeneralInformation();
         $payslipReplacementValues[] =  $organization instanceof Organization? $organization->getName():'';
 
-        $joinedDate = $employeeSalaryHistoryRecord->getEmployee()->getJoinedDate();
-        $payslipReplacementValues[] = is_null($joinedDate)?'Not Defined':date('F d, Y',strtotime($joinedDate));
+
 
         $payslipReplacementValues[] = $employeeSalaryHistoryRecord->displayTotalEarnings();
 
