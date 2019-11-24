@@ -161,10 +161,13 @@ class viewPayrollSummaryReportAction extends basePayrollAction
         $bankLetterTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/reports/payrollsummary.txt");
 
         $bankLetterReplacementKeys = array(
-            '/#tableBodyContent/'
+            '/#tableBodyContent/',
+            '/#month/'
 
         );
-        $bankLetterReplacementValues  = array($tableBodyContent);
+
+        $monthName = date('F Y',strtotime($year.'-'.$month.'-01'));
+        $bankLetterReplacementValues  = array($tableBodyContent,$monthName);
 
         $htmlContent = preg_replace($bankLetterReplacementKeys, $bankLetterReplacementValues, $bankLetterTemplate);
 
