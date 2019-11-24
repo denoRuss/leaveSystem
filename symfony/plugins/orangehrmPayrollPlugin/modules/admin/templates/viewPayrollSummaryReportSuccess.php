@@ -18,7 +18,7 @@
                 <p>
 <!--                    <input type="button" id="viewBtn" value="--><?php //echo __("View") ?><!--" name="view" />-->
                     <!--                    <input type="button" class="reset" id="resetBtn" value="--><?php //echo __("Reset") ?><!--" name="_reset" />-->
-                    <input type="button" id="downloadBtn" value="<?php echo __("Download") ?>" name="download" />
+                    <input type="button" id="downloadBtn" value="<?php echo __("Download as CSV") ?>" name="download" />
                     <input type="button" id="downloadPdfBtn" value="<?php echo __("Download as PDF") ?>" name="downloadPdf" />
                     <input type="button" id="viewPdfBtn" value="<?php echo __("View as PDF") ?>" name="viewPdf" />
                 </p>
