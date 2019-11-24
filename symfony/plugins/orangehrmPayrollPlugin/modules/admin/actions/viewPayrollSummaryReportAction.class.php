@@ -104,17 +104,17 @@ class viewPayrollSummaryReportAction extends basePayrollAction
             $totalPayment =$totalPayment + $result->getTotalNetsalary();
             $employeeName = $employee->getCustom4() ? $employee->getCustom4():$employee->getFirstName().' '.$employee->getLastName();
 
-            $tableBodyContent .="<tr>
-                                    <td>{$employeeName}</td>
-                                    <td>{$result->displayMonthlyBasic()}</td>
-                                    <td>{$result->displayTotalEarnings()}</td>
-                                    <td>{$result->displayMonthlyEpfDeduction()}</td>
-                                    <td>{$result->displayMonthlyBasicTax()}</td>
+            $tableBodyContent .="<tr >
+                                    <td style='padding-bottom: 1.5em;'>{$employeeName}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasic()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayTotalEarnings()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyEpfDeduction()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasicTax()}</td>
                                     
-                                    <td>{$result->dispalyTotalDeduction()}</td>
-                                    <td>{$result->displayCompanyEpfDeduction()}</td>
-                                    <td>{$result->displayMonthlyEtfDeduction()}</td>
-                                    <td>{$result->displayTotalNetsalary()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->dispalyTotalDeduction()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayCompanyEpfDeduction()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyEtfDeduction()}</td>
+                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayTotalNetsalary()}</td>
                                 </tr>";
 
 
@@ -145,14 +145,14 @@ class viewPayrollSummaryReportAction extends basePayrollAction
 
         $tableBodyContent .="<tr>
                                 <td></td>
-                                <td>{$totalRow[1]}</td>
-                                <td>{$totalRow[2]}</td>
-                                <td>{$totalRow[3]}</td>
-                                <td>{$totalRow[4]}</td>
-                                <td>{$totalRow[5]}</td>
-                                <td>{$totalRow[6]}</td>
-                                <td>{$totalRow[7]}</td>
-                                <td>{$totalRow[8]}</td>
+                                <td style='text-align: right;font-weight: bolder';padding-right: 5px>{$totalRow[1]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[2]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[3]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[4]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[5]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[6]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[7]}</td>
+                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[8]}</td>
                                 
         </tr>
         ";
