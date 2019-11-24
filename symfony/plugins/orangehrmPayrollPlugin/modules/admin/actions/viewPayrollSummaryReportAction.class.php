@@ -19,6 +19,9 @@ class viewPayrollSummaryReportAction extends basePayrollAction
                 try {
 
                     $csvExport = true;
+                    if($hdnAction=='view'){
+                        $csvExport = false;
+                    }
                     if($csvExport){
 
                         $csvContent = $this->getCsvForReport($postData);
@@ -68,7 +71,7 @@ class viewPayrollSummaryReportAction extends basePayrollAction
     }
 
 
-    public function getHtmlForReport($publishDate,$year=null,$month=null){
+    public function getHtmlForReport($year=null,$month=null){
 
         $searchParams = array('year'=>$year,'month'=>$month);
 
@@ -76,6 +79,16 @@ class viewPayrollSummaryReportAction extends basePayrollAction
 
         $totalPayment = 0;
         $tableBodyContent = '';
+
+        $basicSalSum = 0;
+        $grossSalSum = 0;
+        $epf8SalSum = 0;
+        $payeeTaxSum = 0;
+        $totalDeductionSum = 0;
+        $epf12Sum = 0;
+        $etf3Sum = 0;
+        $netSalarySum = 0;
+
         foreach ($results as $result){
             /**
              * @var $employee Employee
@@ -87,37 +100,71 @@ class viewPayrollSummaryReportAction extends basePayrollAction
             if(!is_null($employee->getIsExcluded())){
                 continue;
             }
+
             $totalPayment =$totalPayment + $result->getTotalNetsalary();
-            $tableBodyContent .="<tr style='height: 15px'>
-								<td>".$employee->getFirstName().' '.$employee->getLastName()."</td>
-								<td style='text-align: right'>{$result->dispalyTotalNetsalary()}</td>
-								<td class='account-no-row'>{$employee->getCustom1()}</td>
-								<td class='bank-row'>{$employee->getCustom2()}</td>
-								<td class='branch-row'>{$employee->getCustom3()}</td>
-							</tr>";
+            $employeeName = $employee->getCustom4() ? $employee->getCustom4():$employee->getFirstName().' '.$employee->getLastName();
+
+            $tableBodyContent .="<tr>
+                                    <td>{$employeeName}</td>
+                                    <td>{$result->displayMonthlyBasic()}</td>
+                                    <td>{$result->displayTotalEarnings()}</td>
+                                    <td>{$result->displayMonthlyEpfDeduction()}</td>
+                                    <td>{$result->displayMonthlyBasicTax()}</td>
+                                    
+                                    <td>{$result->dispalyTotalDeduction()}</td>
+                                    <td>{$result->displayCompanyEpfDeduction()}</td>
+                                    <td>{$result->displayMonthlyEtfDeduction()}</td>
+                                    <td>{$result->displayTotalNetsalary()}</td>
+                                </tr>";
+
+
+
+            $basicSalSum += $result->getMonthlyBasic();
+            $grossSalSum += $result->calculateTotalEarnings();
+            $epf8SalSum += $result->getMonthlyEpfDeduction();
+            $payeeTaxSum += $result->getMonthlyBasicTax();
+
+            $totalDeductionSum += $result->calculateTotalDeduction();
+            $epf12Sum += $result->getCompanyEpfDeduction();
+            $etf3Sum += $result->getMonthlyEtfDeduction();
+            $netSalarySum += $result->getTotalNetsalary();
+
         }
 
-        $totalPayment = number_format($totalPayment,2);
+
+        $totalRow = array('',$basicSalSum,$grossSalSum,$epf8SalSum,$payeeTaxSum,$totalDeductionSum,$epf12Sum,$etf3Sum,$netSalarySum);
+        foreach ($totalRow as $key=>$value){
+
+            if($key == 0){
+                continue;
+            }
+
+            $totalRow[$key] = number_format($value,2,'.',',');
+
+        }
+
         $tableBodyContent .="<tr>
-								<td class='total-row-label'>TOTAL</td>
-							    <td class='total-row-value'>{$totalPayment}</td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-							</tr>";
+                                <td></td>
+                                <td>{$totalRow[1]}</td>
+                                <td>{$totalRow[2]}</td>
+                                <td>{$totalRow[3]}</td>
+                                <td>{$totalRow[4]}</td>
+                                <td>{$totalRow[5]}</td>
+                                <td>{$totalRow[6]}</td>
+                                <td>{$totalRow[7]}</td>
+                                <td>{$totalRow[8]}</td>
+                                
+        </tr>
+        ";
 
 
-
-        $bankLetterTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/reports/bank.txt");
+        $bankLetterTemplate = file_get_contents(sfConfig::get('sf_root_dir') . "/plugins/orangehrmPayrollPlugin/modules/admin/templates/reports/payrollsummary.txt");
 
         $bankLetterReplacementKeys = array(
-            '/#tableBodyContent/',
-            '/#publishDate/',
-            '/#addressDate/'
+            '/#tableBodyContent/'
 
         );
-        $addressDate = date('jS F Y');
-        $bankLetterReplacementValues  = array($tableBodyContent,date('d.m.Y',strtotime($publishDate)),$addressDate);
+        $bankLetterReplacementValues  = array($tableBodyContent);
 
         $htmlContent = preg_replace($bankLetterReplacementKeys, $bankLetterReplacementValues, $bankLetterTemplate);
 
