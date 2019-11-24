@@ -9,7 +9,7 @@ class generatePayrollSummaryReportAction extends viewPayrollSummaryReportAction
         $month = $request->getParameter('month');
 
         $pdf = new PDFWrapper();
-        $pdf->setOrient('Landscape');
+//        $pdf->setOrient('Landscape');
         $pdf->setHtml($this->getHtmlForReport($year,$month));
         $pdf->generatePDF();
         $fileName = $this->getFileName($year.'_'.$month);

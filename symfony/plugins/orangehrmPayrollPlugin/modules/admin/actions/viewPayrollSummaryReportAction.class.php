@@ -18,11 +18,8 @@ class viewPayrollSummaryReportAction extends basePayrollAction
             if ($this->form->isValid()) {
                 try {
 
-                    $csvExport = true;
-                    if($hdnAction=='view'){
-                        $csvExport = false;
-                    }
-                    if($csvExport){
+
+                    if($hdnAction=='downloadCsv'){
 
                         $csvContent = $this->getCsvForReport($postData);
                         $this->renderResponse($csvContent);
@@ -46,9 +43,9 @@ class viewPayrollSummaryReportAction extends basePayrollAction
                     }
                     else{
                         $pdf = new PDFWrapper();
-                        $pdf->setHtml($this->getHtmlForReport($postData['publishDate'],$postData['year'],$postData['month']));
+                        $pdf->setHtml($this->getHtmlForReport($postData['year'],$postData['month']));
                         $pdf->generatePDF();
-                        $fileName = $this->getFileName($postData['publishDate']);
+                        $fileName = $this->getFileName($postData['year'].'_'.$postData['month']);
 
                         $pdf->downloadPDF($fileName);
 
@@ -145,7 +142,7 @@ class viewPayrollSummaryReportAction extends basePayrollAction
 
         $tableBodyContent .="<tr>
                                 <td></td>
-                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder';padding-right: 5px>{$totalRow[1]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[1]}</td>
                                 <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[2]}</td>
                                 <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[3]}</td>
                                 <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[4]}</td>

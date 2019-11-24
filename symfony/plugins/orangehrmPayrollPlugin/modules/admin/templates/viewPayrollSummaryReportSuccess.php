@@ -19,6 +19,8 @@
 <!--                    <input type="button" id="viewBtn" value="--><?php //echo __("View") ?><!--" name="view" />-->
                     <!--                    <input type="button" class="reset" id="resetBtn" value="--><?php //echo __("Reset") ?><!--" name="_reset" />-->
                     <input type="button" id="downloadBtn" value="<?php echo __("Download") ?>" name="download" />
+                    <input type="button" id="downloadPdfBtn" value="<?php echo __("Download as PDF") ?>" name="downloadPdf" />
+                    <input type="button" id="viewPdfBtn" value="<?php echo __("View as PDF") ?>" name="viewPdf" />
                 </p>
 
             </fieldset>
@@ -36,7 +38,7 @@
 
 
     
-    var bankLetterGenerateUrl = '<?php echo $reportGenerateUrl; ?>';
+    var summaryGenerateUrl = '<?php echo $reportGenerateUrl; ?>';
     var lang_Required = '<?php echo __js(ValidationMessages::REQUIRED); ?>';
     var datepickerDateFormat = '<?php echo get_datepicker_date_format($sf_user->getDateFormat()); ?>';
     var displayDateFormat = '<?php echo str_replace('yy', 'yyyy', get_datepicker_date_format($sf_user->getDateFormat())); ?>';
@@ -47,21 +49,27 @@
 
     $(document).ready(function (e) {
 
-        $("#viewBtn").click(function (e) {
+        $("#viewPdfBtn").click(function (e) {
 
             if($("#search_form").valid()){
                 var year = $('#bankletter_year').val();
                 var month = $('#bankletter_month').val();
-                window.open(bankLetterGenerateUrl+'?publishDate='+publishDate+'&year='+year+'&month='+month);
+                window.open(summaryGenerateUrl+'?&year='+year+'&month='+month);
             }
 
         });
 
         $("#downloadBtn").click(function (e) {
 
-            $("#hdnAction").val('download');
+            $("#hdnAction").val('downloadCsv');
             $('#search_form').submit();
         });
+        $("#downloadPdfBtn").click(function (e) {
+
+            $("#hdnAction").val('downloadPdf');
+            $('#search_form').submit();
+        });
+
 
         var validator = $("#search_form").validate(
             {
