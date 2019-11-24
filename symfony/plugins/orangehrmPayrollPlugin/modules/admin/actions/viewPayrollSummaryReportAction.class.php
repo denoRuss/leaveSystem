@@ -105,16 +105,16 @@ class viewPayrollSummaryReportAction extends basePayrollAction
             $employeeName = $employee->getCustom4() ? $employee->getCustom4():$employee->getFirstName().' '.$employee->getLastName();
 
             $tableBodyContent .="<tr >
-                                    <td style='padding-bottom: 1.5em;'>{$employeeName}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasic()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayTotalEarnings()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyEpfDeduction()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasicTax()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;'>{$employeeName}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasic()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayTotalEarnings()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayMonthlyEpfDeduction()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayMonthlyBasicTax()}</td>
                                     
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->dispalyTotalDeduction()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayCompanyEpfDeduction()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayMonthlyEtfDeduction()}</td>
-                                    <td style='padding-bottom: 1.5em;text-align: right;padding-right: 5px'>{$result->displayTotalNetsalary()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->dispalyTotalDeduction()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayCompanyEpfDeduction()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayMonthlyEtfDeduction()}</td>
+                                    <td style='padding-bottom: 1em;padding-top: 1em;;padding-top: 1em;;text-align: right;padding-right: 5px'>{$result->displayTotalNetsalary()}</td>
                                 </tr>";
 
 
@@ -145,14 +145,14 @@ class viewPayrollSummaryReportAction extends basePayrollAction
 
         $tableBodyContent .="<tr>
                                 <td></td>
-                                <td style='text-align: right;font-weight: bolder';padding-right: 5px>{$totalRow[1]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[2]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[3]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[4]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[5]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[6]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[7]}</td>
-                                <td style='text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[8]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder';padding-right: 5px>{$totalRow[1]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[2]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[3]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[4]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[5]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[6]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[7]}</td>
+                                <td style='padding-bottom: 1em;padding-top: 1em;;text-align: right;font-weight: bolder;padding-right: 5px'>{$totalRow[8]}</td>
                                 
         </tr>
         ";
