@@ -38,7 +38,7 @@
 				<div class="entry" style="display: inline-block">
 				    <p>.........................</p>
 					<div class="label">Frank Stephen</div>
-					<div class="label">Country Manager</div>
+					<div class="label">Country Director</div>
 				</div>
 				<div class="entry" style="display: inline-block;float: right">
 				    <p>.........................</p>
