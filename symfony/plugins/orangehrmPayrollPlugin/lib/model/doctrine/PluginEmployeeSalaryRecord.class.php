@@ -16,7 +16,7 @@ abstract class PluginEmployeeSalaryRecord extends BaseEmployeeSalaryRecord
     protected $salaryConfigService;
     const ADMIN_SCREEN = 'admin';
     const PIM_SALARY_SCREEN = 'pim_salary';
-    const MAX_SALARY = 350000;
+    const MAX_SALARY = 950000;
     const MAX_SALARY_TAX_PERCENTAGE = 24;
 
     public function calculateMonthlyBasicTax($salary){
