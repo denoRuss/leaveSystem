@@ -233,6 +233,7 @@ class viewEmployeeListAction extends basePimAction {
      * @return unknown_type
      */
     protected function setFilters(array $filters) {
+        if(is_null($filters))$filters =array();
         return $this->getUser()->setAttribute('emplist.filters', $filters, 'pim_module');
     }
 
