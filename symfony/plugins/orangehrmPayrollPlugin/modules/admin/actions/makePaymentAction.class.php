@@ -27,13 +27,22 @@ class makePaymentAction extends viewEmployeeListAction
         $offset = ($pageNumber >= 1) ? (($pageNumber - 1) * $noOfRecords) : ($request->getParameter('pageNo', 1) - 1) * $noOfRecords;
 
         // Reset filters if requested to
-        if ($request->hasParameter('reset')) {
+        if ($request->getParameterHolder()->get('empsearch')['isReset']=='yes') {
             $this->setFilters(array());
             $this->setSortParameter(array("field"=> NULL, "order"=> NULL));
             $this->setPage(1);
+            $this->defaultYear = date('Y');
+            $this->defaultMonth = date('m');
+        }
+        else{
+            $this->setFilters($this->getRequest()->getParameterHolder()->get('empsearch'));
+            $this->defaultYear = $this->getRequest()->getParameterHolder()->get('empsearch')['year'];
+            $this->defaultMonth = $this->getRequest()->getParameterHolder()->get('empsearch')['month'];
         }
 
-        $this->form = new EmployeePaymentSearchForm($this->getFilters());
+
+
+        $this->form = new EmployeePaymentSearchForm(array(),$this->getFilters());
         if ($request->isMethod('post')) {
 
             $this->form->bind($request->getParameter($this->form->getName()));

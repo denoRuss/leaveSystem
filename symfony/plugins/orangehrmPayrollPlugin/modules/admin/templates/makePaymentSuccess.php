@@ -43,7 +43,15 @@ if($showList){
 
 <script type="text/javascript">
 
+    var defaultMonth = '<?php echo $defaultMonth?>';
+    var defaultYear = '<?php echo $defaultYear?>';
+
+
     $(document).ready(function() {
+
+
+        $("#empsearch_year").val(defaultYear).attr("selected","selected");
+        $("#empsearch_month").val(defaultMonth).attr("selected","selected");
 
         $("#empsearch_sub_unit").parent().hide();
         var supervisors = <?php echo str_replace('&#039;', "'", $form->getSupervisorListAsJson()) ?>;
@@ -143,6 +151,36 @@ if($showList){
                 return false;
             });
         });
+
+
+        $('#empsearch_year').change(function (item) {
+
+            $.ajax({
+                url: 'getMonthListForMakePaymentViewAjax',
+                data: "year=" + $(this).val(),
+                dataType: 'json',
+                success: function (monthList) {
+
+                    var select = $('#empsearch_month');
+
+                    var options = select[0].options;
+                    $('option', select).remove();
+
+                    var i = 0;
+                    $.each(monthList, function (key, val) {
+                        options[i] = new Option(val, key);
+                        i++;
+                    });
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        });
+
+
 
         /* Delete confirmation controls: Begin */
         $('#dialogDeleteBtn').click(function() {
