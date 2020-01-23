@@ -35,8 +35,12 @@ class makePaymentAction extends viewEmployeeListAction
             $this->defaultMonth = date('m');
         }
         else{
-            $emptyFilter =is_array($this->getRequest()->getParameterHolder()->get('empsearch'))?$this->getRequest()->getParameterHolder()->get('empsearch'):array();
-            $this->setFilters($emptyFilter);
+            if($request->isMethod('post')){
+                $emptyFilter =is_array($this->getRequest()->getParameterHolder()->get('empsearch'))?$this->getRequest()->getParameterHolder()->get('empsearch'):array();
+                $this->setFilters($emptyFilter);
+            }
+
+
             $this->defaultYear = $this->getRequest()->getParameterHolder()->get('empsearch')['year'];
             if(is_null($this->defaultYear)){
                 $this->defaultYear = date('Y');
