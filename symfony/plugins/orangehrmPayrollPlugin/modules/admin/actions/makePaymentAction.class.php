@@ -42,7 +42,7 @@ class makePaymentAction extends viewEmployeeListAction
                 $this->defaultYear = date('Y');
             }
             $this->defaultMonth = $this->getRequest()->getParameterHolder()->get('empsearch')['month'];
-            if($this->defaultMonth){
+            if(is_null($this->defaultMonth)){
                 $this->defaultMonth = date('m');
             }
         }

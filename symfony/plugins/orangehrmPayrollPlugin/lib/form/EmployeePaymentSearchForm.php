@@ -192,7 +192,7 @@ class EmployeePaymentSearchForm extends BaseForm {
 
         $this->setWidget('month', new sfWidgetFormChoice(array('choices' => $monthCoices)));
         $defaultMonthChoices = array(1,2,3,4,5,6,7,8,9,10,11,12);
-        $this->setValidator('month', new sfValidatorChoice(array('choices' => array_keys($defaultMonthChoices))));
+        $this->setValidator('month', new sfValidatorChoice(array('choices' => $defaultMonthChoices)));
     }
 
     public function getYearList()
