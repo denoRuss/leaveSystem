@@ -49,6 +49,33 @@
 
     $(document).ready(function (e) {
 
+        $('#bankletter_year').change(function (item) {
+
+            $.ajax({
+                url: 'getMonthListForMakePaymentViewAjax',
+                data: "year=" + $(this).val(),
+                dataType: 'json',
+                success: function (monthList) {
+
+                    var select = $('#bankletter_month');
+
+                    var options = select[0].options;
+                    $('option', select).remove();
+
+                    var i = 0;
+                    $.each(monthList, function (key, val) {
+                        options[i] = new Option(val, key);
+                        i++;
+                    });
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        });
+
         $("#viewPdfBtn").click(function (e) {
 
             if($("#search_form").valid()){
