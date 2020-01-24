@@ -418,15 +418,15 @@ class DkSalaryDao
     public function getSummaryOfPaymentRecords($searchParams){
         try {
 
-            $sql = "SELECT sum(h.company_epf_deduction) as employerContribution, sum(h.monthly_epf_deduction)  as employeeContribution, max(h.total_earning) as totalEarning, 
+            $sql = "SELECT sum(h.company_epf_deduction) as employerContribution, sum(h.monthly_epf_deduction)  as employeeContribution, h.total_earning as totalEarning, 
                     h.emp_number as empNumber, e.emp_firstname as firstName, e.emp_lastname as lastName, e.employee_id as memberNo, e.emp_dri_lice_num as nic,
                     e.custom4 as reportName
                     FROM `dk_employee_salary_history` h
                     LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
-                    WHERE CONCAT(h.`year`,h.month) BETWEEN ? AND ?
+                    WHERE h.`year` >= ? AND h.`month` >= ? AND h.year <= ? AND h.month <= ?
                     GROUP BY h.emp_number";
 
-            $bindParams = array($searchParams['startYear'].$searchParams['startMonth'],$searchParams['endYear'].$searchParams['endMonth']);
+            $bindParams = array($searchParams['startYear'],$searchParams['startMonth'],$searchParams['endYear'],$searchParams['endMonth']);
 
 
             $pdo = Doctrine_Manager::connection()->getDbh();
@@ -454,10 +454,10 @@ class DkSalaryDao
                     e.custom4 as reportName
                     FROM `dk_employee_salary_history` h
                     LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
-                    WHERE CONCAT(h.`year`,h.month) BETWEEN ? AND ?
+                    WHERE h.`year` >= ? AND h.`month` >= ? AND h.year <= ? AND h.month <= ?
                     GROUP BY h.emp_number";
 
-            $bindParams = array($searchParams['startYear'].$searchParams['startMonth'],$searchParams['endYear'].$searchParams['endMonth']);
+            $bindParams = array($searchParams['startYear'],$searchParams['startMonth'],$searchParams['endYear'],$searchParams['endMonth']);
 
 
             $pdo = Doctrine_Manager::connection()->getDbh();
