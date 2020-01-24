@@ -454,10 +454,10 @@ class DkSalaryDao
                     e.custom4 as reportName
                     FROM `dk_employee_salary_history` h
                     LEFT JOIN hs_hr_employee e ON h.emp_number = e.emp_number
-                    WHERE h.`year` >= ? AND h.`month` >= ? AND h.year <= ? AND h.month <= ?
+                    WHERE CONCAT(h.`year`,h.month) BETWEEN ? AND ?
                     GROUP BY h.emp_number";
 
-            $bindParams = array($searchParams['startYear'],$searchParams['startMonth'],$searchParams['endYear'],$searchParams['endMonth']);
+            $bindParams = array($searchParams['startYear'].$searchParams['startMonth'],$searchParams['endYear'].$searchParams['endMonth']);
 
 
             $pdo = Doctrine_Manager::connection()->getDbh();
