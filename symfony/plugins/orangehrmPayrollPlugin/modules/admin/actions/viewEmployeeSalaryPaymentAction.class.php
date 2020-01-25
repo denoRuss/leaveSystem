@@ -30,7 +30,7 @@ class viewEmployeeSalaryPaymentAction extends viewSalaryTypeListAction
         }
 
 
-        $form = new EmployeeSalaryPaymentForm();
+        $form = new EmployeeSalaryPaymentForm(array(),$searchParam);
         $form->setEmployeeSalaryPaymentObject($employeeSalaryRecord,$employee,$year,$month);
 
         $this->editable = true;
