@@ -37,7 +37,8 @@ class EmployeeSalaryPaymentForm extends EmployeeSalaryRecordForm
         $this->setValidator('year', new sfValidatorChoice(array('choices' => array_keys($yearChoices))));
 
         $this->setWidget('month', new sfWidgetFormChoice(array('choices' => $monthCoices)));
-        $this->setValidator('month', new sfValidatorChoice(array('choices' => array_keys($monthCoices))));
+        $defaultMonthChoices = array(1,2,3,4,5,6,7,8,9,10,11,12);
+        $this->setValidator('month', new sfValidatorChoice(array('choices' => $defaultMonthChoices)));
     }
 
     public function getYearList()
